@@ -19,6 +19,17 @@ export async function POST(request: Request) {
             },
           ],
         },
+        "First Name": {
+          type: "rich_text",
+          rich_text: [
+            {
+              type: "text",
+              text: {
+                content: body?.name,
+              },
+            },
+          ],
+        },
       },
     })
 
