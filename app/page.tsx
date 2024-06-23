@@ -141,7 +141,7 @@ export default function Home() {
         <motion.div variants={itemVariants}>
           <Input
             type="text"
-            placeholder="Tyler Durden"
+            placeholder="Your Name"
             value={name}
             onChange={handleNameChange}
           />
@@ -149,7 +149,7 @@ export default function Home() {
         <motion.div variants={itemVariants}>
           <Input
             type="email"
-            placeholder="tylerdurden@fc.com"
+            placeholder="Your Email Address"
             value={email}
             onChange={handleEmailChange}
           />
