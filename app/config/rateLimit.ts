@@ -1,9 +1,9 @@
 import { Ratelimit } from "@upstash/ratelimit"
-import { kv } from "@vercel/kv"
+import redis from "./redisDB"
 
 const ratelimit = new Ratelimit({
-  redis: kv,
-  limiter: Ratelimit.slidingWindow(4, "1 m"),
+  redis: redis,
+  limiter: Ratelimit.fixedWindow(3, "1 m"),
 })
 
 export default ratelimit

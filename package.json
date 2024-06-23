@@ -13,7 +13,7 @@
     "@notionhq/client": "^2.2.15",
     "@react-email/components": "0.0.19",
     "@upstash/ratelimit": "^1.2.1",
-    "@vercel/kv": "^2.0.0",
+    "@upstash/redis": "^1.31.6",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
