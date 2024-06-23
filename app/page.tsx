@@ -15,6 +15,7 @@ import AnimatedShinyText from "@/components/ui/shimmer-text"
 export default function Home() {
   const [name, setName] = useState<string>("")
   const [email, setEmail] = useState<string>("")
+  const [loading, setLoading] = useState<boolean>(false)
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value)
@@ -40,34 +41,50 @@ export default function Home() {
       return
     }
 
-    try {
-      const notionResponse = await fetch("/api/notion/waitlist", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email }),
-      })
+    setLoading(true)
 
-      const mailResponse = await fetch("/api/mail", {
-        cache: "no-store",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ firstname: name, email }),
-      })
+    const promise = new Promise(async (resolve, reject) => {
+      try {
+        const notionResponse = await fetch("/api/notion/waitlist", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email }),
+        })
 
-      if (notionResponse.ok && mailResponse.ok) {
-        toast.success("Thank you for joining morph2json's waitlist! 🎉")
+        const mailResponse = await fetch("/api/mail", {
+          cache: "no-store",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ firstname: name, email }),
+        })
+
+        if (notionResponse.ok && mailResponse.ok) {
+          resolve({ name })
+        } else {
+          reject(new Error("Failed to add to the waitlist"))
+        }
+      } catch (error) {
+        reject(error)
+      }
+    })
+
+    toast.promise(promise, {
+      loading: "Getting you on the waitlist... 🚀",
+      success: (data) => {
         setName("")
         setEmail("")
-      } else {
-        toast.error("Failed to add to you to the waitlist 😢.")
-      }
-    } catch (error) {
-      toast.error("An error occurred. Please try again 😢.")
-    }
+        return "Thank you for joining morph2json's waitlist! 🎉"
+      },
+      error: "An error occurred. Please try again 😢.",
+    })
+
+    promise.finally(() => {
+      setLoading(false)
+    })
   }
 
   const containerVariants = {
@@ -160,8 +177,9 @@ export default function Home() {
             Icon={FaArrowRightLong}
             onClick={handleSubmit}
             iconPlacement="right"
-            className="w-full mt-2">
-            Join Waitlist!
+            className="w-full mt-2"
+            disabled={loading}>
+            {loading ? "Loading..." : "Join Waitlist!"}
           </EnhancedButton>
         </motion.div>
         <motion.div

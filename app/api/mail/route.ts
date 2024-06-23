@@ -38,9 +38,10 @@ export async function POST(request: NextRequest, response: NextResponse) {
   const { email, firstname } = await request.json()
 
   const { data, error } = await resend.emails.send({
-    from: "Lakshay <hello@m2j.lakshb.dev>",
+    from: "Join <join@m2j.lakshb.dev>",
     to: [email],
     subject: "Thankyou for waitlisting morph2json!",
+    reply_to: "lakshb.work@gmail.com",
     html: render(WelcomeTemplate({ userFirstname: firstname })),
   })
 

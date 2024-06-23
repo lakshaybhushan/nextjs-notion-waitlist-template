@@ -29,27 +29,29 @@ export const morph2jsonWaitlistEmail = ({
           alt="morph2json logo"
           style={logo}
         />
-        <Text style={paragraph}>Hey! {userFirstname},</Text>
+        <Text style={paragraph}>Hi {userFirstname},</Text>
         <Text style={paragraph}>
-          Thank you so much for joining the waitlist for morph2json. Your
-          support means a lot to me. I am dedicated to making morph2json the
-          best tool for your requirements. I will update you on the progress and
-          let you know as soon as it is ready for you to use.
+          Thanks for joining the waitlist for morph2json! I'm Lakshay, the
+          developer working on this tool. I'm excited you're interested and I'm
+          putting in the effort to make morph2json as useful as possible for
+          you.
         </Text>
 
         <Text style={paragraph}>
-          If you have any questions or feedback, feel free to reply to{" "}
+          I'll keep you updated on progress and let you know the second it's
+          ready to use. If you have any questions or feedback, feel free to
+          reply directly to{" "}
           <a
             href="mailto:
           lakshb.work@gmail.com"
             style={{ color: "#F7FF9B" }}>
             this email
           </a>
-          . I'd love to hear from you.
+          — I'm all ears!
         </Text>
 
         <Text style={paragraph}>
-          Make sure to follow me on X/Twitter for the updates{" "}
+          For updates, you can also follow me on X/Twitter: {""}
           <a href="https://x.com/blakssh" style={{ color: "#F7FF9B" }}>
             @blakssh
           </a>
