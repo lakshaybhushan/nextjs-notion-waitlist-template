@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 
 interface MousePosition {
   x: number;
@@ -30,7 +30,9 @@ function MousePosition(): MousePosition {
 
 interface ParticlesProps {
   className?: string;
-  quantity?: number;
+  quantityDesktop?: number;
+  quantityMobile?: number;
+  mobileBreakpoint?: number;
   staticity?: number;
   ease?: number;
   size?: number;
@@ -39,6 +41,7 @@ interface ParticlesProps {
   vx?: number;
   vy?: number;
 }
+
 function hexToRgb(hex: string): number[] {
   hex = hex.replace("#", "");
   const hexInt = parseInt(hex, 16);
@@ -50,7 +53,9 @@ function hexToRgb(hex: string): number[] {
 
 const Particles: React.FC<ParticlesProps> = ({
   className = "",
-  quantity = 100,
+  quantityDesktop = 100,
+  quantityMobile = 50,
+  mobileBreakpoint = 768,
   staticity = 50,
   ease = 50,
   size = 0.4,
@@ -68,6 +73,31 @@ const Particles: React.FC<ParticlesProps> = ({
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
 
+  const [quantity, setQuantity] = useState(quantityDesktop);
+
+  const initCanvas = useCallback(() => {
+    resizeCanvas();
+    drawParticles();
+  }, [quantity, color]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < mobileBreakpoint) {
+        setQuantity(quantityMobile);
+      } else {
+        setQuantity(quantityDesktop);
+      }
+      initCanvas();
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [quantityDesktop, quantityMobile, mobileBreakpoint, initCanvas]);
+
   useEffect(() => {
     if (canvasRef.current) {
       context.current = canvasRef.current.getContext("2d");
@@ -79,7 +109,7 @@ const Particles: React.FC<ParticlesProps> = ({
     return () => {
       window.removeEventListener("resize", initCanvas);
     };
-  }, [color]);
+  }, [color, initCanvas]);
 
   useEffect(() => {
     onMouseMove();
@@ -87,12 +117,7 @@ const Particles: React.FC<ParticlesProps> = ({
 
   useEffect(() => {
     initCanvas();
-  }, [refresh]);
-
-  const initCanvas = () => {
-    resizeCanvas();
-    drawParticles();
-  };
+  }, [refresh, initCanvas]);
 
   const onMouseMove = () => {
     if (canvasRef.current) {
@@ -122,14 +147,14 @@ const Particles: React.FC<ParticlesProps> = ({
   };
 
   const resizeCanvas = () => {
-    if (canvasContainerRef.current && canvasRef.current && context.current) {
+    if (canvasRef.current && context.current) {
       circles.current.length = 0;
-      canvasSize.current.w = canvasContainerRef.current.offsetWidth;
-      canvasSize.current.h = canvasContainerRef.current.offsetHeight;
+      canvasSize.current.w = window.innerWidth;
+      canvasSize.current.h = window.innerHeight;
       canvasRef.current.width = canvasSize.current.w * dpr;
       canvasRef.current.height = canvasSize.current.h * dpr;
-      canvasRef.current.style.width = `${canvasSize.current.w}px`;
-      canvasRef.current.style.height = `${canvasSize.current.h}px`;
+      canvasRef.current.style.width = `100vw`;
+      canvasRef.current.style.height = `100vh`;
       context.current.scale(dpr, dpr);
     }
   };
@@ -190,8 +215,8 @@ const Particles: React.FC<ParticlesProps> = ({
 
   const drawParticles = () => {
     clearContext();
-    const particleCount = quantity;
-    for (let i = 0; i < particleCount; i++) {
+    circles.current = [];
+    for (let i = 0; i < quantity; i++) {
       const circle = circleParams();
       drawCircle(circle);
     }
@@ -212,12 +237,11 @@ const Particles: React.FC<ParticlesProps> = ({
   const animate = () => {
     clearContext();
     circles.current.forEach((circle: Circle, i: number) => {
-      // Handle the alpha value
       const edge = [
-        circle.x + circle.translateX - circle.size, // distance from left edge
-        canvasSize.current.w - circle.x - circle.translateX - circle.size, // distance from right edge
-        circle.y + circle.translateY - circle.size, // distance from top edge
-        canvasSize.current.h - circle.y - circle.translateY - circle.size, // distance from bottom edge
+        circle.x + circle.translateX - circle.size,
+        canvasSize.current.w - circle.x - circle.translateX - circle.size,
+        circle.y + circle.translateY - circle.size,
+        canvasSize.current.h - circle.y - circle.translateY - circle.size,
       ];
       const closestEdge = edge.reduce((a, b) => Math.min(a, b));
       const remapClosestEdge = parseFloat(
@@ -242,27 +266,26 @@ const Particles: React.FC<ParticlesProps> = ({
 
       drawCircle(circle, true);
 
-      // circle gets out of the canvas
       if (
         circle.x < -circle.size ||
         circle.x > canvasSize.current.w + circle.size ||
         circle.y < -circle.size ||
         circle.y > canvasSize.current.h + circle.size
       ) {
-        // remove the circle from the array
         circles.current.splice(i, 1);
-        // create a new circle
         const newCircle = circleParams();
         drawCircle(newCircle);
-        // update the circle position
       }
     });
     window.requestAnimationFrame(animate);
   };
 
   return (
-    <div className={className} ref={canvasContainerRef} aria-hidden="true">
-      <canvas ref={canvasRef} className="h-full w-full" />
+    <div
+      className={`${className} fixed inset-0 -z-[100]`}
+      ref={canvasContainerRef}
+      aria-hidden="true">
+      <canvas ref={canvasRef} style={{ width: "100vw", height: "100vh" }} />
     </div>
   );
 };

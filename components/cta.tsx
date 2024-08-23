@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import AnimatedShinyText from "@/components/ui/shimmer-text";
 import TextBlur from "@/components/ui/text-blur";
+import AnimatedShinyText from "@/components/ui/shimmer-text";
 import { containerVariants, itemVariants } from "@/lib/animation-variants";
 
 export default function CTA() {
@@ -37,7 +37,7 @@ export default function CTA() {
       <motion.div variants={itemVariants}>
         <TextBlur
           className="mx-auto max-w-[27rem] pt-1.5 text-center text-base text-zinc-300 sm:text-lg"
-          text="Join the waitlist to get early access to the template and recieve updates on the progress!"
+          text="Join the waitlist to get early access of the product and recieve updates on the progress!"
           duration={0.8}
         />
       </motion.div>

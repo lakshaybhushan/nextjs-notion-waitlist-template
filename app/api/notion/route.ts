@@ -19,7 +19,7 @@ export async function POST(request: Request) {
             },
           ],
         },
-        "First Name": {
+        "Name": {
           type: "rich_text",
           rich_text: [
             {

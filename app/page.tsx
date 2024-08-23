@@ -6,6 +6,8 @@ import CTA from "@/components/cta";
 import Form from "@/components/form";
 import Logos from "@/components/logos";
 import Particles from "@/components/ui/particles";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 export default function Home() {
   const [name, setName] = useState<string>("");
@@ -40,14 +42,7 @@ export default function Home() {
 
     const promise = new Promise(async (resolve, reject) => {
       try {
-        const notionResponse = await fetch("/api/notion", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name, email }),
-        });
-
+        // First, attempt to send the email
         const mailResponse = await fetch("/api/mail", {
           cache: "no-store",
           method: "POST",
@@ -57,15 +52,35 @@ export default function Home() {
           body: JSON.stringify({ firstname: name, email }),
         });
 
-        if (notionResponse.ok && mailResponse.ok) {
-          resolve({ name });
+        if (!mailResponse.ok) {
+          if (mailResponse.status === 429) {
+            reject("Rate limited");
+          } else {
+            reject("Email sending failed");
+          }
+          return; // Exit the promise early if mail sending fails
+        }
+
+        // If email sending is successful, proceed to insert into Notion
+        const notionResponse = await fetch("/api/notion", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email }),
+        });
+
+        if (!notionResponse.ok) {
+          if (notionResponse.status === 429) {
+            reject("Rate limited");
+          } else {
+            reject("Notion insertion failed");
+          }
         } else {
-          reject("Request failed");
-          toast.error("Request failed. Rate limit exceeded 😢");
+          resolve({ name });
         }
       } catch (error) {
         reject(error);
-        toast.error("An error occurred. Please try again 😢");
       }
     });
 
@@ -74,9 +89,18 @@ export default function Home() {
       success: (data) => {
         setName("");
         setEmail("");
-        return "Thank you for joining morph2json's waitlist! 🎉";
+        return "Thank you for joining the waitlist 🎉";
       },
-      error: "An error occurred. Please try again 😢.",
+      error: (error) => {
+        if (error === "Rate limited") {
+          return "You're doing that too much. Please try again later";
+        } else if (error === "Email sending failed") {
+          return "Failed to send email. Please try again 😢.";
+        } else if (error === "Notion insertion failed") {
+          return "Failed to save your details. Please try again 😢.";
+        }
+        return "An error occurred. Please try again 😢.";
+      },
     });
 
     promise.finally(() => {
@@ -85,22 +109,29 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center px-4 pt-24 sm:px-6 lg:px-8">
-      <CTA />
-      <Form
-        name={name}
-        email={email}
-        handleNameChange={handleNameChange}
-        handleEmailChange={handleEmailChange}
-        handleSubmit={handleSubmit}
-        loading={loading}
-      />
+    <main className="flex min-h-screen flex-col items-center overflow-x-clip pt-12 md:pt-24">
+      <section className="flex flex-col items-center px-4 sm:px-6 lg:px-8">
+        <Header />
 
-      <Logos />
+        <CTA />
+
+        <Form
+          name={name}
+          email={email}
+          handleNameChange={handleNameChange}
+          handleEmailChange={handleEmailChange}
+          handleSubmit={handleSubmit}
+          loading={loading}
+        />
+
+        <Logos />
+      </section>
+
+      <Footer />
 
       <Particles
-        className="absolute inset-0 -z-[100]"
-        quantity={150}
+        quantityDesktop={350}
+        quantityMobile={100}
         ease={80}
         color={"#F7FF9B"}
         refresh
