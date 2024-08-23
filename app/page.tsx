@@ -1,57 +1,52 @@
-"use client"
+"use client";
 
-import { EnhancedButton } from "@/components/ui/enhanced-btn"
-import { Input } from "@/components/ui/input"
-import { FaArrowRightLong } from "react-icons/fa6"
-import { useState } from "react"
-import Link from "next/link"
-import Particles from "@/components/ui/particles"
-import TextBlur from "@/components/ui/text-blur"
-import { motion } from "framer-motion"
-import { toast } from "sonner"
-import { FaXTwitter } from "react-icons/fa6"
-import AnimatedShinyText from "@/components/ui/shimmer-text"
+import { toast } from "sonner";
+import { useState } from "react";
+import CTA from "@/components/cta";
+import Form from "@/components/form";
+import Logos from "@/components/logos";
+import Particles from "@/components/ui/particles";
 
 export default function Home() {
-  const [name, setName] = useState<string>("")
-  const [email, setEmail] = useState<string>("")
-  const [loading, setLoading] = useState<boolean>(false)
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value)
-  }
+    setEmail(event.target.value);
+  };
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value)
-  }
+    setName(event.target.value);
+  };
 
   const isValidEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(email)
-  }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const handleSubmit = async () => {
     if (!name || !email) {
-      toast.error("Please fill in all fields 😠")
-      return
+      toast.error("Please fill in all fields 😠");
+      return;
     }
 
     if (!isValidEmail(email)) {
-      toast.error("Please enter a valid email address 😠")
-      return
+      toast.error("Please enter a valid email address 😠");
+      return;
     }
 
-    setLoading(true)
+    setLoading(true);
 
     const promise = new Promise(async (resolve, reject) => {
       try {
-        const notionResponse = await fetch("/api/notion/waitlist", {
+        const notionResponse = await fetch("/api/notion", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ name, email }),
-        })
+        });
 
         const mailResponse = await fetch("/api/mail", {
           cache: "no-store",
@@ -60,140 +55,48 @@ export default function Home() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ firstname: name, email }),
-        })
+        });
 
         if (notionResponse.ok && mailResponse.ok) {
-          resolve({ name })
+          resolve({ name });
         } else {
-          reject(new Error("Failed to add to the waitlist"))
+          reject("Request failed");
+          toast.error("Request failed. Rate limit exceeded 😢");
         }
       } catch (error) {
-        reject(error)
+        reject(error);
+        toast.error("An error occurred. Please try again 😢");
       }
-    })
+    });
 
     toast.promise(promise, {
       loading: "Getting you on the waitlist... 🚀",
       success: (data) => {
-        setName("")
-        setEmail("")
-        return "Thank you for joining morph2json's waitlist! 🎉"
+        setName("");
+        setEmail("");
+        return "Thank you for joining morph2json's waitlist! 🎉";
       },
       error: "An error occurred. Please try again 😢.",
-    })
+    });
 
     promise.finally(() => {
-      setLoading(false)
-    })
-  }
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: {
-        duration: 0.5,
-      },
-    },
-  }
+      setLoading(false);
+    });
+  };
 
   return (
-    <main className="flex flex-col min-h-screen items-center pt-24 px-4 sm:px-6 lg:px-8">
-      <motion.div
-        className="flex flex-col gap-2 max-w-2xl w-full"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible">
-        <motion.div variants={itemVariants}>
-          <div className="flex items-center justify-center">
-            <div className="bg-muted/80 text-center w-fit rounded-full flex items-center justify-center">
-              <AnimatedShinyText className="px-4 py-1">
-                <span>Coming soon!</span>
-              </AnimatedShinyText>
-            </div>
-          </div>
-        </motion.div>
+    <main className="flex min-h-screen flex-col items-center px-4 pt-24 sm:px-6 lg:px-8">
+      <CTA />
+      <Form
+        name={name}
+        email={email}
+        handleNameChange={handleNameChange}
+        handleEmailChange={handleEmailChange}
+        handleSubmit={handleSubmit}
+        loading={loading}
+      />
 
-        <motion.img
-          src="/logo.svg"
-          alt="logo"
-          className="w-24 h-24 mx-auto"
-          variants={itemVariants}
-        />
-
-        <motion.div variants={itemVariants}>
-          <TextBlur
-            className="text-3xl sm:text-5xl font-medium tracking-tighter text-center"
-            text="Effortlessly Convert your raw data into a well structured JSON"
-          />
-        </motion.div>
-
-        <motion.div variants={itemVariants}>
-          <TextBlur
-            className="text-base sm:text-lg text-center pt-1.5 text-zinc-300 max-w-[27rem] mx-auto"
-            text="Join the waitlist to get early access to morph2json and get notified
-            the moment it goes live!"
-            duration={0.8}
-          />
-        </motion.div>
-      </motion.div>
-      <motion.div
-        className="flex flex-col gap-2 mt-6 w-full max-w-[24rem]"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible">
-        <motion.div variants={itemVariants}>
-          <Input
-            type="text"
-            placeholder="Your Name"
-            value={name}
-            onChange={handleNameChange}
-          />
-        </motion.div>
-        <motion.div variants={itemVariants}>
-          <Input
-            type="email"
-            placeholder="Your Email Address"
-            value={email}
-            onChange={handleEmailChange}
-          />
-        </motion.div>
-        <motion.div variants={itemVariants}>
-          <EnhancedButton
-            variant="expandIcon"
-            Icon={FaArrowRightLong}
-            onClick={handleSubmit}
-            iconPlacement="right"
-            className="w-full mt-2"
-            disabled={loading}>
-            {loading ? "Loading..." : "Join Waitlist!"}
-          </EnhancedButton>
-        </motion.div>
-        <motion.div
-          variants={itemVariants}
-          className="flex justify-center w-full mt-4 text-muted-foreground gap-1 items-center">
-          <p>For any queries, reach out at </p>
-          <Link
-            href="https://x.com/blakssh"
-            rel="noopener noreferrer"
-            target="_blank">
-            <FaXTwitter className="w-4 h-4 hover:text-yellow-200 ease-linear transition-all duration-200" />
-          </Link>
-        </motion.div>
-      </motion.div>
+      <Logos />
 
       <Particles
         className="absolute inset-0 -z-[100]"
@@ -203,5 +106,5 @@ export default function Home() {
         refresh
       />
     </main>
-  )
+  );
 }
