@@ -1,0 +1,16 @@
+
+ init hello dreamer
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Committer: Kayla Kennedy <kaylanicole@Kaylas-Air.attlocal.net>
+#
+# On branch yoda
+# Your branch is up to date with 'origin/yoda'.
+#
+# Changes to be committed:
+#	modified:   .gitignore
+#	modified:   components/cta.tsx
+#	new file:   package-lock.json
+#
