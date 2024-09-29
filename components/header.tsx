@@ -1,27 +1,11 @@
-import Link from "next/link";
-import { Button } from "./ui/button";
-import { motion } from "framer-motion";
-import { FaGithub } from "react-icons/fa6";
-import { containerVariants, itemVariants } from "@/lib/animation-variants";
-
 export default function Header() {
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="fixed right-0 top-0 z-[50] m-4">
-      <motion.div variants={itemVariants}>
-        <Link href="https://github.com/lakshaybhushan/nextjs-notion-waitlist-template/fork">
-          <Button
-            size="sm"
-            variant="secondary"
-            className="text-yellow-50 transition-all duration-150 ease-linear md:hover:text-yellow-200">
-            <FaGithub className="md:mr-1.5" />
-            <span className="hidden md:inline">Use this template</span>
-          </Button>
-        </Link>
-      </motion.div>
-    </motion.div>
-  );
-}
+  <header className="w-full text-center mb-8">
+  <h1 className="text-3xl sm:text-5xl font-bold text-teal-600 drop-shadow-lg whitespace-normal sm:whitespace-nowrap flex flex-col sm:flex-row items-center justify-center">
+  <span className="font-serif italic tracking-tighter" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>TYLER'S</span>
+  <span className="font-serif italic tracking-tighter sm:ml-2" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>HOME FINDS</span>
+  </h1>
+  <p className="text-2xl sm:text-4xl font-semibold text-orange-400 font-serif italic tracking-tighter" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.2)' }}>Coming soon!</p>
+  </header>
+  )
+  }

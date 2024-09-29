@@ -1,80 +1,57 @@
-import Link from "next/link";
-import { ChangeEvent } from "react";
-import { motion } from "framer-motion";
-import { FaGithub, FaXTwitter } from "react-icons/fa6";
-import { Input } from "@/components/ui/input";
-import { FaArrowRightLong } from "react-icons/fa6";
-import { EnhancedButton } from "@/components/ui/enhanced-btn";
-import { containerVariants, itemVariants } from "@/lib/animation-variants";
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 
 interface FormProps {
-  name: string;
-  email: string;
-  handleNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleEmailChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: () => void;
-  loading: boolean;
+name: string
+email: string
+handleNameChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+handleEmailChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+handleSubmit: () => void
+loading: boolean
+isHovered: boolean
+setIsHovered: (isHovered: boolean) => void
 }
 
 export default function Form({
-  name,
-  email,
-  handleNameChange,
-  handleEmailChange,
-  handleSubmit,
-  loading,
+name,
+email,
+handleNameChange,
+handleEmailChange,
+handleSubmit,
+loading,
+isHovered,
+setIsHovered
 }: FormProps) {
-  return (
-    <motion.div
-      className="mt-6 flex w-full max-w-[24rem] flex-col gap-2"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible">
-      <motion.div variants={itemVariants}>
-        <Input
-          type="text"
-          placeholder="Your Name"
-          value={name}
-          onChange={handleNameChange}
-        />
-      </motion.div>
-      <motion.div variants={itemVariants}>
-        <Input
-          type="email"
-          placeholder="Your Email Address"
-          value={email}
-          onChange={handleEmailChange}
-        />
-      </motion.div>
-      <motion.div variants={itemVariants}>
-        <EnhancedButton
-          variant="expandIcon"
-          Icon={FaArrowRightLong}
-          onClick={handleSubmit}
-          iconPlacement="right"
-          className="mt-2 w-full"
-          disabled={loading}>
-          {loading ? "Loading..." : "Join Waitlist!"}
-        </EnhancedButton>
-      </motion.div>
-      <motion.div
-        variants={itemVariants}
-        className="mt-4 flex w-full items-center justify-center gap-1 text-muted-foreground">
-        <p>For any queries, reach out at </p>
-        <Link
-          href="https://x.com/blakssh"
-          rel="noopener noreferrer"
-          target="_blank">
-          <FaXTwitter className="h-4 w-4 transition-all duration-200 ease-linear hover:text-yellow-200" />
-        </Link>
-        or
-        <Link
-          href="https://github.com/lakshaybhushan"
-          rel="noopener noreferrer"
-          target="_blank">
-          <FaGithub className="ml-0.5 h-5 w-5 transition-all duration-200 ease-linear hover:text-yellow-200" />
-        </Link>
-      </motion.div>
-    </motion.div>
-  );
+return (
+<form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="space-y-4">
+<Input
+type="text"
+placeholder="Your Name"
+value={name}
+onChange={handleNameChange}
+required
+className="w-full border-2 border-teal-400 bg-white/50 placeholder-teal-400 text-teal-600 font-semibold rounded-full px-4 sm:px-6 py-2 sm:py-3"
+style={{ fontFamily: "'Segoe UI', 'Roboto', sans-serif" }}
+/>
+<Input
+type="email"
+placeholder="Your Email"
+value={email}
+onChange={handleEmailChange}
+required
+className="w-full border-2 border-teal-400 bg-white/50 placeholder-teal-400 text-teal-600 font-semibold rounded-full px-4 sm:px-6 py-2 sm:py-3"
+style={{ fontFamily: "'Segoe UI', 'Roboto', sans-serif" }}
+/>
+<Button
+type="submit"
+disabled={loading}
+className={`w-full bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 sm:py-3 rounded-full transition-colors duration-300 text-lg sm:text-xl join-button ${isHovered ? 'wiggle' : ''}`}
+style={{ fontFamily: "'Comic Sans MS', cursive, sans-serif" }}
+onMouseEnter={() => setIsHovered(true)}
+onMouseLeave={() => setIsHovered(false)}
+>
+{loading ? "Joining..." : "Join the fuss!"}
+</Button>
+</form>
+)
 }

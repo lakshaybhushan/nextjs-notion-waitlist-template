@@ -1,26 +1,12 @@
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/lib/animation-variants";
-
 export default function Footer() {
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="mt-auto flex w-full items-center justify-center gap-1 border-t bg-background p-6 text-muted-foreground md:justify-start">
-      <motion.div variants={itemVariants}>
-        Brought to you by{" "}
-        <Link
-          href="https://lakshb.dev"
-          rel="noopener noreferrer"
-          target="_blank">
-          <span className="text-zinc-300 underline underline-offset-2 transition-all duration-200 ease-linear hover:text-yellow-200">
-            lakshaybhushan
-          </span>
-          .
-        </Link>
-      </motion.div>
-    </motion.div>
-  );
+    <footer className="w-full text-center py-8 mt-12">
+      <p className="text-base sm:text-lg text-gray-700 drop-shadow-sm" style={{ fontFamily: "'Segoe UI', 'Roboto', sans-serif" }}>
+        Brought to you by TYLER'S - 
+        <a href="https://tylerstx.com" className="text-orange-400 hover:underline ml-1 font-semibold">
+          it's a Texas tradition built on a foundation of quality and trust.
+        </a>
+      </p>
+    </footer>
+  )
 }
