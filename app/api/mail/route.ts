@@ -10,8 +10,8 @@ import { Ratelimit } from "@upstash/ratelimit";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+  url: process.env.https://gusc1-next-30774.upstash.io,
+  token: process.env.AXg2ASQgMzkyMTQxZjgtNDQwZC00MDFkLThkMmItNzQ3NjEzOWNjZDkxZGY0NDM5M2IwZjMzNGVhZWIyNTcwOTBjMzE5ZGEzZTM=,
 });
 
 const ratelimit = new Ratelimit({
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
   const { data, error } = await resend.emails.send({
     from: "Tylers<hearmeclearly.store>",
     to: [email],
-    subject: "Thankyou for wailisting the Next.js + Notion CMS template!",
+    subject: "Thankyou for Joining Tylers Home Finds!",
     reply_to: "hearmeclearly.store",
     html: render(WelcomeTemplate({ userFirstname: firstname })),
   });
