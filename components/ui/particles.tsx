@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 interface ParticlesProps {
   quantityDesktop: number
@@ -71,4 +72,62 @@ export default function Particles({ quantityDesktop, quantityMobile, ease, color
   }, [quantityDesktop, quantityMobile, ease, color, refresh])
 
   return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none" />
+  const Particles: React.FC<ParticlesProps> = ({ quantity, staticity, ease, refresh }) => {
+    const canvasRef = useRef<HTMLCanvasElement>(null)
+    const [context, setContext] = useState<CanvasRenderingContext2D | null>(null)
+    const [particles, setParticles] = useState<Particle[]>([])
+  
+    const createParticles = useCallback(() => {
+      // ... particle creation logic ...
+    }, [quantity])
+  
+    const drawParticles = useCallback(() => {
+      if (!context) return
+      context.clearRect(0, 0, window.innerWidth, window.innerHeight)
+      particles.forEach((particle) => {
+        // ... drawing logic ...
+      })
+    }, [context, particles])
+  
+    const animate = useCallback(() => {
+      drawParticles()
+      requestAnimationFrame(animate)
+    }, [drawParticles])
+  
+    const resizeCanvas = useCallback(() => {
+      if (canvasRef.current) {
+        canvasRef.current.width = window.innerWidth
+        canvasRef.current.height = window.innerHeight
+      }
+      createParticles()
+    }, [createParticles])
+  
+    useEffect(() => {
+      if (canvasRef.current) {
+        const ctx = canvasRef.current.getContext('2d')
+        setContext(ctx)
+      }
+      resizeCanvas()
+      animate()
+      window.addEventListener('resize', resizeCanvas)
+      return () => window.removeEventListener('resize', resizeCanvas)
+    }, [animate, resizeCanvas])
+  
+    const onMouseMove = useCallback((event: MouseEvent) => {
+      // ... mouse move logic ...
+    }, [particles, staticity, ease])
+  
+    useEffect(() => {
+      window.addEventListener('mousemove', onMouseMove)
+      return () => window.removeEventListener('mousemove', onMouseMove)
+    }, [onMouseMove])
+  
+    useEffect(() => {
+      createParticles()
+    }, [refresh, createParticles])
+  
+    return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none" />
+  }
+  
+  export default Particles
 }
