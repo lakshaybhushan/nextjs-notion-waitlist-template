@@ -1,0 +1,42 @@
+import React from 'react'
+import Link from 'next/link'
+
+const Logo: React.FC = () => {
+  return (
+    <Link href="/" className="flex items-center space-x-2">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="w-8 h-8 text-teal-600"
+      >
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
+      <span className="text-2xl font-bold text-gray-800">
+        TYLER'S <span className="text-teal-600">HOME FINDS</span>
+      </span>
+    </Link>
+
+
+
+
+
+
+
+
+
+
+
+  )
+}
+
+export default Logo
+
+name: "Modern Bedroom Collection", 
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-09-08%207.08.50%20PM-uPGlaPx2Ete971rO2CClt8WZwB9Etw.png",
+      description: "Transform your bedroom into a contemporary retreat with our light wood furniture and upholstered headboard."
