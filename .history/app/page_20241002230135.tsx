@@ -1,19 +1,8 @@
 "use client"
 
-interface ParticlesProps {
-  quantityDesktop: number;
-  quantityMobile: number;
-  ease: number;
-  color: string;
-  refresh: boolean;
-}
-
-
-
 import { useState } from "react"
 import { toast } from "react-hot-toast"
-import { Header, Footer, CTA, Particles, FeaturedProducts } from '@/Components'
-
+import { Header, Footer, CTA, Particles, FeaturedProducts } from '@/components'
 
 export default function Home() {
   const [name, setName] = useState("")
@@ -121,6 +110,13 @@ export default function Home() {
         <FeaturedProducts />
       </section>
       <Footer />
+      <Particles
+        quantityDesktop={350}
+        quantityMobile={100}
+        ease={80}
+        color="#F7FF9B"
+        refresh
+      />
     </main>
   )
 }

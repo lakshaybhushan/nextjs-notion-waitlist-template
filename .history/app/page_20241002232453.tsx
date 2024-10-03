@@ -8,11 +8,12 @@ interface ParticlesProps {
   refresh: boolean;
 }
 
-
-
+const Particles: React.FC<ParticlesProps> = ({ quantityDesktop, quantityMobile, ease, color, refresh }) => {
+  // Component implementation
+}
 import { useState } from "react"
 import { toast } from "react-hot-toast"
-import { Header, Footer, CTA, Particles, FeaturedProducts } from '@/Components'
+import { Header, Footer, CTA, Particles, FeaturedProducts } from '@/components'
 
 
 export default function Home() {
