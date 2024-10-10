@@ -11,26 +11,27 @@ export async function POST(request: Request) {
       },
       properties: {
         Email: {
+          email: body?.email,
+        },
+        Name: {
           title: [
             {
-              text: {
-                content: body?.email,
-              },
-            },
-          ],
-        },
-        "Name": {
-          type: "rich_text",
-          rich_text: [
-            {
-              type: "text",
               text: {
                 content: body?.name,
               },
             },
           ],
         },
-      },
+        Timestamp: {
+          rich_text: [
+            {
+              text: {
+                content: new Date().toISOString() as string,
+              },
+            },
+          ],
+        },
+      }
     });
 
     if (!response) {
