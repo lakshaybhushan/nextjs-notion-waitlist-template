@@ -54,9 +54,11 @@ Now you need to get the `SECRET` key for your workspace. You can get it from the
 
 Now you need to get the ID of the database you created. You can get it from the URL of the database. It will look something like this:
 
-`https://www.notion.so/{USERNAME}/{DATABASE_ID}?v={NUMBERS}&pvs={NUMBERS}`
+`https://www.notion.so/{DATABASE_ID}?v={NUMBERS}&pvs={NUMBERS}`
 
 You need to copy the `DATABASE_ID` from the URL.
+
+Don't forget to grant access to your database within Notion. Go to your Database, then click on the three dots, connections. A new pop up opens up, select there the name of your integration connected.
 
 ### Upstash Redis
 
