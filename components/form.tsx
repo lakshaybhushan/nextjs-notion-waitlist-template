@@ -36,6 +36,7 @@ export default function Form({
           placeholder="Your Name"
           value={name}
           onChange={handleNameChange}
+          className="focus-visible:ring-[#1877F2] focus-visible:ring-opacity-70"
         />
       </motion.div>
       <motion.div variants={itemVariants}>
@@ -44,6 +45,7 @@ export default function Form({
           placeholder="Your Email Address"
           value={email}
           onChange={handleEmailChange}
+          className="focus-visible:ring-[#1877F2] focus-visible:ring-opacity-70"
         />
       </motion.div>
       <motion.div variants={itemVariants}>
@@ -52,7 +54,7 @@ export default function Form({
           Icon={FaArrowRightLong}
           onClick={handleSubmit}
           iconPlacement="right"
-          className="mt-2 w-full"
+          className="mt-2 w-full bg-[#1877F2]/80 hover:bg-[#1877F2] shadow-sm shadow-[#1877F2]/20"
           disabled={loading}>
           {loading ? "Loading..." : "Join Waitlist!"}
         </EnhancedButton>
@@ -65,15 +67,15 @@ export default function Form({
           href="https://x.com/learnrithmai"
           rel="noopener noreferrer"
           target="_blank">
-          <FaXTwitter className="h-4 w-4 transition-all duration-200 ease-linear hover:text-yellow-200" />
+          <FaXTwitter className="h-4 w-4 transition-all duration-200 ease-linear hover:text-[#1877F2]" />
         </Link>
         or
         <Link
           href="https://instagram.com/learnrithm"
           rel="noopener noreferrer"
           target="_blank">
-          <FaInstagram className="ml-0.5 h-5 w-5 transition-all duration-200 ease-linear hover:text-yellow-200" />
-          </Link>
+          <FaInstagram className="ml-0.5 h-5 w-5 transition-all duration-200 ease-linear hover:text-[#1877F2]" />
+        </Link>
       </motion.div>
     </motion.div>
   );

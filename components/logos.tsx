@@ -6,32 +6,32 @@ import { FaMicrophone, FaBook, FaQuestionCircle, FaBrain, FaGraduationCap, FaYou
 
 const features = [
   {
-    icon: <FaMicrophone className="h-10 w-10 text-yellow-200 mb-4" />,
+    icon: <FaMicrophone className="h-10 w-10 text-[#1877F2] mb-4" />,
     title: "AI Voice Tutor",
     description: "Speak naturally and get instant help—it's like having a friendly tutor right by your side."
   },
   {
-    icon: <FaBook className="h-10 w-10 text-yellow-200 mb-4" />,
+    icon: <FaBook className="h-10 w-10 text-[#1877F2] mb-4" />,
     title: "Personal Study Mode",
     description: "Receive clear, custom lessons and learning paths that fit your unique study needs."
   },
   {
-    icon: <FaQuestionCircle className="h-10 w-10 text-yellow-200 mb-4" />,
+    icon: <FaQuestionCircle className="h-10 w-10 text-[#1877F2] mb-4" />,
     title: "Practice Quiz Mode",
     description: "Generate practice questions to test your knowledge and boost your exam readiness."
   },
   {
-    icon: <FaBrain className="h-10 w-10 text-yellow-200 mb-4" />,
+    icon: <FaBrain className="h-10 w-10 text-[#1877F2] mb-4" />,
     title: "Critical Thinking Mode",
     description: "Dive into guided reasoning exercises to break down complex topics and solve problems."
   },
   {
-    icon: <FaGraduationCap className="h-10 w-10 text-yellow-200 mb-4" />,
+    icon: <FaGraduationCap className="h-10 w-10 text-[#1877F2] mb-4" />,
     title: "Custom Course Builder",
     description: "Tell us what you want to learn and get a tailor-made course with lessons, videos, and guides."
   },
   {
-    icon: <FaYoutube className="h-10 w-10 text-yellow-200 mb-4" />,
+    icon: <FaYoutube className="h-10 w-10 text-[#1877F2] mb-4" />,
     title: "Instant Video Summary",
     description: "Quickly capture the main points from long YouTube videos so you can focus on what matters."
   }
@@ -90,33 +90,33 @@ export default function Features() {
       </motion.div>
       
       <motion.div variants={itemVariants} className="flex justify-center mt-2 mb-8">
-        <div className="flex flex-col items-center rounded-xl border border-yellow-200/30 bg-zinc-900/70 px-8 py-6">
+        <div className="flex flex-col items-center rounded-xl border border-[#1877F2]/30 bg-zinc-900/70 px-8 py-6 shadow-sm shadow-[#1877F2]/10">
           <h3 className="text-lg font-medium text-zinc-300 mb-3">Launching In</h3>
           
           <div className="flex items-center justify-center gap-4">
             <div className="flex flex-col items-center">
-              <div className="text-4xl font-bold text-yellow-200">{countdown.days}</div>
+              <div className="text-4xl font-bold text-[#1877F2]">{countdown.days}</div>
               <div className="text-xs text-zinc-400 mt-1">days</div>
             </div>
             
-            <div className="text-2xl text-yellow-200">:</div>
+            <div className="text-2xl text-[#1877F2]">:</div>
             
             <div className="flex flex-col items-center">
-              <div className="text-4xl font-bold text-yellow-200">{countdown.hours}</div>
+              <div className="text-4xl font-bold text-[#1877F2]">{countdown.hours}</div>
               <div className="text-xs text-zinc-400 mt-1">hours</div>
             </div>
             
-            <div className="text-2xl text-yellow-200">:</div>
+            <div className="text-2xl text-[#1877F2]">:</div>
             
             <div className="flex flex-col items-center">
-              <div className="text-4xl font-bold text-yellow-200">{countdown.minutes}</div>
+              <div className="text-4xl font-bold text-[#1877F2]">{countdown.minutes}</div>
               <div className="text-xs text-zinc-400 mt-1">minutes</div>
             </div>
             
-            <div className="text-2xl text-yellow-200">:</div>
+            <div className="text-2xl text-[#1877F2]">:</div>
             
             <div className="flex flex-col items-center">
-              <div className="text-4xl font-bold text-yellow-200">{countdown.seconds}</div>
+              <div className="text-4xl font-bold text-[#1877F2]">{countdown.seconds}</div>
               <div className="text-xs text-zinc-400 mt-1">seconds</div>
             </div>
           </div>
@@ -129,7 +129,7 @@ export default function Features() {
         {features.map((feature, index) => (
           <div
             key={index}
-            className="flex flex-col items-center rounded-lg border border-zinc-800 bg-zinc-900 p-6 text-center transition-all duration-150 ease-in hover:border-zinc-700 hover:bg-accent">
+            className="flex flex-col items-center rounded-lg border border-zinc-800 bg-zinc-900 p-6 text-center transition-all duration-150 ease-in hover:border-[#1877F2]/40 hover:shadow-sm hover:shadow-[#1877F2]/10">
             {feature.icon}
             <h3 className="mb-2 text-xl font-medium text-zinc-100">{feature.title}</h3>
             <p className="text-sm text-zinc-400">{feature.description}</p>
