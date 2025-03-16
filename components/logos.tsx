@@ -1,58 +1,139 @@
-import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { containerVariants, itemVariants } from "@/lib/animation-variants";
 import TextBlur from "./ui/text-blur";
+import { FaMicrophone, FaBook, FaQuestionCircle, FaBrain, FaGraduationCap, FaYoutube } from "react-icons/fa";
 
-const logos = [
-  { href: "https://nextjs.org", src: "/nextjs.svg", alt: "Next.js Logo" },
-  { href: "https://notion.so", src: "/notion.svg", alt: "Notion Logo" },
-  { href: "https://resend.com", src: "/resend.svg", alt: "Resend Logo" },
-  { href: "https://upstash.com", src: "/upstash.svg", alt: "Upstash Logo" },
-  { href: "https://ui.shadcn.com", src: "/shadcn.svg", alt: "shadcn Logo" },
-  { href: "https://vercel.com", src: "/vercel.svg", alt: "Vercel Logo" },
+const features = [
+  {
+    icon: <FaMicrophone className="h-10 w-10 text-yellow-200 mb-4" />,
+    title: "AI Voice Tutor",
+    description: "Speak naturally and get instant help—it's like having a friendly tutor right by your side."
+  },
+  {
+    icon: <FaBook className="h-10 w-10 text-yellow-200 mb-4" />,
+    title: "Personal Study Mode",
+    description: "Receive clear, custom lessons and learning paths that fit your unique study needs."
+  },
+  {
+    icon: <FaQuestionCircle className="h-10 w-10 text-yellow-200 mb-4" />,
+    title: "Practice Quiz Mode",
+    description: "Generate practice questions to test your knowledge and boost your exam readiness."
+  },
+  {
+    icon: <FaBrain className="h-10 w-10 text-yellow-200 mb-4" />,
+    title: "Critical Thinking Mode",
+    description: "Dive into guided reasoning exercises to break down complex topics and solve problems."
+  },
+  {
+    icon: <FaGraduationCap className="h-10 w-10 text-yellow-200 mb-4" />,
+    title: "Custom Course Builder",
+    description: "Tell us what you want to learn and get a tailor-made course with lessons, videos, and guides."
+  },
+  {
+    icon: <FaYoutube className="h-10 w-10 text-yellow-200 mb-4" />,
+    title: "Instant Video Summary",
+    description: "Quickly capture the main points from long YouTube videos so you can focus on what matters."
+  }
 ];
 
-export default function Logos() {
+export default function Features() {
+  const [countdown, setCountdown] = useState({
+    days: 15,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+  
+  useEffect(() => {
+    // Fixed target date - March 31, 2025
+    // Replace this with your actual launch date
+    const targetDate = new Date("2025-04-01T00:00:00");
+    
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const difference = targetDate.getTime() - now.getTime();
+      
+      if (difference <= 0) {
+        setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return;
+      }
+      
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      
+      setCountdown({ days, hours, minutes, seconds });
+    };
+    
+    // Calculate initially
+    calculateTimeLeft();
+    
+    // Update every second
+    const interval = setInterval(calculateTimeLeft, 1000);
+    
+    return () => clearInterval(interval);
+  }, []);
+  
   return (
     <motion.div
-      className="flex h-full w-full flex-col gap-2 pb-12 pt-12 md:pb-24 md:pt-16"
+      className="flex h-full w-full flex-col gap-4 py-12 md:py-16"
       variants={containerVariants}
       initial="hidden"
       animate="visible">
       <motion.div variants={itemVariants}>
         <TextBlur
           className="text-center text-2xl font-medium tracking-tight text-zinc-200 md:text-3xl"
-          text="Powered by"
+          text="What To Expect In The v2?"
         />
       </motion.div>
-
-      <motion.div variants={itemVariants}>
-        <TextBlur
-          className="text-center text-base text-zinc-300 sm:text-lg"
-          text="Simple and powerful tools that help you build faster"
-          duration={0.8}
-        />
+      
+      <motion.div variants={itemVariants} className="flex justify-center mt-2 mb-8">
+        <div className="flex flex-col items-center rounded-xl border border-yellow-200/30 bg-zinc-900/70 px-8 py-6">
+          <h3 className="text-lg font-medium text-zinc-300 mb-3">Launching In</h3>
+          
+          <div className="flex items-center justify-center gap-4">
+            <div className="flex flex-col items-center">
+              <div className="text-4xl font-bold text-yellow-200">{countdown.days}</div>
+              <div className="text-xs text-zinc-400 mt-1">days</div>
+            </div>
+            
+            <div className="text-2xl text-yellow-200">:</div>
+            
+            <div className="flex flex-col items-center">
+              <div className="text-4xl font-bold text-yellow-200">{countdown.hours}</div>
+              <div className="text-xs text-zinc-400 mt-1">hours</div>
+            </div>
+            
+            <div className="text-2xl text-yellow-200">:</div>
+            
+            <div className="flex flex-col items-center">
+              <div className="text-4xl font-bold text-yellow-200">{countdown.minutes}</div>
+              <div className="text-xs text-zinc-400 mt-1">minutes</div>
+            </div>
+            
+            <div className="text-2xl text-yellow-200">:</div>
+            
+            <div className="flex flex-col items-center">
+              <div className="text-4xl font-bold text-yellow-200">{countdown.seconds}</div>
+              <div className="text-xs text-zinc-400 mt-1">seconds</div>
+            </div>
+          </div>
+        </div>
       </motion.div>
 
       <motion.div
         variants={itemVariants}
-        className="mt-4 grid w-full grid-cols-2 items-center justify-center gap-4 md:mt-6 md:grid-cols-3 md:gap-6">
-        {logos.map((logo, index) => (
-          <Link
+        className="mt-4 grid w-full grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+        {features.map((feature, index) => (
+          <div
             key={index}
-            href={logo.href}
-            rel="noopener noreferrer"
-            target="_blank"
-            className="flex h-24 items-center justify-center rounded-lg border bg-zinc-900 p-8 transition-all duration-150 ease-in-out md:hover:border-zinc-700 md:hover:bg-accent">
-            <Image
-              src={logo.src}
-              alt={logo.alt}
-              width={100}
-              height={100}
-              className="h-auto w-32 opacity-85"
-            />
-          </Link>
+            className="flex flex-col items-center rounded-lg border border-zinc-800 bg-zinc-900 p-6 text-center transition-all duration-150 ease-in hover:border-zinc-700 hover:bg-accent">
+            {feature.icon}
+            <h3 className="mb-2 text-xl font-medium text-zinc-100">{feature.title}</h3>
+            <p className="text-sm text-zinc-400">{feature.description}</p>
+          </div>
         ))}
       </motion.div>
     </motion.div>

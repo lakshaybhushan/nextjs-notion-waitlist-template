@@ -43,15 +43,15 @@ export const NotionWaitlistEmail = ({ userFirstname }: EmailProps) => (
           — I'm here to listen!
         </Text>
         <Text style={paragraph}>
-          You can also follow me on X/Twitter for updates:{" "}
-          <a href="https://x.com/blakssh" style={link}>
+          You can also follow us on X/Twitter for updates:{" "}
+          <a href="https://x.com/learnrithmai" style={link}>
             @blakssh
           </a>
         </Text>
         <Text style={signOff}>
           Best regards,
           <br />
-          Lakshay
+          Learnrithm Ai
         </Text>
         <Hr style={hr} />
         <Text style={footer}>

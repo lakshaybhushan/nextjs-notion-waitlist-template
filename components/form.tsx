@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ChangeEvent } from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaXTwitter } from "react-icons/fa6";
+import { FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { Input } from "@/components/ui/input";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { EnhancedButton } from "@/components/ui/enhanced-btn";
@@ -62,18 +62,18 @@ export default function Form({
         className="mt-4 flex w-full items-center justify-center gap-1 text-muted-foreground">
         <p>For any queries, reach out at </p>
         <Link
-          href="https://x.com/blakssh"
+          href="https://x.com/learnrithmai"
           rel="noopener noreferrer"
           target="_blank">
           <FaXTwitter className="h-4 w-4 transition-all duration-200 ease-linear hover:text-yellow-200" />
         </Link>
         or
         <Link
-          href="https://github.com/lakshaybhushan"
+          href="https://instagram.com/learnrithm"
           rel="noopener noreferrer"
           target="_blank">
-          <FaGithub className="ml-0.5 h-5 w-5 transition-all duration-200 ease-linear hover:text-yellow-200" />
-        </Link>
+          <FaInstagram className="ml-0.5 h-5 w-5 transition-all duration-200 ease-linear hover:text-yellow-200" />
+          </Link>
       </motion.div>
     </motion.div>
   );
