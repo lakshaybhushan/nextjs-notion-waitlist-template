@@ -1,0 +1,13 @@
+{
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "yoda"
+    ],
+    // Reset source control notification settings
+    "git.confirmSync": true,
+    "git.showCommitInput": true,
+    "git.enableSmartCommit": false,
+    "git.inputValidationLength": 0,
+    "git.inputValidationSubjectLength": 0,
+    "scm.diffDecorationsGutterVisibility": "always",
+    "scm.diffDecorationsGutterAction": "diff"
+}
