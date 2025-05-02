@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+  @font-face {
+    font-family: 'OffBit-Dot';
+    src: url('/OffBit-Dot.ttf') format('truetype'); /* Path relative to public folder */
+    font-weight: normal;
+    font-style: normal;
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -72,6 +79,12 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .font-offbit-dot {
+    font-family: 'OffBit-Dot', sans-serif; /* Apply the custom font */
   }
 }
 
