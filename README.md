@@ -1,4 +1,4 @@
-<h1 align="center">Next.js + Notion — Wailtist Template</h1>
+<h1 align="center">Wailtist </h1>
 
 <p align="center">
 
