@@ -29,10 +29,10 @@ const TextBlur = ({
       animate="visible"
       transition={{ duration }}
       variants={combinedVariants}
-      className={cn(className, "drop-shadow-sm")}>
-      {text}
-    </motion.h1>
-  )
-}
+      className={cn(className, "drop-shadow-sm")}
+      dangerouslySetInnerHTML={{ __html: text }}
+    />
+  );
+};
 
-export default TextBlur
+export default TextBlur;

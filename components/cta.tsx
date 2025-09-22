@@ -30,14 +30,14 @@ export default function CTA() {
       <motion.div variants={itemVariants}>
         <TextBlur
           className="text-center text-3xl font-medium tracking-tighter sm:text-5xl"
-          text="Dealing with 1000 real estate deals. Now in minutes."
+          text={"AI-Powered Real Estate<br />Off-Market Due Diligence Platform"}
         />
       </motion.div>
 
       <motion.div variants={itemVariants}>
         <TextBlur
-          className="mx-auto max-w-[27rem] pt-1.5 text-center text-base text-zinc-300 sm:text-lg"
-          text="Join the waitlist to get early access of the product and recieve updates on the progress!"
+          className="mx-auto max-w-[42rem] pt-1.5 text-center text-base text-zinc-300 sm:text-lg"
+          text="Transform off-market property analysis from weeks to minutes with intelligent automation"
           duration={0.8}
         />
       </motion.div>

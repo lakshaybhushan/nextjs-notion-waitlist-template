@@ -50,7 +50,9 @@ interface BentoItem {
         | "spotlight"
         | "icons"
         | "typing"
-        | "metrics";
+        | "metrics"
+        | "investorMatch"
+        | "priorKnowledgeCheck";
     spotlightItems?: string[];
     timeline?: Array<{ year: string; event: string }>;
     code?: string;
@@ -61,6 +63,17 @@ interface BentoItem {
         value: number;
         suffix?: string;
         color?: string;
+    }>;
+    investorMatches?: Array<{
+        investor: string;
+        propertyHint: string;
+        score: number;
+        color?: string;
+    }>;
+    priorKnowledgeItems?: Array<{
+        object: string;
+        city: string;
+        priorKnowledge: boolean;
     }>;
     statistic?: {
         value: string;
@@ -76,62 +89,80 @@ interface BentoItem {
 const bentoItems: BentoItem[] = [
     {
         id: "main",
-        title: "Building tomorrow's technology",
+        title: "Intelligent Document Processing",
         description:
-            "We architect and develop enterprise-grade applications that scale seamlessly with cloud-native technologies and microservices.",
+            "Automated data extraction, standardization, and validation from any property document format.",
         href: "#",
-        feature: "spotlight",
-        spotlightItems: [
-            "Microservices architecture",
-            "Serverless computing",
-            "Container orchestration",
-            "API-first design",
-            "Event-driven systems",
-        ],
-        size: "lg",
-        className: "col-span-2 row-span-1 md:col-span-2 md:row-span-1",
+        feature: "typing",
+        typingText: `{\n  "property_name": "Berlin Central Tower",\n  "location": "Berlin, Germany",\n  "size_sqm": 25000,\n  "noi_eur": 4500000,\n  "cap_rate": "5.5%",\n  "status": "Validated"\n}`,
+        className: "col-span-1 row-span-1",
     },
     {
         id: "stat1",
-        title: "AI Agents & Automation",
+        title: "Comprehensive Financial Analysis",
         description:
-            "Intelligent agents that learn, adapt, and automate complex workflows",
+            "Generate 20-year cashflow models, calculate key metrics, and run sensitivity analysis.",
         href: "#",
-        feature: "typing",
-        typingText:
-            "const createAgent = async () => {\\n  const agent = new AIAgent({\\n    model: 'gpt-4-turbo',\\n    tools: [codeAnalysis, dataProcessing],\\n    memory: new ConversationalMemory()\\n  });\\n\\n  // Train on domain knowledge\\n  await agent.learn(domainData);\\n\\n  return agent;\\n};",
-        size: "md",
-        className: "col-span-2 row-span-1 col-start-1 col-end-3",
+        feature: "priorKnowledgeCheck",
+        priorKnowledgeItems: [
+            { object: "City villa", city: "Munich", priorKnowledge: false },
+            {
+                object: "Multi-family house",
+                city: "Berlin",
+                priorKnowledge: true,
+            },
+            { object: "Condominium", city: "Dusseldorf", priorKnowledge: true },
+        ],
+        className: "col-span-1 row-span-1",
     },
     {
         id: "partners",
-        title: "Trusted partners",
+        title: "Intelligent Investor Matching",
         description:
-            "Working with the leading AI and cloud providers to deliver cutting-edge solutions",
-        icons: true,
+            "AI-powered algorithm matches properties with the best-fit investors from your CRM.",
         href: "#",
-        feature: "icons",
-        size: "md",
+        feature: "investorMatch",
+        investorMatches: [
+            {
+                investor: "Investor Group Alpha",
+                propertyHint: "B-CT",
+                score: 96,
+                color: "emerald",
+            },
+            {
+                investor: "Syndicate Partners",
+                propertyHint: "B-CT",
+                score: 82,
+                color: "emerald",
+            },
+            {
+                investor: "Momentum Ventures",
+                propertyHint: "M-RP",
+                score: 74,
+                color: "blue",
+            },
+            {
+                investor: "Legacy Capital",
+                propertyHint: "H-OS",
+                score: 45,
+                color: "amber",
+            },
+        ],
         className: "col-span-1 row-span-1",
     },
     {
         id: "innovation",
-        title: "Innovation timeline",
+        title: "Automated Presentation Generation",
         description:
-            "Pioneering the future of AI and cloud computing with breakthrough innovations",
+            "Instantly create professional, investor-ready teaser decks and pitch materials.",
         href: "#",
         feature: "timeline",
         timeline: [
-            { year: "2020", event: "Launch of Cloud-Native Platform" },
-            { year: "2021", event: "Advanced AI Integration & LLM APIs" },
-            { year: "2022", event: "Multi-Agent Systems & RAG Architecture" },
-            { year: "2023", event: "Autonomous AI Agents & Neural Networks" },
-            {
-                year: "2024",
-                event: "AGI-Ready Infrastructure & Edge Computing",
-            },
+            { year: "1", event: "Data Ingestion & Analysis" },
+            { year: "2", event: "Financial Modeling" },
+            { year: "3", event: "Risk Assessment" },
+            { year: "4", event: "Investor-Ready Deck Generated" },
         ],
-        size: "sm",
         className: "col-span-1 row-span-1",
     },
 ];
@@ -451,6 +482,118 @@ const MetricsFeature = ({
     );
 };
 
+const PriorKnowledgeCheckFeature = ({
+    items,
+}: {
+    items: Array<{
+        object: string;
+        city: string;
+        priorKnowledge: boolean;
+    }>;
+}) => {
+    return (
+        <div className="mt-3 w-fit overflow-hidden rounded-lg border border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-100/30 dark:bg-neutral-900/30 p-1 font-medium">
+            <div className="grid grid-cols-3 gap-2 text-xs text-neutral-600 dark:text-neutral-400 px-2 py-1.5">
+                <span className="font-bold text-neutral-800 dark:text-neutral-200">
+                    object
+                </span>
+                <span className="font-bold text-neutral-800 dark:text-neutral-200">
+                    city
+                </span>
+                <span className="font-bold text-neutral-800 dark:text-neutral-200">
+                    prior knowledge
+                </span>
+            </div>
+            <div className="">
+                {items.map((item, index) => (
+                    <motion.div
+                        key={item.object}
+                        className="grid grid-cols-3 gap-2 items-center text-sm text-neutral-800 dark:text-neutral-300 px-2 py-2 border-t border-neutral-200/80 dark:border-neutral-800/80"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.15 * index }}
+                    >
+                        <span>{item.object}</span>
+                        <span>{item.city}</span>
+                        <span>
+                            {item.priorKnowledge ? (
+                                <div className="flex items-center gap-1.5 w-fit px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-500 dark:bg-rose-500/15 dark:text-rose-400 border border-rose-500/20 dark:border-rose-500/25">
+                                    <div
+                                        className="h-1.5 w-1.5 rounded-full bg-rose-500 dark:bg-rose-400 animate-slow-blink"
+                                        style={{ animationDelay: `${index * 0.4}s` }}
+                                    />
+                                    Ja
+                                </div>
+                            ) : (
+                                <div className="flex items-center gap-1.5 w-fit px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-400 border border-emerald-500/20 dark:border-emerald-500/25">
+                                    <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400" />
+                                    Nein
+                                </div>
+                            )}
+                        </span>
+                    </motion.div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const InvestorMatchFeature = ({
+    matches,
+}: {
+    matches: Array<{
+        investor: string;
+        propertyHint: string;
+        score: number;
+        color?: string;
+    }>;
+}) => {
+    const getColorClass = (color = "emerald") => {
+        const colors = {
+            emerald: "text-emerald-500 dark:text-emerald-400",
+            blue: "text-blue-500 dark:text-blue-400",
+            amber: "text-amber-500 dark:text-amber-400",
+            rose: "text-rose-500 dark:text-rose-400",
+        };
+        return colors[color as keyof typeof colors] || colors.emerald;
+    };
+
+    return (
+        <div className="mt-3 space-y-2.5">
+            <div className="grid grid-cols-3 gap-2 text-xs text-neutral-500 dark:text-neutral-400 font-semibold px-1">
+                <span>INVESTOR</span>
+                <span className="text-center">PROPERTY</span>
+                <span className="text-right">MATCH</span>
+            </div>
+            {matches.map((match, index) => (
+                <motion.div
+                    key={`match-${match.investor
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")}`}
+                    className="grid grid-cols-3 gap-2 items-center"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.15 * index }}
+                >
+                    <div className="text-sm font-medium text-neutral-800 dark:text-neutral-200 truncate">
+                        {match.investor}
+                    </div>
+                    <div className="text-xs font-mono text-neutral-600 dark:text-neutral-400 text-center bg-neutral-100 dark:bg-neutral-800/50 rounded-sm px-1 py-0.5 truncate">
+                        {match.propertyHint}
+                    </div>
+                    <div
+                        className={`text-sm font-bold text-right ${getColorClass(
+                            match.color
+                        )}`}
+                    >
+                        {match.score}%
+                    </div>
+                </motion.div>
+            ))}
+        </div>
+    );
+};
+
 function AIInput_Voice() {
     const [submitted, setSubmitted] = useState(false);
     const [time, setTime] = useState(0);
@@ -665,6 +808,9 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
 
                         {item.feature === "counter" && item.statistic && (
                             <div className="mt-auto pt-3">
+                                <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                                    {item.statistic.label}
+                                </div>
                                 <CounterAnimation
                                     start={item.statistic.start || 0}
                                     end={item.statistic.end || 100}
@@ -704,6 +850,20 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                             <MetricsFeature metrics={item.metrics} />
                         )}
 
+                        {item.feature === "investorMatch" &&
+                            item.investorMatches && (
+                                <InvestorMatchFeature
+                                    matches={item.investorMatches}
+                                />
+                            )}
+
+                        {item.feature === "priorKnowledgeCheck" &&
+                            item.priorKnowledgeItems && (
+                                <PriorKnowledgeCheckFeature
+                                    items={item.priorKnowledgeItems}
+                                />
+                            )}
+
                         {item.icons && !item.feature && (
                             <div className="mt-auto pt-4 flex items-center flex-wrap gap-4 border-t border-neutral-200/70 dark:border-neutral-800/70">
                                 <OpenAI className="w-5 h-5 dark:hidden opacity-70 hover:opacity-100 transition-opacity" />
@@ -732,49 +892,13 @@ export default function BentoGrid() {
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={staggerContainer}
-                    className="grid gap-6"
+                    className="grid grid-cols-1 md:grid-cols-2 gap-6"
                 >
-                    <div className="grid md:grid-cols-3 gap-6">
-                        <motion.div
-                            variants={fadeInUp}
-                            className="md:col-span-1"
-                        >
-                            <BentoCard item={bentoItems[0]} />
+                    {bentoItems.map((item) => (
+                        <motion.div variants={fadeInUp} key={item.id}>
+                            <BentoCard item={item} />
                         </motion.div>
-                        <motion.div
-                            variants={fadeInUp}
-                            className="md:col-span-2"
-                        >
-                            <BentoCard item={bentoItems[1]} />
-                        </motion.div>
-                    </div>
-                    <div className="grid md:grid-cols-2 gap-6">
-                        <motion.div
-                            variants={fadeInUp}
-                            className="md:col-span-1"
-                        >
-                            <BentoCard item={bentoItems[2]} />
-                        </motion.div>
-                        <motion.div
-                            variants={fadeInUp}
-                            className="md:col-span-1 rounded-xl overflow-hidden bg-gradient-to-b from-neutral-50/80 to-neutral-50 dark:from-neutral-900/80 dark:to-neutral-900 border border-neutral-200/50 dark:border-neutral-800/50 hover:border-neutral-400/30 dark:hover:border-neutral-600/30 hover:shadow-lg hover:shadow-neutral-200/20 dark:hover:shadow-neutral-900/20 transition-all duration-300"
-                        >
-                            <div className="p-5">
-                                <div className="flex items-center justify-between mb-4">
-                                    <h3 className="text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
-                                        Voice Assistant
-                                    </h3>
-                                </div>
-                                <p className="text-sm text-neutral-600 dark:text-neutral-400 tracking-tight mb-4">
-                                    Interact with our AI using natural voice
-                                    commands. Experience seamless voice-driven
-                                    interactions with advanced speech
-                                    recognition.
-                                </p>
-                                <AIInput_Voice />
-                            </div>
-                        </motion.div>
-                    </div>
+                    ))}
                 </motion.div>
             </div>
         </section>

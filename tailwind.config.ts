@@ -75,11 +75,17 @@ const config = {
             "background-position": "calc(100% + var(--shimmer-width)) 0",
           },
         },
+        "slow-blink": {
+          "50%": {
+            opacity: "0.5",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         shimmer: "shimmer 8s infinite",
+        "slow-blink": "slow-blink 2s infinite",
       },
     },
   },
