@@ -1,10 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Figtree } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/react";
-
-const FigtreeFont = Figtree({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Next.js + Notion — Waitlist Template",
@@ -35,7 +33,7 @@ export default function RootLayout({
       <meta name="twitter:image:type" content="image/png" />
       <meta name="twitter:image:width" content="1280" />
       <meta name="twitter:image:height" content="832" />
-      <body className={FigtreeFont.className}>
+      <body className={GeistSans.className}>
         {children}
         <Toaster richColors position="top-center" />
         <Analytics />

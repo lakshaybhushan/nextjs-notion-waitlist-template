@@ -761,7 +761,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
             <Link
                 href={item.href || "#"}
                 className={`
-                    group relative flex flex-col gap-4 h-full rounded-xl p-5
+                    group relative flex flex-col gap-4 h-full rounded-xl p-8
                     bg-gradient-to-b from-neutral-50/60 via-neutral-50/40 to-neutral-50/30 
                     dark:from-neutral-900/60 dark:via-neutral-900/40 dark:to-neutral-900/30
                     border border-neutral-200/60 dark:border-neutral-800/60
@@ -788,17 +788,16 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                 >
                     <div className="space-y-2 flex-1 flex flex-col">
                         <div className="flex items-center justify-between">
-                            <h3 className="text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors duration-300">
+                            <h3 className="text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors duration-300">
                                 {item.title}
+                                <span className="font-normal text-neutral-600 dark:text-neutral-400">
+                                    {" "}{item.description}
+                                </span>
                             </h3>
                             <div className="text-neutral-400 dark:text-neutral-500 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                                 <ArrowUpRight className="h-5 w-5" />
                             </div>
                         </div>
-
-                        <p className="text-sm text-neutral-600 dark:text-neutral-400 tracking-tight">
-                            {item.description}
-                        </p>
 
                         {/* Feature specific content */}
                         {item.feature === "spotlight" &&
@@ -884,7 +883,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
 
 export default function BentoGrid() {
     return (
-        <section className="relative py-24 sm:py-32 bg-white dark:bg-black overflow-hidden">
+        <section className="relative py-24 sm:py-32 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Bento Grid */}
                 <motion.div
