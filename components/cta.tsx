@@ -6,7 +6,7 @@ import { containerVariants, itemVariants } from "@/lib/animation-variants";
 export default function CTA() {
   return (
     <motion.div
-      className="flex w-full max-w-2xl flex-col gap-2"
+      className="flex w-full max-w-2xl flex-col items-center gap-2 mt-20 md:mt-28"
       variants={containerVariants}
       initial="hidden"
       animate="visible">
@@ -20,17 +20,10 @@ export default function CTA() {
         </div>
       </motion.div>
 
-      <motion.img
-        src="/logo.svg"
-        alt="logo"
-        className="mx-auto h-24 w-24"
-        variants={itemVariants}
-      />
-
       <motion.div variants={itemVariants}>
         <TextBlur
-          className="text-center text-3xl font-medium tracking-tighter sm:text-5xl"
-          text={"AI-Powered Real Estate<br />Off-Market Due Diligence Platform"}
+          className="text-center text-7xl font-black tracking-tighter sm:text-7xl whitespace-nowrap"
+          text={"Real Estate analyzed in seconds."}
         />
       </motion.div>
 
