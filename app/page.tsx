@@ -11,6 +11,7 @@ import BentoGrid from "@/components/kokonutui/bento-grid";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Testimonials from "@/components/testimonials";
+import GridBackground from "@/components/grid-background";
 
 export default function Home() {
   const [name, setName] = useState<string>("");
@@ -113,6 +114,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center overflow-x-clip pt-12 md:pt-24">
+      <GridBackground />
       <section className="flex flex-col items-center px-4 sm:px-6 lg:px-8">
         <Header />
 

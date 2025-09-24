@@ -63,6 +63,12 @@ const config = {
         sans: ["var(--font-geist-sans)", ...fontFamily.sans],
         mono: ["var(--font-geist-mono)", ...fontFamily.mono],
       },
+      backgroundImage: {
+        "grid-pattern": "linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px)",
+      },
+      backgroundSize: {
+        "grid-size": "4rem 4rem",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
