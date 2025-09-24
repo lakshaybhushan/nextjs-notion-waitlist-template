@@ -762,21 +762,12 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                 href={item.href || "#"}
                 className={`
                     group relative flex flex-col gap-4 h-full rounded-xl p-8
-                    bg-gradient-to-b from-neutral-50/60 via-neutral-50/40 to-neutral-50/30 
-                    dark:from-neutral-900/60 dark:via-neutral-900/40 dark:to-neutral-900/30
                     border border-neutral-200/60 dark:border-neutral-800/60
                     before:absolute before:inset-0 before:rounded-xl
                     before:bg-gradient-to-b before:from-white/10 before:via-white/20 before:to-transparent 
                     dark:before:from-black/10 dark:before:via-black/20 dark:before:to-transparent
                     before:opacity-100 before:transition-opacity before:duration-500
-                    after:absolute after:inset-0 after:rounded-xl after:bg-neutral-50/70 dark:after:bg-neutral-900/70 after:z-[-1]
-                    backdrop-blur-[4px]
-                    shadow-[0_4px_20px_rgb(0,0,0,0.04)] dark:shadow-[0_4px_20px_rgb(0,0,0,0.2)]
                     hover:border-neutral-300/50 dark:hover:border-neutral-700/50
-                    hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_8px_30px_rgb(0,0,0,0.3)]
-                    hover:backdrop-blur-[6px]
-                    hover:bg-gradient-to-b hover:from-neutral-50/60 hover:via-neutral-50/30 hover:to-neutral-50/20
-                    dark:hover:from-neutral-800/60 dark:hover:via-neutral-800/30 dark:hover:to-neutral-800/20
                     transition-all duration-500 ease-out ${item.className}
                 `}
                 tabIndex={0}
@@ -883,7 +874,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
 
 export default function BentoGrid() {
     return (
-        <section className="relative py-24 sm:py-32 overflow-hidden">
+        <section className="relative pb-24 sm:pb-32 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Bento Grid */}
                 <motion.div
