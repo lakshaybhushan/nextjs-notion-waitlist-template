@@ -22,15 +22,15 @@ export default function CTA() {
 
       <motion.div variants={itemVariants}>
         <TextBlur
-          className="text-center text-7xl font-black tracking-tighter sm:text-7xl whitespace-nowrap"
-          text={"Real Estate analyzed in seconds."}
+          className="text-center text-6xl font-black tracking-tighter sm:text-6xl whitespace-nowrap"
+          text={"Immobilien analysiert in Sekunden."}
         />
       </motion.div>
 
       <motion.div variants={itemVariants}>
         <TextBlur
           className="mx-auto max-w-[42rem] pt-1.5 text-center text-base text-zinc-300 sm:text-lg"
-          text="Transform off-market property analysis from weeks to minutes with intelligent automation"
+          text="Whisper verwandelt Off-Market-Dokumente in Sekundenschnelle in fertige Analysen, Präsentationen und Verkaufstools."
           duration={0.8}
         />
       </motion.div>

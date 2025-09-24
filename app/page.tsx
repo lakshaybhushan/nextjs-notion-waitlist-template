@@ -127,7 +127,7 @@ export default function Home() {
           loading={loading}
         />
 
-        <motion.div
+        {/* <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
@@ -140,7 +140,7 @@ export default function Home() {
             height={800}
             className="rounded-lg shadow-xl"
           />
-        </motion.div>
+        </motion.div> */}
       </section>
 
       <Testimonials />
