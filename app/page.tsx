@@ -10,6 +10,7 @@ import Footer from "@/components/footer";
 import BentoGrid from "@/components/kokonutui/bento-grid";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Testimonials from "@/components/testimonials";
 
 export default function Home() {
   const [name, setName] = useState<string>("");
@@ -141,7 +142,9 @@ export default function Home() {
           />
         </motion.div>
       </section>
-      
+
+      <Testimonials />
+
       <BentoGrid />
 
       <Footer />
