@@ -149,13 +149,13 @@ export default function Home() {
 
       <Footer />
 
-      <Particles
+      {/* <Particles
         quantityDesktop={350}
         quantityMobile={100}
         ease={80}
         color={"#F7FF9B"}
         refresh
-      />
+      /> */}
     </main>
   );
 }
