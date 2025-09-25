@@ -382,6 +382,38 @@ const LineChartFeature = ({
     const allValues = data.flatMap((d) => [d.miete, d.tilgung]);
     const dataMin = Math.min(...allValues);
 
+    const CustomTooltip = ({ active, payload }: any) => {
+        if (active && payload && payload.length) {
+            return (
+                <div className="bg-black p-4 rounded-lg border border-neutral-700 shadow-xl space-y-1">
+                    {payload.map((pld: any) => (
+                        <div
+                            key={pld.dataKey}
+                            className="flex items-center justify-between gap-4"
+                        >
+                            <div className="flex items-center gap-2.5 shrink-0">
+                                <div
+                                    className="w-2.5 h-2.5 rounded-full"
+                                    style={{ backgroundColor: pld.stroke }}
+                                />
+                                <p className="text-base text-neutral-400">
+                                    {pld.name === "miete"
+                                        ? "Mieteinnahmen"
+                                        : "Tilgung"}
+                                </p>
+                            </div>
+                            <p className="font-bold text-neutral-100 text-right">
+                                {pld.value.toLocaleString("de-DE")} €
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        return null;
+    };
+
     return (
         <div className="relative h-96 w-full">
             <AnimatePresence>
@@ -433,18 +465,7 @@ const LineChartFeature = ({
                     <Tooltip
                         cursor={false}
                         animationDuration={300}
-                        contentStyle={{
-                            backgroundColor: "rgba(23, 23, 23, 0.8)",
-                            borderColor: "rgb(51, 51, 51)",
-                            color: "#fff",
-                            borderRadius: "8px",
-                            fontSize: "12px",
-                        }}
-                        labelStyle={{ fontWeight: "bold" }}
-                        formatter={(value: number, name: string) => [
-                            `${value.toLocaleString("de-DE")} €`,
-                            name === "miete" ? "Mieteinnahmen" : "Tilgung",
-                        ]}
+                        content={<CustomTooltip />}
                     />
                     <Line
                         name="miete"
