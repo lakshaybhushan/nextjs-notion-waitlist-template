@@ -88,20 +88,20 @@ interface BentoItem {
 
 const bentoItems: BentoItem[] = [
     {
-        id: "main",
-        title: "Intelligent Document Processing",
+        id: "ueberblick",
+        title: "Effekt: Sofort Überblick erhalten",
         description:
-            "Automated data extraction, standardization, and validation from any property document format.",
+            "Feature: Automatische Extraktion und Standardisierung aller Immobiliendaten",
         href: "#",
         feature: "typing",
         typingText: `{\n  "property_name": "Berlin Central Tower",\n  "location": "Berlin, Germany",\n  "size_sqm": 25000,\n  "noi_eur": 4500000,\n  "cap_rate": "5.5%",\n  "status": "Validated"\n}`,
-        className: "col-span-1 row-span-1",
+        className: "col-span-1",
     },
     {
-        id: "stat1",
-        title: "Comprehensive Financial Analysis",
+        id: "investitionsentscheidungen",
+        title: "Effekt: Sichere Investitionsentscheidungen treffen",
         description:
-            "Generate 20-year cashflow models, calculate key metrics, and run sensitivity analysis.",
+            "Feature: Automatisierte Cashflow-Berechnung und Vorkenntnisprüfung",
         href: "#",
         feature: "priorKnowledgeCheck",
         priorKnowledgeItems: [
@@ -113,13 +113,13 @@ const bentoItems: BentoItem[] = [
             },
             { object: "Condominium", city: "Dusseldorf", priorKnowledge: true },
         ],
-        className: "col-span-1 row-span-1",
+        className: "col-span-1",
     },
     {
-        id: "partners",
-        title: "Intelligent Investor Matching",
+        id: "investments",
+        title: "Effekt: Passende Investments für jeden Investor",
         description:
-            "AI-powered algorithm matches properties with the best-fit investors from your CRM.",
+            "Feature: KI-gestützte Investor-CRM mit automatischer Präferenzabgleichung",
         href: "#",
         feature: "investorMatch",
         investorMatches: [
@@ -141,20 +141,13 @@ const bentoItems: BentoItem[] = [
                 score: 74,
                 color: "blue",
             },
-            {
-                investor: "Legacy Capital",
-                propertyHint: "H-OS",
-                score: 45,
-                color: "amber",
-            },
         ],
-        className: "col-span-1 row-span-1",
+        className: "md:col-span-2",
     },
     {
-        id: "innovation",
-        title: "Automated Presentation Generation",
-        description:
-            "Instantly create professional, investor-ready teaser decks and pitch materials.",
+        id: "praesentieren",
+        title: "Effekt: Beeindruckend präsentieren, mit einem Klick",
+        description: "Feature: Automatische Teaser-Deck-Generierung",
         href: "#",
         feature: "timeline",
         timeline: [
@@ -163,7 +156,21 @@ const bentoItems: BentoItem[] = [
             { year: "3", event: "Risk Assessment" },
             { year: "4", event: "Investor-Ready Deck Generated" },
         ],
-        className: "col-span-1 row-span-1",
+        className: "col-span-1",
+    },
+    {
+        id: "verhandeln",
+        title: "Effekt: Schneller verhandeln und überzeugen",
+        description:
+            "Feature: Exporte fertiger Berechnungen für Pitch und Verhandlung",
+        href: "#",
+        feature: "spotlight",
+        spotlightItems: [
+            "Cashflow-Modelle (PDF, Excel)",
+            "Sensitivitätsanalysen (PDF)",
+            "Mieterlisten (Excel)",
+        ],
+        className: "col-span-1",
     },
 ];
 
@@ -756,7 +763,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                 href={item.href || "#"}
                 className={`
                     group relative flex flex-col h-full p-12
-                    transition-all duration-500 ease-out ${item.className}
+                    transition-all duration-500 ease-out
                 `}
                 tabIndex={0}
                 aria-label={`${item.title} - ${item.description}`}
@@ -883,10 +890,14 @@ export default function BentoGrid() {
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={staggerContainer}
-                    className="grid grid-cols-1 md:grid-cols-2 grid-flow-row-dense divide-y divide-x divide-neutral-200/60 dark:divide-neutral-800/60 border border-neutral-200/60 dark:border-neutral-800/60 overflow-hidden"
+                    className="grid grid-cols-1 md:grid-cols-2 divide-y divide-x divide-neutral-200/60 dark:divide-neutral-800/60 border border-neutral-200/60 dark:border-neutral-800/60 overflow-hidden"
                 >
                     {bentoItems.map((item) => (
-                        <motion.div variants={fadeInUp} key={item.id}>
+                        <motion.div
+                            variants={fadeInUp}
+                            key={item.id}
+                            className={item.className}
+                        >
                             <BentoCard item={item} />
                         </motion.div>
                     ))}
