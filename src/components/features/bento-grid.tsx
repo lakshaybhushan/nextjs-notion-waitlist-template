@@ -350,6 +350,13 @@ const LineChartFeature = ({
     const [activeData, setActiveData] = useState<{ x: number; y: number } | null>(
         null,
     );
+    const [animationActive, setAnimationActive] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setAnimationActive(false), 1500);
+        return () => clearTimeout(timer);
+    }, []);
+
     const xSpring = useSpring(0, {
         stiffness: 200,
         damping: 40,
@@ -468,6 +475,7 @@ const LineChartFeature = ({
                         content={<CustomTooltip />}
                     />
                     <Line
+                        isAnimationActive={animationActive}
                         name="miete"
                         type="step"
                         dataKey="miete"
@@ -487,6 +495,7 @@ const LineChartFeature = ({
                         }}
                     />
                     <Line
+                        isAnimationActive={animationActive}
                         name="tilgung"
                         type="step"
                         dataKey="tilgung"
