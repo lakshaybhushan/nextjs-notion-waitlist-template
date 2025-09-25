@@ -26,6 +26,7 @@ import {
 } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect, useRef, useMemo } from "react";
+import Image from "next/image";
 import {
     LineChart,
     Line,
@@ -104,7 +105,8 @@ interface BentoItem {
         | "typing"
         | "metrics"
         | "investorMatch"
-        | "priorKnowledgeCheck";
+        | "priorKnowledgeCheck"
+        | "praesentation";
     spotlightItems?: string[];
     timeline?: Array<{ year: string; event: string }>;
     code?: string;
@@ -195,13 +197,7 @@ const bentoItems: BentoItem[] = [
         title: "Beeindruckend präsentieren, mit einem Klick. ",
         description: "Automatische Teaser-Deck-Generierung.",
         href: "#",
-        feature: "timeline",
-        timeline: [
-            { year: "1", event: "Data Ingestion & Analysis" },
-            { year: "2", event: "Financial Modeling" },
-            { year: "3", event: "Risk Assessment" },
-            { year: "4", event: "Investor-Ready Deck Generated" },
-        ],
+        feature: "praesentation",
         className: "col-span-1",
     },
     {
@@ -426,11 +422,7 @@ const LineChartFeature = ({
         );
     };
 
-    const CustomTooltip = ({
-        active,
-        payload,
-        coordinate,
-    }: any) => {
+    const CustomTooltip = ({ active, payload, coordinate }: any) => {
         useEffect(() => {
             if (isInitial && active && coordinate) {
                 setActiveX(coordinate.x);
@@ -548,7 +540,10 @@ const LineChartFeature = ({
                         tickLine={false}
                     />
                     <YAxis
-                        tick={{ fill: "rgb(163, 163, 163)", fontSize: 12 }}
+                        tick={{
+                            fill: "rgb(163, 163, 163)",
+                            fontSize: 12,
+                        }}
                         axisLine={false}
                         tickLine={false}
                         domain={[dataMin - 50000, "dataMax + 50000"]}
@@ -849,7 +844,16 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                 />
                             )}
 
-
+                        {item.feature === "praesentation" && (
+                            <div className="flex justify-center items-center h-full">
+                                <Image
+                                    src="/praesentation2.svg"
+                                    alt="Präsentation"
+                                    width={500}
+                                    height={400}
+                                />
+                            </div>
+                        )}
 
                         {item.feature === "chart" && item.chartData && (
                             <LineChartFeature data={item.chartData} />
