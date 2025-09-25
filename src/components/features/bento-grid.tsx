@@ -106,7 +106,8 @@ interface BentoItem {
         | "metrics"
         | "investorMatch"
         | "priorKnowledgeCheck"
-        | "praesentation";
+        | "praesentation"
+        | "export";
     spotlightItems?: string[];
     timeline?: Array<{ year: string; event: string }>;
     code?: string;
@@ -206,12 +207,7 @@ const bentoItems: BentoItem[] = [
         description:
             "Exporte fertiger Berechnungen für Pitch und Verhandlung.",
         href: "#",
-        feature: "spotlight",
-        spotlightItems: [
-            "Cashflow-Modelle (PDF, Excel)",
-            "Sensitivitätsanalysen (PDF)",
-            "Mieterlisten (Excel)",
-        ],
+        feature: "export",
         className: "col-span-1",
     },
 ];
@@ -851,6 +847,17 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                     alt="Präsentation"
                                     width={500}
                                     height={400}
+                                />
+                            </div>
+                        )}
+
+                        {item.feature === "export" && (
+                            <div className="flex justify-center items-center h-full">
+                                <Image
+                                    src="/group34.svg"
+                                    alt="Export"
+                                    width={200}
+                                    height={150}
                                 />
                             </div>
                         )}
