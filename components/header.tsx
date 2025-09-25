@@ -10,27 +10,29 @@ export default function Header() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="fixed flex justify-between left-0 top-0 z-50 p-4 items-center border-b border-white/10 backdrop-blur-sm w-full"
+      className="fixed left-0 top-0 z-50 w-full border-b border-white/10 backdrop-blur-sm"
     >
-      <motion.div variants={itemVariants} className="flex items-center gap-6">
-        <Link href="/" className="flex items-center gap-2">
-          <Image src="/logo.svg" alt="logo" width={24} height={24} />
-          <span className="font-bold text-white">whisper</span>
-        </Link>
-        <div className="flex items-center gap-4">
-          <Link href="#features" className="text-neutral-400 hover:text-white transition-colors">
-              Features
+      <div className="flex w-full max-w-7xl mx-auto items-center justify-between p-4">
+        <motion.div variants={itemVariants} className="flex items-center gap-6">
+          <Link href="/" className="flex items-center gap-2">
+            <Image src="/logo.svg" alt="logo" width={24} height={24} />
+            <span className="font-bold text-white">whisper</span>
           </Link>
-          <Link href="#pricing" className="text-neutral-400 hover:text-white transition-colors">
-              Pricing
-          </Link>
-        </div>
-      </motion.div>
-      <motion.div variants={itemVariants}>
-        <Button asChild className="bg-white text-black hover:bg-neutral-200 rounded-lg font-semibold">
-          <Link href="/signup">Sign Up</Link>
-        </Button>
-      </motion.div>
+          <div className="flex items-center gap-4">
+            <Link href="#features" className="text-neutral-400 hover:text-white transition-colors">
+                Features
+            </Link>
+            <Link href="#pricing" className="text-neutral-400 hover:text-white transition-colors">
+                Pricing
+            </Link>
+          </div>
+        </motion.div>
+        <motion.div variants={itemVariants}>
+          <Button asChild className="bg-white text-black hover:bg-neutral-200 rounded-lg font-semibold">
+            <Link href="/signup">Sign Up</Link>
+          </Button>
+        </motion.div>
+      </div>
     </motion.div>
   );
 }
