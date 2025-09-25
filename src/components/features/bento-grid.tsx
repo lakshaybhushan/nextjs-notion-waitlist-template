@@ -25,7 +25,7 @@ import {
     AnimatePresence,
 } from "framer-motion";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import {
     LineChart,
     Line,
@@ -347,10 +347,13 @@ const LineChartFeature = ({
 }: {
     data: Array<{ month: string; miete: number; tilgung: number }>;
 }) => {
-    const [activeData, setActiveData] = useState<{ x: number; y: number } | null>(
-        null,
-    );
+    const [isInitial, setIsInitial] = useState(true);
+    const [activeX, setActiveX] = useState<number | null>(null);
     const [animationActive, setAnimationActive] = useState(true);
+    const initialIndex = useMemo(
+        () => Math.floor(data.length / 2),
+        [data.length],
+    );
 
     useEffect(() => {
         const timer = setTimeout(() => setAnimationActive(false), 1500);
@@ -364,32 +367,41 @@ const LineChartFeature = ({
     });
 
     useEffect(() => {
-        if (activeData) {
-            xSpring.set(activeData.x);
+        if (activeX !== null) {
+            xSpring.set(activeX);
         }
-    }, [activeData, xSpring]);
+    }, [activeX, xSpring]);
 
     const handleMouseMove = (e: any) => {
+        if (isInitial) {
+            setIsInitial(false);
+        }
         if (e.activeCoordinate) {
-            setActiveData(e.activeCoordinate);
+            setActiveX(e.activeCoordinate.x);
         }
     };
 
     const handleMouseLeave = () => {
-        setActiveData(null);
-    };
-
-    const formatYAxis = (tick: number) => {
-        if (tick >= 1000000) {
-            return `${(tick / 1000000).toFixed(1).replace(".", ",")}M`;
+        if (isInitial) {
+            setIsInitial(false);
         }
-        return `${(tick / 1000).toFixed(0)}K`;
+        setActiveX(null);
     };
 
     const allValues = data.flatMap((d) => [d.miete, d.tilgung]);
     const dataMin = Math.min(...allValues);
 
-    const CustomTooltip = ({ active, payload }: any) => {
+    const CustomTooltip = ({
+        active,
+        payload,
+        coordinate,
+    }: any) => {
+        useEffect(() => {
+            if (isInitial && active && coordinate) {
+                setActiveX(coordinate.x);
+            }
+        }, [isInitial, active, coordinate]);
+
         if (active && payload && payload.length) {
             return (
                 <div className="bg-black p-4 rounded-lg border border-neutral-700 shadow-xl space-y-1">
@@ -424,7 +436,7 @@ const LineChartFeature = ({
     return (
         <div className="relative h-96 w-full">
             <AnimatePresence>
-                {activeData && (
+                {activeX !== null && (
                     <motion.div
                         className="absolute top-0 bottom-0 z-10"
                         style={{
@@ -467,7 +479,14 @@ const LineChartFeature = ({
                         axisLine={false}
                         tickLine={false}
                         domain={[dataMin - 50000, "dataMax + 50000"]}
-                        tickFormatter={formatYAxis}
+                        tickFormatter={(tick) => {
+                            if (tick >= 1000000) {
+                                return `${(tick / 1000000)
+                                    .toFixed(1)
+                                    .replace(".", ",")}M`;
+                            }
+                            return `${(tick / 1000).toFixed(0)}K`;
+                        }}
                     />
                     <Tooltip
                         cursor={false}
