@@ -117,7 +117,7 @@ export default function Home() {
       <Header />
       <div className="relative w-full">
         <GridBackground />
-        <section className="flex flex-col items-center px-4 sm:px-6 lg:px-8 pt-24 md:pt-32">
+        <section className="flex flex-col items-center px-4 sm:px-6 lg:px-8 pt-24 md:pt-32 max-w-7xl mx-auto">
           <CTA />
 
           <Form
@@ -143,9 +143,8 @@ export default function Home() {
               className="rounded-lg shadow-xl"
             />
           </motion.div> */}
+          <Testimonials />
         </section>
-
-        <Testimonials />
       </div>
 
       <BentoGrid />
