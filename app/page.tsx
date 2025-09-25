@@ -113,39 +113,40 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center overflow-x-clip pt-24 md:pt-32">
-      <GridBackground />
-      <section className="flex flex-col items-center px-4 sm:px-6 lg:px-8">
-        <Header />
+    <main className="flex min-h-screen flex-col items-center overflow-x-clip">
+      <Header />
+      <div className="relative w-full">
+        <GridBackground />
+        <section className="flex flex-col items-center px-4 sm:px-6 lg:px-8 pt-24 md:pt-32">
+          <CTA />
 
-        <CTA />
-
-        <Form
-          name={name}
-          email={email}
-          handleNameChange={handleNameChange}
-          handleEmailChange={handleEmailChange}
-          handleSubmit={handleSubmit}
-          loading={loading}
-        />
-
-        {/* <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-12"
-        >
-          <Image
-            src="/screenshot.png"
-            alt="Screenshot of the application"
-            width={1200}
-            height={800}
-            className="rounded-lg shadow-xl"
+          <Form
+            name={name}
+            email={email}
+            handleNameChange={handleNameChange}
+            handleEmailChange={handleEmailChange}
+            handleSubmit={handleSubmit}
+            loading={loading}
           />
-        </motion.div> */}
-      </section>
 
-      <Testimonials />
+          {/* <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-12"
+          >
+            <Image
+              src="/screenshot.png"
+              alt="Screenshot of the application"
+              width={1200}
+              height={800}
+              className="rounded-lg shadow-xl"
+            />
+          </motion.div> */}
+        </section>
+
+        <Testimonials />
+      </div>
 
       <BentoGrid />
 

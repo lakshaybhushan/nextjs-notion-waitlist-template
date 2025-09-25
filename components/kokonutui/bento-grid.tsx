@@ -761,13 +761,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
             <Link
                 href={item.href || "#"}
                 className={`
-                    group relative flex flex-col gap-4 h-full rounded-xl p-8
-                    border border-neutral-200/60 dark:border-neutral-800/60
-                    before:absolute before:inset-0 before:rounded-xl
-                    before:bg-gradient-to-b before:from-white/10 before:via-white/20 before:to-transparent 
-                    dark:before:from-black/10 dark:before:via-black/20 dark:before:to-transparent
-                    before:opacity-100 before:transition-opacity before:duration-500
-                    hover:border-neutral-300/50 dark:hover:border-neutral-700/50
+                    group relative flex flex-col gap-4 h-full p-8
                     transition-all duration-500 ease-out ${item.className}
                 `}
                 tabIndex={0}
@@ -882,7 +876,7 @@ export default function BentoGrid() {
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={staggerContainer}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                    className="grid grid-cols-1 md:grid-cols-2 grid-flow-row-dense divide-y divide-x divide-neutral-200/60 dark:divide-neutral-800/60 border border-neutral-200/60 dark:border-neutral-800/60 rounded-2xl overflow-hidden"
                 >
                     {bentoItems.map((item) => (
                         <motion.div variants={fadeInUp} key={item.id}>
