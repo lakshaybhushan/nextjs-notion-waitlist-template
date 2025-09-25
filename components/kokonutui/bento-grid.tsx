@@ -761,7 +761,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
             <Link
                 href={item.href || "#"}
                 className={`
-                    group relative flex flex-col gap-4 h-full p-8
+                    group relative flex flex-col gap-12 h-full p-12
                     transition-all duration-500 ease-out ${item.className}
                 `}
                 tabIndex={0}
@@ -787,11 +787,13 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                         {/* Feature specific content */}
                         {item.feature === "spotlight" &&
                             item.spotlightItems && (
-                                <SpotlightFeature items={item.spotlightItems} />
+                                <div className="mt-6">
+                                    <SpotlightFeature items={item.spotlightItems} />
+                                </div>
                             )}
 
                         {item.feature === "counter" && item.statistic && (
-                            <div className="mt-auto pt-3">
+                            <div className="mt-auto pt-3 mt-6">
                                 <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
                                     {item.statistic.label}
                                 </div>
@@ -804,7 +806,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                         )}
 
                         {item.feature === "chart" && item.statistic && (
-                            <div className="mt-auto pt-3">
+                            <div className="mt-auto pt-3 mt-6">
                                 <div className="flex items-center justify-between mb-1">
                                     <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
                                         {item.statistic.label}
@@ -821,35 +823,49 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                         )}
 
                         {item.feature === "timeline" && item.timeline && (
-                            <TimelineFeature timeline={item.timeline} />
+                            <div className="mt-6">
+                                <TimelineFeature timeline={item.timeline} />
+                            </div>
                         )}
 
-                        {item.feature === "icons" && <IconsFeature />}
+                        {item.feature === "icons" && 
+                            <div className="mt-6">
+                                <IconsFeature />
+                            </div>
+                        }
 
                         {item.feature === "typing" && item.typingText && (
-                            <TypingCodeFeature text={item.typingText} />
+                            <div className="mt-6">
+                                <TypingCodeFeature text={item.typingText} />
+                            </div>
                         )}
 
                         {item.feature === "metrics" && item.metrics && (
-                            <MetricsFeature metrics={item.metrics} />
+                            <div className="mt-6">
+                                <MetricsFeature metrics={item.metrics} />
+                            </div>
                         )}
 
                         {item.feature === "investorMatch" &&
                             item.investorMatches && (
-                                <InvestorMatchFeature
-                                    matches={item.investorMatches}
-                                />
+                                <div className="mt-6">
+                                    <InvestorMatchFeature
+                                        matches={item.investorMatches}
+                                    />
+                                </div>
                             )}
 
                         {item.feature === "priorKnowledgeCheck" &&
                             item.priorKnowledgeItems && (
-                                <PriorKnowledgeCheckFeature
-                                    items={item.priorKnowledgeItems}
-                                />
+                                <div className="mt-6">
+                                    <PriorKnowledgeCheckFeature
+                                        items={item.priorKnowledgeItems}
+                                    />
+                                </div>
                             )}
 
                         {item.icons && !item.feature && (
-                            <div className="mt-auto pt-4 flex items-center flex-wrap gap-4 border-t border-neutral-200/70 dark:border-neutral-800/70">
+                            <div className="mt-auto pt-4 flex items-center flex-wrap gap-4 border-t border-neutral-200/70 dark:border-neutral-800/70 mt-6">
                                 <OpenAI className="w-5 h-5 dark:hidden opacity-70 hover:opacity-100 transition-opacity" />
                                 <OpenAIDark className="w-5 h-5 hidden dark:block opacity-70 hover:opacity-100 transition-opacity" />
                                 <AnthropicDark className="w-5 h-5 dark:block hidden opacity-70 hover:opacity-100 transition-opacity" />
