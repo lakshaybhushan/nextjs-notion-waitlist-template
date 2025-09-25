@@ -390,15 +390,10 @@ const TypingCodeFeature = ({ text }: { text: string }) => {
     }, []);
 
     return (
-        <div className="mt-3 relative">
-            <div className="flex items-center gap-2 mb-2">
-                <div className="text-xs text-neutral-500 dark:text-neutral-400">
-                    server.ts
-                </div>
-            </div>
+        <div className="relative">
             <div
                 ref={terminalRef}
-                className="bg-neutral-900 dark:bg-black text-neutral-100 p-3 rounded-md text-xs font-mono h-[150px] overflow-y-auto"
+                className="bg-neutral-900 dark:bg-black text-neutral-100 p-3 rounded-b-md text-xs font-mono h-[150px] overflow-y-auto"
             >
                 <pre className="whitespace-pre-wrap">
                     {displayedText}
@@ -748,7 +743,6 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
             variants={fadeInUp}
             whileHover={{ y: -5 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="h-full"
             onHoverStart={() => setIsHovered(true)}
             onHoverEnd={handleMouseLeave}
             onMouseMove={handleMouseMove}
@@ -761,17 +755,17 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
             <Link
                 href={item.href || "#"}
                 className={`
-                    group relative flex flex-col gap-12 h-full p-12
+                    group relative flex flex-col h-full p-12
                     transition-all duration-500 ease-out ${item.className}
                 `}
                 tabIndex={0}
                 aria-label={`${item.title} - ${item.description}`}
             >
                 <div
-                    className="relative z-10 flex flex-col gap-3 h-full"
+                    className="relative z-10 flex flex-col h-full justify-between"
                     style={{ transform: "translateZ(20px)" }}
                 >
-                    <div className="space-y-2 flex-1 flex flex-col">
+                    <div className="space-y-2">
                         <div className="flex items-center justify-between">
                             <h3 className="text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors duration-300">
                                 {item.title}
@@ -783,17 +777,17 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                 <ArrowUpRight className="h-5 w-5" />
                             </div>
                         </div>
+                    </div>
 
+                    <div className="mt-10">
                         {/* Feature specific content */}
                         {item.feature === "spotlight" &&
                             item.spotlightItems && (
-                                <div className="mt-6">
-                                    <SpotlightFeature items={item.spotlightItems} />
-                                </div>
+                                <SpotlightFeature items={item.spotlightItems} />
                             )}
 
                         {item.feature === "counter" && item.statistic && (
-                            <div className="mt-auto pt-3 mt-6">
+                            <div className="mt-auto pt-3">
                                 <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
                                     {item.statistic.label}
                                 </div>
@@ -806,7 +800,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                         )}
 
                         {item.feature === "chart" && item.statistic && (
-                            <div className="mt-auto pt-3 mt-6">
+                            <div className="mt-auto pt-3">
                                 <div className="flex items-center justify-between mb-1">
                                     <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
                                         {item.statistic.label}
@@ -823,49 +817,46 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                         )}
 
                         {item.feature === "timeline" && item.timeline && (
-                            <div className="mt-6">
-                                <TimelineFeature timeline={item.timeline} />
-                            </div>
+                            <TimelineFeature timeline={item.timeline} />
                         )}
 
                         {item.feature === "icons" && 
-                            <div className="mt-6">
-                                <IconsFeature />
-                            </div>
+                            <IconsFeature />
                         }
 
                         {item.feature === "typing" && item.typingText && (
-                            <div className="mt-6">
-                                <TypingCodeFeature text={item.typingText} />
+                            <div className="max-w-md mx-auto">
+                                <div className="rounded-lg border border-neutral-200/80 dark:border-neutral-800/80 overflow-hidden">
+                                    <div className="flex items-center gap-2 p-2 bg-neutral-100/30 dark:bg-neutral-900/30 border-b border-neutral-200/80 dark:border-neutral-800/80">
+                                        <div className="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
+                                        <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80"></div>
+                                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></div>
+                                    </div>
+                                    <TypingCodeFeature text={item.typingText} />
+                                </div>
                             </div>
                         )}
 
                         {item.feature === "metrics" && item.metrics && (
-                            <div className="mt-6">
-                                <MetricsFeature metrics={item.metrics} />
-                            </div>
+                            <MetricsFeature metrics={item.metrics} />
                         )}
 
                         {item.feature === "investorMatch" &&
                             item.investorMatches && (
-                                <div className="mt-6">
-                                    <InvestorMatchFeature
-                                        matches={item.investorMatches}
-                                    />
-                                </div>
+                                <InvestorMatchFeature
+                                    matches={item.investorMatches}
+                                />
                             )}
 
                         {item.feature === "priorKnowledgeCheck" &&
                             item.priorKnowledgeItems && (
-                                <div className="mt-6">
-                                    <PriorKnowledgeCheckFeature
-                                        items={item.priorKnowledgeItems}
-                                    />
-                                </div>
+                                <PriorKnowledgeCheckFeature
+                                    items={item.priorKnowledgeItems}
+                                />
                             )}
 
                         {item.icons && !item.feature && (
-                            <div className="mt-auto pt-4 flex items-center flex-wrap gap-4 border-t border-neutral-200/70 dark:border-neutral-800/70 mt-6">
+                            <div className="mt-auto pt-4 flex items-center flex-wrap gap-4 border-t border-neutral-200/70 dark:border-neutral-800/70">
                                 <OpenAI className="w-5 h-5 dark:hidden opacity-70 hover:opacity-100 transition-opacity" />
                                 <OpenAIDark className="w-5 h-5 hidden dark:block opacity-70 hover:opacity-100 transition-opacity" />
                                 <AnthropicDark className="w-5 h-5 dark:block hidden opacity-70 hover:opacity-100 transition-opacity" />
