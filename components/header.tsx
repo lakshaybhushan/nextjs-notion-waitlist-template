@@ -2,6 +2,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/lib/animation-variants";
 import Image from "next/image";
+import { Button } from "./ui/button";
 
 export default function Header() {
   return (
@@ -9,7 +10,7 @@ export default function Header() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="fixed flex left-0 top-0 z-50 p-4 items-center border-b border-white/10 backdrop-blur-sm w-full"
+      className="fixed flex justify-between left-0 top-0 z-50 p-4 items-center border-b border-white/10 backdrop-blur-sm w-full"
     >
       <motion.div variants={itemVariants} className="flex items-center gap-6">
         <Link href="/" className="flex items-center gap-2">
@@ -24,6 +25,11 @@ export default function Header() {
               Pricing
           </Link>
         </div>
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <Button asChild className="bg-white text-black hover:bg-neutral-200 rounded-lg font-semibold">
+          <Link href="/signup">Sign Up</Link>
+        </Button>
       </motion.div>
     </motion.div>
   );
