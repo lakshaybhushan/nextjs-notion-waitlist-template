@@ -724,9 +724,9 @@ const DashboardWindow = () => {
     return (
         <div className="rounded-lg border border-neutral-200/80 dark:border-neutral-800/80 overflow-hidden bg-neutral-50 dark:bg-neutral-900 shadow-lg">
             <div className="flex items-center gap-2 px-3 py-2 bg-neutral-100/30 dark:bg-neutral-900/30 border-b border-neutral-200/80 dark:border-neutral-800/80">
-                <div className="w-2 h-2 rounded-full bg-red-500/80"></div>
-                <div className="w-2 h-2 rounded-full bg-amber-500/80"></div>
-                <div className="w-2 h-2 rounded-full bg-emerald-500/80"></div>
+                <div className="w-2 h-2 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
+                <div className="w-2 h-2 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
+                <div className="w-2 h-2 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
             </div>
             <div className="p-3 space-y-2">
                 <motion.div
@@ -909,9 +909,9 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                     className="rounded-lg border border-neutral-200/80 dark:border-neutral-800/80 overflow-hidden"
                                 >
                                     <div className="flex items-center gap-2 p-2 bg-neutral-100/30 dark:bg-neutral-900/30 border-b border-neutral-200/80 dark:border-neutral-800/80">
-                                        <div className="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
-                                        <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80"></div>
-                                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></div>
+                                        <div className="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
+                                        <div className="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
+                                        <div className="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
                                     </div>
                                     <TypingCodeFeature
                                         text={item.typingText}
