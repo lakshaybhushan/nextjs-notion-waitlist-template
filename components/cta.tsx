@@ -30,7 +30,7 @@ export default function CTA() {
       <motion.div variants={itemVariants}>
         <TextBlur
           className="mx-auto max-w-[42rem] pt-1.5 text-center text-base text-zinc-300 sm:text-lg"
-          text="Whisper verwandelt Off-Market-Dokumente in Sekundenschnelle in fertige Analysen, Präsentationen und Verkaufstools."
+          text="Whisper verwandelt Off-Market-Deals in Sekundenschnelle in fertige Analysen, Präsentationen und Verkaufstools."
           duration={0.8}
         />
       </motion.div>
