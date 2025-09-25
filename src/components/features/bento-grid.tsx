@@ -391,6 +391,41 @@ const LineChartFeature = ({
     const allValues = data.flatMap((d) => [d.miete, d.tilgung]);
     const dataMin = Math.min(...allValues);
 
+    const GradientDot = ({ cx, cy, index, color }: any) => {
+        const totalPoints = data.length;
+        const opacity = 0.2 + (index / (totalPoints - 1)) * 0.8;
+        const rgbColor = color === "miete" ? "59, 130, 246" : "239, 68, 68";
+
+        return (
+            <circle
+                cx={cx}
+                cy={cy}
+                r={4}
+                fill={`rgba(${rgbColor}, ${opacity})`}
+                stroke="rgba(23, 23, 23, 0.8)"
+                strokeWidth={2}
+            />
+        );
+    };
+
+    const ActiveGradientDot = ({ cx, cy, index, color }: any) => {
+        if (cx === null || cy === null) return null;
+        const totalPoints = data.length;
+        const opacity = 0.2 + (index / (totalPoints - 1)) * 0.8;
+        const rgbColor = color === "miete" ? "59, 130, 246" : "239, 68, 68";
+
+        return (
+            <circle
+                cx={cx}
+                cy={cy}
+                r={6}
+                fill={`rgba(${rgbColor}, ${opacity})`}
+                stroke="rgba(23, 23, 23, 0.8)"
+                strokeWidth={2}
+            />
+        );
+    };
+
     const CustomTooltip = ({
         active,
         payload,
@@ -463,6 +498,44 @@ const LineChartFeature = ({
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}
                 >
+                    <defs>
+                        <linearGradient
+                            id="colorMiete"
+                            x1="0"
+                            y1="0"
+                            x2="1"
+                            y2="0"
+                        >
+                            <stop
+                                offset="5%"
+                                stopColor="#3b82f6"
+                                stopOpacity={0.2}
+                            />
+                            <stop
+                                offset="95%"
+                                stopColor="#3b82f6"
+                                stopOpacity={1}
+                            />
+                        </linearGradient>
+                        <linearGradient
+                            id="colorTilgung"
+                            x1="0"
+                            y1="0"
+                            x2="1"
+                            y2="0"
+                        >
+                            <stop
+                                offset="5%"
+                                stopColor="#ef4444"
+                                stopOpacity={0.2}
+                            />
+                            <stop
+                                offset="95%"
+                                stopColor="#ef4444"
+                                stopOpacity={1}
+                            />
+                        </linearGradient>
+                    </defs>
                     <CartesianGrid
                         strokeDasharray="3 3"
                         stroke="rgba(163, 163, 163, 0.2)"
@@ -498,40 +571,20 @@ const LineChartFeature = ({
                         name="miete"
                         type="step"
                         dataKey="miete"
-                        stroke="#3b82f6"
+                        stroke="url(#colorMiete)"
                         strokeWidth={2}
-                        dot={{
-                            r: 4,
-                            fill: "#3b82f6",
-                            stroke: "rgba(23, 23, 23, 0.8)",
-                            strokeWidth: 2,
-                        }}
-                        activeDot={{
-                            r: 6,
-                            fill: "#3b82f6",
-                            stroke: "rgba(23, 23, 23, 0.8)",
-                            strokeWidth: 2,
-                        }}
+                        dot={<GradientDot color="miete" />}
+                        activeDot={<ActiveGradientDot color="miete" />}
                     />
                     <Line
                         isAnimationActive={animationActive}
                         name="tilgung"
                         type="step"
                         dataKey="tilgung"
-                        stroke="#ef4444"
+                        stroke="url(#colorTilgung)"
                         strokeWidth={2}
-                        dot={{
-                            r: 4,
-                            fill: "#ef4444",
-                            stroke: "rgba(23, 23, 23, 0.8)",
-                            strokeWidth: 2,
-                        }}
-                        activeDot={{
-                            r: 6,
-                            fill: "#ef4444",
-                            stroke: "rgba(23, 23, 23, 0.8)",
-                            strokeWidth: 2,
-                        }}
+                        dot={<GradientDot color="tilgung" />}
+                        activeDot={<ActiveGradientDot color="tilgung" />}
                     />
                 </LineChart>
             </ResponsiveContainer>
