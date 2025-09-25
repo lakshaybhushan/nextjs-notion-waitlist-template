@@ -89,9 +89,9 @@ interface BentoItem {
 const bentoItems: BentoItem[] = [
     {
         id: "ueberblick",
-        title: "Effekt: Sofort Überblick erhalten",
+        title: "Sofort Überblick erhalten. ",
         description:
-            "Feature: Automatische Extraktion und Standardisierung aller Immobiliendaten",
+            "Automatische Extraktion und Standardisierung aller Immobiliendaten.",
         href: "#",
         feature: "typing",
         typingText: `{\n  "property_name": "Berlin Central Tower",\n  "location": "Berlin, Germany",\n  "size_sqm": 25000,\n  "noi_eur": 4500000,\n  "cap_rate": "5.5%",\n  "status": "Validated"\n}`,
@@ -99,9 +99,9 @@ const bentoItems: BentoItem[] = [
     },
     {
         id: "investitionsentscheidungen",
-        title: "Effekt: Sichere Investitionsentscheidungen treffen",
+        title: "Sichere Investitionsentscheidungen treffen. ",
         description:
-            "Feature: Automatisierte Cashflow-Berechnung und Vorkenntnisprüfung",
+            "Automatisierte Cashflow-Berechnung und Vorkenntnisprüfung.",
         href: "#",
         feature: "priorKnowledgeCheck",
         priorKnowledgeItems: [
@@ -117,9 +117,9 @@ const bentoItems: BentoItem[] = [
     },
     {
         id: "investments",
-        title: "Effekt: Passende Investments für jeden Investor",
+        title: "Passende Investments für jeden Investor. ",
         description:
-            "Feature: KI-gestützte Investor-CRM mit automatischer Präferenzabgleichung",
+            "KI-gestützte Investor-CRM mit automatischer Präferenzabgleichung.",
         href: "#",
         feature: "investorMatch",
         investorMatches: [
@@ -146,8 +146,8 @@ const bentoItems: BentoItem[] = [
     },
     {
         id: "praesentieren",
-        title: "Effekt: Beeindruckend präsentieren, mit einem Klick",
-        description: "Feature: Automatische Teaser-Deck-Generierung",
+        title: "Beeindruckend präsentieren, mit einem Klick. ",
+        description: "Automatische Teaser-Deck-Generierung.",
         href: "#",
         feature: "timeline",
         timeline: [
@@ -160,9 +160,9 @@ const bentoItems: BentoItem[] = [
     },
     {
         id: "verhandeln",
-        title: "Effekt: Schneller verhandeln und überzeugen",
+        title: "Schneller verhandeln und überzeugen.",
         description:
-            "Feature: Exporte fertiger Berechnungen für Pitch und Verhandlung",
+            "Exporte fertiger Berechnungen für Pitch und Verhandlung.",
         href: "#",
         feature: "spotlight",
         spotlightItems: [
@@ -774,7 +774,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                 >
                     <div className="space-y-2">
                         <div className="flex items-center justify-between">
-                            <h3 className="text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors duration-300">
+                            <h3 className="max-w-lg text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors duration-300">
                                 {item.title}
                                 <span className="font-normal text-neutral-600 dark:text-neutral-400">
                                     {" "}{item.description}
