@@ -2,16 +2,15 @@
 
 import { toast } from "sonner";
 import { useState } from "react";
-import CTA from "@/components/cta";
-import Form from "@/components/form";
-import Particles from "@/components/ui/particles";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
-import BentoGrid from "@/components/kokonutui/bento-grid";
+import CTA from "@/components/features/cta";
+import Form from "@/components/features/form";
+import Header from "@/components/core/header";
+import Footer from "@/components/core/footer";
+import BentoGrid from "@/components/features/bento-grid";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import Testimonials from "@/components/testimonials";
-import GridBackground from "@/components/grid-background";
+import Testimonials from "@/components/features/testimonials";
+import GridBackground from "@/components/ui/grid-background";
 
 export default function Home() {
   const [name, setName] = useState<string>("");
@@ -129,20 +128,6 @@ export default function Home() {
             loading={loading}
           />
 
-          {/* <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-12"
-          >
-            <Image
-              src="/screenshot.png"
-              alt="Screenshot of the application"
-              width={1200}
-              height={800}
-              className="rounded-lg shadow-xl"
-            />
-          </motion.div> */}
           <Testimonials />
         </section>
       </div>
@@ -151,13 +136,6 @@ export default function Home() {
 
       <Footer />
 
-      {/* <Particles
-        quantityDesktop={350}
-        quantityMobile={100}
-        ease={80}
-        color={"#F7FF9B"}
-        refresh
-      /> */}
     </main>
   );
 }

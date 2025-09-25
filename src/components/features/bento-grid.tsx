@@ -10,22 +10,10 @@
  * @github: https://github.com/kokonut-labs/kokonutui
  */
 
-import Anthropic from "@/components/icons/anthropic";
-import AnthropicDark from "@/components/icons/anthropic-dark";
-import Google from "@/components/icons/gemini";
-import OpenAI from "@/components/icons/open-ai";
-import OpenAIDark from "@/components/icons/open-ai-dark";
-import MistralAI from "@/components/icons/mistral";
-import DeepSeek from "@/components/icons/deepseek";
 import { cn } from "@/lib/utils";
 import {
-    Mic,
-    Plus,
     ArrowUpRight,
     CheckCircle2,
-    Clock,
-    Sparkles,
-    Zap,
 } from "lucide-react";
 import {
     motion,
@@ -218,121 +206,6 @@ const SpotlightFeature = ({ items }: { items: string[] }) => {
     );
 };
 
-const CounterAnimation = ({
-    start,
-    end,
-    suffix = "",
-}: {
-    start: number;
-    end: number;
-    suffix?: string;
-}) => {
-    const [count, setCount] = useState(start);
-
-    useEffect(() => {
-        const duration = 2000;
-        const frameRate = 1000 / 60;
-        const totalFrames = Math.round(duration / frameRate);
-
-        let currentFrame = 0;
-        const counter = setInterval(() => {
-            currentFrame++;
-            const progress = currentFrame / totalFrames;
-            const easedProgress = 1 - (1 - progress) ** 3;
-            const current = start + (end - start) * easedProgress;
-
-            setCount(Math.min(current, end));
-
-            if (currentFrame === totalFrames) {
-                clearInterval(counter);
-            }
-        }, frameRate);
-
-        return () => clearInterval(counter);
-    }, [start, end]);
-
-    return (
-        <div className="flex items-baseline gap-1">
-            <span className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-                {count.toFixed(1).replace(/\.0$/, "")}
-            </span>
-            <span className="text-xl font-medium text-neutral-900 dark:text-neutral-100">
-                {suffix}
-            </span>
-        </div>
-    );
-};
-
-const ChartAnimation = ({ value }: { value: number }) => {
-    return (
-        <div className="mt-2 w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
-            <motion.div
-                className="h-full bg-emerald-500 dark:bg-emerald-400 rounded-full"
-                initial={{ width: 0 }}
-                animate={{ width: `${value}%` }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
-            />
-        </div>
-    );
-};
-
-const IconsFeature = () => {
-    return (
-        <div className="grid grid-cols-3 gap-4 mt-4">
-            <motion.div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
-                <div className="relative w-8 h-8 flex items-center justify-center">
-                    <OpenAI className="w-7 h-7 dark:hidden transition-transform " />
-                    <OpenAIDark className="w-7 h-7 hidden dark:block transition-transform " />
-                </div>
-                <span className="text-xs font-medium text-center text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-neutral-200">
-                    OpenAI
-                </span>
-            </motion.div>
-            <motion.div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
-                <div className="relative w-8 h-8 flex items-center justify-center">
-                    <Anthropic className="w-7 h-7 dark:hidden transition-transform " />
-                    <AnthropicDark className="w-7 h-7 hidden dark:block transition-transform " />
-                </div>
-                <span className="text-xs font-medium text-center text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-neutral-200">
-                    Anthropic
-                </span>
-            </motion.div>
-            <motion.div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
-                <div className="relative w-8 h-8 flex items-center justify-center">
-                    <Google className="w-7 h-7 transition-transform " />
-                </div>
-                <span className="text-xs font-medium text-center text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-neutral-200">
-                    Google
-                </span>
-            </motion.div>
-            <motion.div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
-                <div className="relative w-8 h-8 flex items-center justify-center">
-                    <MistralAI className="w-7 h-7 transition-transform " />
-                </div>
-                <span className="text-xs font-medium text-center text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-neutral-200">
-                    Mistral
-                </span>
-            </motion.div>
-            <motion.div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
-                <div className="relative w-8 h-8 flex items-center justify-center">
-                    <DeepSeek className="w-7 h-7 transition-transform " />
-                </div>
-                <span className="text-xs font-medium text-center text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-neutral-200">
-                    DeepSeek
-                </span>
-            </motion.div>
-            <motion.div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
-                <div className="relative w-8 h-8 flex items-center justify-center">
-                    <Plus className="w-6 h-6 text-neutral-600 dark:text-neutral-400 transition-transform " />
-                </div>
-                <span className="text-xs font-medium text-center text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-neutral-200">
-                    More
-                </span>
-            </motion.div>
-        </div>
-    );
-};
-
 const TimelineFeature = ({
     timeline,
 }: {
@@ -407,79 +280,6 @@ const TypingCodeFeature = ({ text }: { text: string }) => {
                     <span className="animate-pulse">|</span>
                 </pre>
             </div>
-        </div>
-    );
-};
-
-const MetricsFeature = ({
-    metrics,
-}: {
-    metrics: Array<{
-        label: string;
-        value: number;
-        suffix?: string;
-        color?: string;
-    }>;
-}) => {
-    const getColorClass = (color = "emerald") => {
-        const colors = {
-            emerald: "bg-emerald-500 dark:bg-emerald-400",
-            blue: "bg-blue-500 dark:bg-blue-400",
-            violet: "bg-violet-500 dark:bg-violet-400",
-            amber: "bg-amber-500 dark:bg-amber-400",
-            rose: "bg-rose-500 dark:bg-rose-400",
-        };
-        return colors[color as keyof typeof colors] || colors.emerald;
-    };
-
-    return (
-        <div className="mt-3 space-y-3">
-            {metrics.map((metric, index) => (
-                <motion.div
-                    key={`metric-${metric.label
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")}`}
-                    className="space-y-1"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.15 * index }}
-                >
-                    <div className="flex justify-between items-center text-sm">
-                        <div className="text-neutral-700 dark:text-neutral-300 font-medium flex items-center gap-1.5">
-                            {metric.label === "Uptime" && (
-                                <Clock className="w-3.5 h-3.5" />
-                            )}
-                            {metric.label === "Response time" && (
-                                <Zap className="w-3.5 h-3.5" />
-                            )}
-                            {metric.label === "Cost reduction" && (
-                                <Sparkles className="w-3.5 h-3.5" />
-                            )}
-                            {metric.label}
-                        </div>
-                        <div className="text-neutral-700 dark:text-neutral-300 font-semibold">
-                            {metric.value}
-                            {metric.suffix}
-                        </div>
-                    </div>
-                    <div className="h-1.5 w-full bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
-                        <motion.div
-                            className={`h-full rounded-full ${getColorClass(
-                                metric.color
-                            )}`}
-                            initial={{ width: 0 }}
-                            animate={{
-                                width: `${Math.min(100, metric.value)}%`,
-                            }}
-                            transition={{
-                                duration: 1.2,
-                                ease: "easeOut",
-                                delay: 0.15 * index,
-                            }}
-                        />
-                    </div>
-                </motion.div>
-            ))}
         </div>
     );
 };
@@ -595,130 +395,6 @@ const InvestorMatchFeature = ({
         </div>
     );
 };
-
-function AIInput_Voice() {
-    const [submitted, setSubmitted] = useState(false);
-    const [time, setTime] = useState(0);
-    const [isClient, setIsClient] = useState(false);
-    const [isDemo, setIsDemo] = useState(true);
-
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
-
-    useEffect(() => {
-        let intervalId: NodeJS.Timeout;
-
-        if (submitted) {
-            intervalId = setInterval(() => {
-                setTime((t) => t + 1);
-            }, 1000);
-        } else {
-            setTime(0);
-        }
-
-        return () => clearInterval(intervalId);
-    }, [submitted]);
-
-    const formatTime = (seconds: number) => {
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        return `${mins.toString().padStart(2, "0")}:${secs
-            .toString()
-            .padStart(2, "0")}`;
-    };
-
-    useEffect(() => {
-        if (!isDemo) return;
-
-        let timeoutId: NodeJS.Timeout;
-        const runAnimation = () => {
-            setSubmitted(true);
-            timeoutId = setTimeout(() => {
-                setSubmitted(false);
-                timeoutId = setTimeout(runAnimation, 1000);
-            }, 3000);
-        };
-
-        const initialTimeout = setTimeout(runAnimation, 100);
-        return () => {
-            clearTimeout(timeoutId);
-            clearTimeout(initialTimeout);
-        };
-    }, [isDemo]);
-
-    const handleClick = () => {
-        if (isDemo) {
-            setIsDemo(false);
-            setSubmitted(false);
-        } else {
-            setSubmitted((prev) => !prev);
-        }
-    };
-
-    return (
-        <div className="w-full py-4">
-            <div className="relative max-w-xl w-full mx-auto flex items-center flex-col gap-2">
-                <button
-                    className={cn(
-                        "group w-16 h-16 rounded-xl flex items-center justify-center transition-colors",
-                        submitted
-                            ? "bg-none"
-                            : "bg-none hover:bg-black/10 dark:hover:bg-white/10"
-                    )}
-                    type="button"
-                    onClick={handleClick}
-                >
-                    {submitted ? (
-                        <div
-                            className="w-6 h-6 rounded-sm animate-spin bg-black  dark:bg-white cursor-pointer pointer-events-auto"
-                            style={{ animationDuration: "3s" }}
-                        />
-                    ) : (
-                        <Mic className="w-6 h-6 text-black/70 dark:text-white/70" />
-                    )}
-                </button>
-
-                <span
-                    className={cn(
-                        "font-mono text-sm transition-opacity duration-300",
-                        submitted
-                            ? "text-black/70 dark:text-white/70"
-                            : "text-black/30 dark:text-white/30"
-                    )}
-                >
-                    {formatTime(time)}
-                </span>
-
-                <div className="h-4 w-64 flex items-center justify-center gap-0.5">
-                    {[...Array(48)].map((_, i) => (
-                        <div
-                            key={`voice-bar-${i}`}
-                            className={cn(
-                                "w-0.5 rounded-full transition-all duration-300",
-                                submitted
-                                    ? "bg-black/50 dark:bg-white/50 animate-pulse"
-                                    : "bg-black/10 dark:bg-white/10 h-1"
-                            )}
-                            style={
-                                submitted && isClient
-                                    ? {
-                                          height: `${20 + Math.random() * 80}%`,
-                                          animationDelay: `${i * 0.05}s`,
-                                      }
-                                    : undefined
-                            }
-                        />
-                    ))}
-                </div>
-
-                <p className="h-4 text-xs text-black/70 dark:text-white/70">
-                    {submitted ? "Listening..." : "Click to speak"}
-                </p>
-            </div>
-        </div>
-    );
-}
 
 const DashboardWindow = () => {
     return (
@@ -897,8 +573,6 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                 <TimelineFeature timeline={item.timeline} />
                             )}
 
-                            {item.feature === "icons" && <IconsFeature />}
-
                             {item.feature === "typing" && item.typingText && (
                                 <div className="relative max-w-md mx-auto h-[182px]">
                                     <motion.div
@@ -935,10 +609,6 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                 </div>
                             )}
 
-                            {item.feature === "metrics" && item.metrics && (
-                                <MetricsFeature metrics={item.metrics} />
-                            )}
-
                             {item.feature === "investorMatch" &&
                                 item.investorMatches && (
                                     <InvestorMatchFeature
@@ -953,17 +623,6 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                     />
                                 )}
 
-                            {item.icons && !item.feature && (
-                                <div className="mt-auto pt-4 flex items-center flex-wrap gap-4 border-t border-neutral-200/70 dark:border-neutral-800/70">
-                                    <OpenAI className="w-5 h-5 dark:hidden opacity-70 hover:opacity-100 transition-opacity" />
-                                    <OpenAIDark className="w-5 h-5 hidden dark:block opacity-70 hover:opacity-100 transition-opacity" />
-                                    <AnthropicDark className="w-5 h-5 dark:block hidden opacity-70 hover:opacity-100 transition-opacity" />
-                                    <Anthropic className="w-5 h-5 dark:hidden opacity-70 hover:opacity-100 transition-opacity" />
-                                    <Google className="w-5 h-5 opacity-70 hover:opacity-100 transition-opacity" />
-                                    <MistralAI className="w-5 h-5 opacity-70 hover:opacity-100 transition-opacity" />
-                                    <DeepSeek className="w-5 h-5 opacity-70 hover:opacity-100 transition-opacity" />
-                                </div>
-                            )}
                         </div>
                     </div>
                 </div>

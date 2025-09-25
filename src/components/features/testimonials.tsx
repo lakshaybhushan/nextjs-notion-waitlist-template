@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { Sparkles } from "lucide-react";
 
 const testimonials = [
