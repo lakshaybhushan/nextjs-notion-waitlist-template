@@ -20,7 +20,7 @@ const testimonials = [
     },
 ];
 
-const categories = ["AI Apps", "Web Apps", "Ecommerce", "Marketing", "Platforms"];
+const categories = ["Rendite", "Leerstand", "Vorkenntnis"];
 
 export default function Testimonials() {
     const [index, setIndex] = useState(0);
@@ -60,7 +60,7 @@ export default function Testimonials() {
                                     key={category} 
                                     variant="secondary" 
                                     size="sm" 
-                                    className="rounded-full bg-neutral-800 text-neutral-400 hover:bg-neutral-700 border border-neutral-700"
+                                    className="rounded-lg bg-neutral-800 text-neutral-400 hover:bg-neutral-700 border border-neutral-700"
                                 >
                                     {category}
                                 </Button>
