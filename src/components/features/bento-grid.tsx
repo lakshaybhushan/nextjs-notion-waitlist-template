@@ -25,6 +25,57 @@ import {
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 
+// Counter animation hook
+const useCounter = (end: number, duration: number = 2, delay: number = 0) => {
+    const [count, setCount] = useState(0);
+    const [hasStarted, setHasStarted] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setHasStarted(true);
+            let start = 0;
+            const increment = end / (duration * 60); // 60fps
+            const counter = setInterval(() => {
+                start += increment;
+                if (start >= end) {
+                    setCount(end);
+                    clearInterval(counter);
+                } else {
+                    setCount(Math.floor(start));
+                }
+            }, 1000 / 60);
+
+            return () => clearInterval(counter);
+        }, delay * 1000);
+
+        return () => clearTimeout(timer);
+    }, [end, duration, delay]);
+
+    return count;
+};
+
+// Match percentage component with counter animation
+const MatchPercentage = ({ targetValue, isGreen, delay }: { targetValue: number, isGreen: boolean, delay: number }) => {
+    const count = useCounter(targetValue, 1.5, delay);
+    
+    return (
+        <span>
+            <div className={`flex items-center gap-1.5 w-fit px-2 py-0.5 rounded-full ${
+                isGreen 
+                    ? 'bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-400 border border-emerald-500/20 dark:border-emerald-500/25'
+                    : 'bg-blue-500/10 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/25'
+            }`}>
+                <div className={`h-1.5 w-1.5 rounded-full ${
+                    isGreen ? 'bg-emerald-500 dark:bg-emerald-400' : 'bg-blue-500 dark:bg-blue-400'
+                }`} />
+                <span className="w-8 text-center font-mono">
+                    {count}%
+                </span>
+            </div>
+        </span>
+    );
+};
+
 interface BentoItem {
     id: string;
     title: string;
@@ -312,7 +363,8 @@ const PriorKnowledgeCheckFeature = ({
                 }}
                 transition={{ 
                     delay: 0.2,
-                    boxShadow: { duration: 2, repeat: Infinity, repeatDelay: 1 }
+                    duration: 0.4,
+                    boxShadow: { duration: 2, repeat: Infinity, repeatDelay: 1, delay: 1.5 }
                 }}
             >
                 <span className="text-sm font-bold text-blue-600 dark:text-blue-400">
@@ -320,29 +372,23 @@ const PriorKnowledgeCheckFeature = ({
                 </span>
             </motion.div>
 
-            {/* Horizontal Line - directly connected */}
+            {/* Horizontal Line - grows from left to right */}
             <motion.div
                 className="flex items-center"
-                initial={{ opacity: 0, scaleX: 0 }}
-                animate={{ opacity: 1, scaleX: 1 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
+                initial={{ opacity: 1 }}
+                animate={{ opacity: 1 }}
             >
                 <motion.div 
-                    className="h-0.5 w-16 bg-neutral-400 dark:bg-neutral-600 relative overflow-hidden"
-                    animate={{
-                        opacity: [0.4, 1, 0.4],
-                        backgroundColor: [
-                            "rgb(163, 163, 163)",
-                            "rgb(59, 130, 246)",
-                            "rgb(163, 163, 163)"
-                        ]
+                    className="h-0.5 bg-blue-400 dark:bg-blue-300 relative overflow-hidden origin-left"
+                    initial={{ scaleX: 0, width: 0 }}
+                    animate={{ 
+                        scaleX: 1,
+                        width: "4rem" // w-16 equivalent
                     }}
                     transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        repeatDelay: 1,
                         delay: 0.8,
-                        ease: "linear"
+                        duration: 0.6,
+                        ease: "easeOut"
                     }}
                 >
                     {/* Pulsing circle effect from left to right */}
@@ -356,7 +402,7 @@ const PriorKnowledgeCheckFeature = ({
                             duration: 2,
                             repeat: Infinity,
                             repeatDelay: 1,
-                            delay: 0.8,
+                            delay: 2,
                             ease: "linear"
                         }}
                     />
@@ -368,7 +414,7 @@ const PriorKnowledgeCheckFeature = ({
                 className="w-fit overflow-hidden rounded-lg border border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-100/30 dark:bg-neutral-900/30 p-1 font-medium"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6 }}
+                transition={{ delay: 1.5, duration: 0.4 }}
             >
             <div className="grid grid-cols-3 gap-2 text-sm text-neutral-600 dark:text-neutral-400 px-2 py-1.5">
                 <span className="font-bold text-neutral-800 dark:text-neutral-200">
@@ -392,19 +438,11 @@ const PriorKnowledgeCheckFeature = ({
                     >
                         <div className="h-4 bg-neutral-300 dark:bg-neutral-700 rounded animate-pulse"></div>
                         <div className="h-4 bg-neutral-300 dark:bg-neutral-700 rounded animate-pulse"></div>
-                        <span>
-                            {item.priorKnowledge ? (
-                                <div className="flex items-center gap-1.5 w-fit px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-400 border border-emerald-500/20 dark:border-emerald-500/25">
-                                    <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400" />
-                                    96%
-                                </div>
-                            ) : (
-                                <div className="flex items-center gap-1.5 w-fit px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/25">
-                                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500 dark:bg-blue-400" />
-                                    {index === 1 ? '82%' : '74%'}
-                                </div>
-                            )}
-                        </span>
+                        <MatchPercentage 
+                            targetValue={item.priorKnowledge ? 96 : (index === 1 ? 82 : 74)}
+                            isGreen={item.priorKnowledge}
+                            delay={2 + index * 0.2}
+                        />
                     </motion.div>
                 ))}
             </div>
