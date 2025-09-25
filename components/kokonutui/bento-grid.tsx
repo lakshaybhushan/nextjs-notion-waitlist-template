@@ -208,8 +208,8 @@ const SpotlightFeature = ({ items }: { items: string[] }) => {
                     transition={{ delay: 0.1 * index }}
                     className="flex items-center gap-2"
                 >
-                    <CheckCircle2 className="h-4 w-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
-                    <span className="text-sm text-neutral-700 dark:text-neutral-300">
+                    <CheckCircle2 className="h-5 w-5 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
+                    <span className="text-base text-neutral-700 dark:text-neutral-300">
                         {item}
                     </span>
                 </motion.li>
@@ -340,7 +340,7 @@ const TimelineFeature = ({
 }) => {
     return (
         <div className="mt-3 relative">
-            <div className="absolute top-0 bottom-0 left-[9px] w-[2px] bg-neutral-200 dark:bg-neutral-700" />
+            <div className="absolute top-0 bottom-0 left-[11px] w-[3px] bg-neutral-200 dark:bg-neutral-700" />
             {timeline.map((item) => (
                 <motion.div
                     key={`timeline-${item.year}-${item.event
@@ -353,12 +353,12 @@ const TimelineFeature = ({
                         delay: (0.15 * Number.parseInt(item.year)) % 10,
                     }}
                 >
-                    <div className="w-5 h-5 rounded-full bg-neutral-100 dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-600 flex-shrink-0 z-10 mt-0.5" />
+                    <div className="w-6 h-6 rounded-full bg-neutral-100 dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-600 flex-shrink-0 z-10 mt-0.5" />
                     <div>
-                        <div className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                        <div className="text-base font-medium text-neutral-900 dark:text-neutral-100">
                             {item.year}
                         </div>
-                        <div className="text-xs text-neutral-600 dark:text-neutral-400">
+                        <div className="text-sm text-neutral-600 dark:text-neutral-400">
                             {item.event}
                         </div>
                     </div>
@@ -400,7 +400,7 @@ const TypingCodeFeature = ({ text }: { text: string }) => {
         <div className="relative">
             <div
                 ref={terminalRef}
-                className="bg-neutral-900 dark:bg-black text-neutral-100 p-3 rounded-b-md text-xs font-mono h-[150px] overflow-y-auto"
+                className="bg-neutral-900 dark:bg-black text-neutral-100 p-3 rounded-b-md text-sm font-mono h-[180px] overflow-y-auto"
             >
                 <pre className="whitespace-pre-wrap">
                     {displayedText}
@@ -495,7 +495,7 @@ const PriorKnowledgeCheckFeature = ({
 }) => {
     return (
         <div className="mt-3 w-fit overflow-hidden rounded-lg border border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-100/30 dark:bg-neutral-900/30 p-1 font-medium">
-            <div className="grid grid-cols-3 gap-2 text-xs text-neutral-600 dark:text-neutral-400 px-2 py-1.5">
+            <div className="grid grid-cols-3 gap-2 text-sm text-neutral-600 dark:text-neutral-400 px-2 py-1.5">
                 <span className="font-bold text-neutral-800 dark:text-neutral-200">
                     object
                 </span>
@@ -510,7 +510,7 @@ const PriorKnowledgeCheckFeature = ({
                 {items.map((item, index) => (
                     <motion.div
                         key={item.object}
-                        className="grid grid-cols-3 gap-2 items-center text-sm text-neutral-800 dark:text-neutral-300 px-2 py-2 border-t border-neutral-200/80 dark:border-neutral-800/80"
+                        className="grid grid-cols-3 gap-2 items-center text-base text-neutral-800 dark:text-neutral-300 px-2 py-2 border-t border-neutral-200/80 dark:border-neutral-800/80"
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.15 * index }}
@@ -562,7 +562,7 @@ const InvestorMatchFeature = ({
 
     return (
         <div className="mt-3 space-y-2.5">
-            <div className="grid grid-cols-3 gap-2 text-xs text-neutral-500 dark:text-neutral-400 font-semibold px-1">
+            <div className="grid grid-cols-3 gap-2 text-sm text-neutral-500 dark:text-neutral-400 font-semibold px-1">
                 <span>INVESTOR</span>
                 <span className="text-center">PROPERTY</span>
                 <span className="text-right">MATCH</span>
@@ -577,14 +577,14 @@ const InvestorMatchFeature = ({
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.15 * index }}
                 >
-                    <div className="text-sm font-medium text-neutral-800 dark:text-neutral-200 truncate">
+                    <div className="text-base font-medium text-neutral-800 dark:text-neutral-200 truncate">
                         {match.investor}
                     </div>
-                    <div className="text-xs font-mono text-neutral-600 dark:text-neutral-400 text-center bg-neutral-100 dark:bg-neutral-800/50 rounded-sm px-1 py-0.5 truncate">
+                    <div className="text-sm font-mono text-neutral-600 dark:text-neutral-400 text-center bg-neutral-100 dark:bg-neutral-800/50 rounded-sm px-1 py-0.5 truncate">
                         {match.propertyHint}
                     </div>
                     <div
-                        className={`text-sm font-bold text-right ${getColorClass(
+                        className={`text-base font-bold text-right ${getColorClass(
                             match.color
                         )}`}
                     >
@@ -836,131 +836,135 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                 aria-label={`${item.title} - ${item.description}`}
             >
                 <div
-                    className="relative z-10 flex flex-col h-full justify-between"
+                    className="relative z-10 flex h-full"
                     style={{ transform: "translateZ(20px)" }}
                 >
-                    <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                            <h3 className="max-w-lg text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors duration-300">
-                                {item.title}
-                                <span className="font-normal text-neutral-600 dark:text-neutral-400">
-                                    {" "}{item.description}
-                                </span>
-                            </h3>
-                            <div className="text-neutral-400 dark:text-neutral-500 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                                <ArrowUpRight className="h-5 w-5" />
+                    <div className="my-auto w-full">
+                        <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                                <h3 className="max-w-lg text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors duration-300">
+                                    {item.title}
+                                    <span className="font-normal text-neutral-600 dark:text-neutral-400">
+                                        {" "}{item.description}
+                                    </span>
+                                </h3>
+                                <div className="text-neutral-400 dark:text-neutral-500 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                                    <ArrowUpRight className="h-5 w-5" />
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div className="mt-10">
-                        {/* Feature specific content */}
-                        {item.feature === "spotlight" &&
-                            item.spotlightItems && (
-                                <SpotlightFeature items={item.spotlightItems} />
-                            )}
-
-                        {item.feature === "counter" && item.statistic && (
-                            <div className="mt-auto pt-3">
-                                <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
-                                    {item.statistic.label}
-                                </div>
-                                <CounterAnimation
-                                    start={item.statistic.start || 0}
-                                    end={item.statistic.end || 100}
-                                    suffix={item.statistic.suffix}
-                                />
-                            </div>
-                        )}
-
-                        {item.feature === "chart" && item.statistic && (
-                            <div className="mt-auto pt-3">
-                                <div className="flex items-center justify-between mb-1">
-                                    <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                                        {item.statistic.label}
-                                    </span>
-                                    <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                                        {item.statistic.end}
-                                        {item.statistic.suffix}
-                                    </span>
-                                </div>
-                                <ChartAnimation
-                                    value={item.statistic.end || 0}
-                                />
-                            </div>
-                        )}
-
-                        {item.feature === "timeline" && item.timeline && (
-                            <TimelineFeature timeline={item.timeline} />
-                        )}
-
-                        {item.feature === "icons" && <IconsFeature />}
-
-                        {item.feature === "typing" && item.typingText && (
-                            <div className="relative max-w-md mx-auto h-[182px]">
-                                <motion.div
-                                    initial={{ y: 0, scale: 1 }}
-                                    animate={{ y: -20, scale: 0.95 }}
-                                    transition={{
-                                        delay: 1.2,
-                                        duration: 0.5,
-                                        ease: "easeOut",
-                                    }}
-                                    className="rounded-lg border border-neutral-200/80 dark:border-neutral-800/80 overflow-hidden"
-                                >
-                                    <div className="flex items-center gap-2 p-2 bg-neutral-100/30 dark:bg-neutral-900/30 border-b border-neutral-200/80 dark:border-neutral-800/80">
-                                        <div className="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
-                                        <div className="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
-                                        <div className="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
-                                    </div>
-                                    <TypingCodeFeature
-                                        text={item.typingText}
+                        <div className="mt-10">
+                            {/* Feature specific content */}
+                            {item.feature === "spotlight" &&
+                                item.spotlightItems && (
+                                    <SpotlightFeature
+                                        items={item.spotlightItems}
                                     />
-                                </motion.div>
-                                <motion.div
-                                    className="absolute -bottom-4 right-0 w-[70%] shadow-2xl"
-                                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    transition={{
-                                        delay: 1.5,
-                                        duration: 0.5,
-                                        ease: "easeOut",
-                                    }}
-                                >
-                                    <DashboardWindow />
-                                </motion.div>
-                            </div>
-                        )}
+                                )}
 
-                        {item.feature === "metrics" && item.metrics && (
-                            <MetricsFeature metrics={item.metrics} />
-                        )}
-
-                        {item.feature === "investorMatch" &&
-                            item.investorMatches && (
-                                <InvestorMatchFeature
-                                    matches={item.investorMatches}
-                                />
+                            {item.feature === "counter" && item.statistic && (
+                                <div className="mt-auto pt-3">
+                                    <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                                        {item.statistic.label}
+                                    </div>
+                                    <CounterAnimation
+                                        start={item.statistic.start || 0}
+                                        end={item.statistic.end || 100}
+                                        suffix={item.statistic.suffix}
+                                    />
+                                </div>
                             )}
 
-                        {item.feature === "priorKnowledgeCheck" &&
-                            item.priorKnowledgeItems && (
-                                <PriorKnowledgeCheckFeature
-                                    items={item.priorKnowledgeItems}
-                                />
+                            {item.feature === "chart" && item.statistic && (
+                                <div className="mt-auto pt-3">
+                                    <div className="flex items-center justify-between mb-1">
+                                        <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                                            {item.statistic.label}
+                                        </span>
+                                        <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                                            {item.statistic.end}
+                                            {item.statistic.suffix}
+                                        </span>
+                                    </div>
+                                    <ChartAnimation
+                                        value={item.statistic.end || 0}
+                                    />
+                                </div>
                             )}
 
-                        {item.icons && !item.feature && (
-                            <div className="mt-auto pt-4 flex items-center flex-wrap gap-4 border-t border-neutral-200/70 dark:border-neutral-800/70">
-                                <OpenAI className="w-5 h-5 dark:hidden opacity-70 hover:opacity-100 transition-opacity" />
-                                <OpenAIDark className="w-5 h-5 hidden dark:block opacity-70 hover:opacity-100 transition-opacity" />
-                                <AnthropicDark className="w-5 h-5 dark:block hidden opacity-70 hover:opacity-100 transition-opacity" />
-                                <Anthropic className="w-5 h-5 dark:hidden opacity-70 hover:opacity-100 transition-opacity" />
-                                <Google className="w-5 h-5 opacity-70 hover:opacity-100 transition-opacity" />
-                                <MistralAI className="w-5 h-5 opacity-70 hover:opacity-100 transition-opacity" />
-                                <DeepSeek className="w-5 h-5 opacity-70 hover:opacity-100 transition-opacity" />
-                            </div>
-                        )}
+                            {item.feature === "timeline" && item.timeline && (
+                                <TimelineFeature timeline={item.timeline} />
+                            )}
+
+                            {item.feature === "icons" && <IconsFeature />}
+
+                            {item.feature === "typing" && item.typingText && (
+                                <div className="relative max-w-md mx-auto h-[182px]">
+                                    <motion.div
+                                        initial={{ y: 0, scale: 1 }}
+                                        animate={{ y: -20, scale: 0.95 }}
+                                        transition={{
+                                            delay: 1.2,
+                                            duration: 0.5,
+                                            ease: "easeOut",
+                                        }}
+                                        className="rounded-lg border border-neutral-200/80 dark:border-neutral-800/80 overflow-hidden"
+                                    >
+                                        <div className="flex items-center gap-2 p-2 bg-neutral-100/30 dark:bg-neutral-900/30 border-b border-neutral-200/80 dark:border-neutral-800/80">
+                                            <div className="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
+                                            <div className="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
+                                            <div className="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
+                                        </div>
+                                        <TypingCodeFeature
+                                            text={item.typingText}
+                                        />
+                                    </motion.div>
+                                    <motion.div
+                                        className="absolute -bottom-4 right-0 w-[70%] shadow-2xl"
+                                        initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        transition={{
+                                            delay: 1.5,
+                                            duration: 0.5,
+                                            ease: "easeOut",
+                                        }}
+                                    >
+                                        <DashboardWindow />
+                                    </motion.div>
+                                </div>
+                            )}
+
+                            {item.feature === "metrics" && item.metrics && (
+                                <MetricsFeature metrics={item.metrics} />
+                            )}
+
+                            {item.feature === "investorMatch" &&
+                                item.investorMatches && (
+                                    <InvestorMatchFeature
+                                        matches={item.investorMatches}
+                                    />
+                                )}
+
+                            {item.feature === "priorKnowledgeCheck" &&
+                                item.priorKnowledgeItems && (
+                                    <PriorKnowledgeCheckFeature
+                                        items={item.priorKnowledgeItems}
+                                    />
+                                )}
+
+                            {item.icons && !item.feature && (
+                                <div className="mt-auto pt-4 flex items-center flex-wrap gap-4 border-t border-neutral-200/70 dark:border-neutral-800/70">
+                                    <OpenAI className="w-5 h-5 dark:hidden opacity-70 hover:opacity-100 transition-opacity" />
+                                    <OpenAIDark className="w-5 h-5 hidden dark:block opacity-70 hover:opacity-100 transition-opacity" />
+                                    <AnthropicDark className="w-5 h-5 dark:block hidden opacity-70 hover:opacity-100 transition-opacity" />
+                                    <Anthropic className="w-5 h-5 dark:hidden opacity-70 hover:opacity-100 transition-opacity" />
+                                    <Google className="w-5 h-5 opacity-70 hover:opacity-100 transition-opacity" />
+                                    <MistralAI className="w-5 h-5 opacity-70 hover:opacity-100 transition-opacity" />
+                                    <DeepSeek className="w-5 h-5 opacity-70 hover:opacity-100 transition-opacity" />
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </Link>
