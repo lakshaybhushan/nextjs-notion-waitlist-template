@@ -294,7 +294,7 @@ const PriorKnowledgeCheckFeature = ({
     }>;
 }) => {
     return (
-        <div className="mt-3 w-fit overflow-hidden rounded-lg border border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-100/30 dark:bg-neutral-900/30 p-1 font-medium">
+        <div className="mt-3 w-fit mx-auto overflow-hidden rounded-lg border border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-100/30 dark:bg-neutral-900/30 p-1 font-medium">
             <div className="grid grid-cols-3 gap-2 text-sm text-neutral-600 dark:text-neutral-400 px-2 py-1.5">
                 <span className="font-bold text-neutral-800 dark:text-neutral-200">
                     object
