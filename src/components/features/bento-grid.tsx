@@ -543,7 +543,7 @@ const LineChartFeature = ({
                     />
                     <XAxis
                         dataKey="month"
-                        tick={{ fill: "rgb(163, 163, 163)", fontSize: 12 }}
+                        tick={false}
                         axisLine={{ stroke: "rgba(163, 163, 163, 0.2)" }}
                         tickLine={false}
                     />
