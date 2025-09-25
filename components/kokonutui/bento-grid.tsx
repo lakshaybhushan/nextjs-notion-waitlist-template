@@ -883,7 +883,7 @@ export default function BentoGrid() {
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={staggerContainer}
-                    className="grid grid-cols-1 md:grid-cols-2 grid-flow-row-dense divide-y divide-x divide-neutral-200/60 dark:divide-neutral-800/60 border border-neutral-200/60 dark:border-neutral-800/60 rounded-2xl overflow-hidden"
+                    className="grid grid-cols-1 md:grid-cols-2 grid-flow-row-dense divide-y divide-x divide-neutral-200/60 dark:divide-neutral-800/60 border border-neutral-200/60 dark:border-neutral-800/60 overflow-hidden"
                 >
                     {bentoItems.map((item) => (
                         <motion.div variants={fadeInUp} key={item.id}>

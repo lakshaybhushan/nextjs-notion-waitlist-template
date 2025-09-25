@@ -7,16 +7,16 @@ import { Sparkles } from "lucide-react";
 
 const testimonials = [
     {
-        company: "runway",
-        quote: "build times went from 7m to 40s.",
+        company: "Die Portfoliorendite ",
+        quote: "stieg auf 8,2% p.a.",
     },
     {
-        company: "Leonardo.Ai",
-        quote: "saw a 95% reduction in page load times.",
+        company: "Leerstand ",
+        quote: "sank auf 2,1% dank automatisiertem Monitoring.",
     },
     {
-        company: "_zapier",
-        quote: "saw 24x faster builds.",
+        company: "Vorkenntnisprüfung & Dealroom",
+        quote: "dauern jetzt nur noch 10 Sekunden.",
     },
 ];
 
@@ -49,7 +49,7 @@ export default function Testimonials() {
                                     transition={{ duration: 0.5 }}
                                     className="text-3xl absolute inset-0"
                                 >
-                                    <span className="font-bold text-white">{testimonials[index].company}</span> 
+                                    <span className="font-normal text-white">{testimonials[index].company}</span> 
                                     <span className="text-neutral-400"> {testimonials[index].quote}</span>
                                 </motion.div>
                             </AnimatePresence>
