@@ -222,7 +222,15 @@ const bentoItems: BentoItem[] = [
         href: "#",
         feature: "howItWorks",
         className:
-            "md:col-span-2 border-t border-neutral-200/60 dark:border-neutral-800/60",
+            "md:col-span-1 border-t border-neutral-200/60 dark:border-neutral-800/60",
+    },
+    {
+        id: "how-it-works-2",
+        title: "",
+        description: "",
+        href: "#",
+        className:
+            "md:col-span-1 border-t border-l border-neutral-200/60 dark:border-neutral-800/60",
     },
 ];
 
