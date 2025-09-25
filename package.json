@@ -30,15 +30,18 @@
     "react-dom": "^18",
     "react-email": "2.1.4",
     "react-icons": "^5.2.1",
+    "recharts": "^3.2.1",
     "resend": "^3.3.0",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "victory": "^37.3.6"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/recharts": "^1.8.29",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "postcss": "^8",

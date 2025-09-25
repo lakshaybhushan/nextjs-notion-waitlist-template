@@ -21,9 +21,21 @@ import {
     useMotionValue,
     useTransform,
     type Variants,
+    useSpring,
+    AnimatePresence,
 } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import {
+    LineChart,
+    Line,
+    XAxis,
+    YAxis,
+    Tooltip,
+    ResponsiveContainer,
+    CartesianGrid,
+} from "recharts";
+
 
 // Counter animation hook
 const useCounter = (end: number, duration: number = 2, delay: number = 0) => {
@@ -98,6 +110,7 @@ interface BentoItem {
     code?: string;
     codeLang?: string;
     typingText?: string;
+    chartData?: Array<{ month: string; miete: number; tilgung: number }>;
     metrics?: Array<{
         label: string;
         value: number;
@@ -161,26 +174,19 @@ const bentoItems: BentoItem[] = [
         description:
             "Automatisierte Cashflow-Berechnung und Vorkenntnisprüfung.",
         href: "#",
-        feature: "investorMatch",
-        investorMatches: [
-            {
-                investor: "Investor Group Alpha",
-                propertyHint: "B-CT",
-                score: 96,
-                color: "emerald",
-            },
-            {
-                investor: "Syndicate Partners",
-                propertyHint: "B-CT",
-                score: 82,
-                color: "emerald",
-            },
-            {
-                investor: "Momentum Ventures",
-                propertyHint: "M-RP",
-                score: 74,
-                color: "blue",
-            },
+        feature: "chart",
+        chartData: [
+            { month: "Jan", miete: 1200000, tilgung: 950000 },
+            { month: "", miete: 1250000, tilgung: 950000 },
+            { month: "Feb", miete: 1180000, tilgung: 980000 },
+            { month: "", miete: 1300000, tilgung: 980000 },
+            { month: "Mär", miete: 1500000, tilgung: 1100000 },
+            { month: "", miete: 1450000, tilgung: 1100000 },
+            { month: "Apr", miete: 1700000, tilgung: 1200000 },
+            { month: "", miete: 1650000, tilgung: 1200000 },
+            { month: "Mai", miete: 1800000, tilgung: 1350000 },
+            { month: "", miete: 1900000, tilgung: 1350000 },
+            { month: "Jun", miete: 1850000, tilgung: 1400000 },
         ],
         className: "md:col-span-2",
     },
@@ -336,6 +342,154 @@ const TypingCodeFeature = ({ text }: { text: string }) => {
     );
 };
 
+const LineChartFeature = ({
+    data,
+}: {
+    data: Array<{ month: string; miete: number; tilgung: number }>;
+}) => {
+    const [activeData, setActiveData] = useState<{ x: number; y: number } | null>(
+        null,
+    );
+    const xSpring = useSpring(0, {
+        stiffness: 200,
+        damping: 40,
+        mass: 1,
+    });
+
+    useEffect(() => {
+        if (activeData) {
+            xSpring.set(activeData.x);
+        }
+    }, [activeData, xSpring]);
+
+    const handleMouseMove = (e: any) => {
+        if (e.activeCoordinate) {
+            setActiveData(e.activeCoordinate);
+        }
+    };
+
+    const handleMouseLeave = () => {
+        setActiveData(null);
+    };
+
+    const formatYAxis = (tick: number) => {
+        if (tick >= 1000000) {
+            return `${(tick / 1000000).toFixed(1).replace(".", ",")}M`;
+        }
+        return `${(tick / 1000).toFixed(0)}K`;
+    };
+
+    const allValues = data.flatMap((d) => [d.miete, d.tilgung]);
+    const dataMin = Math.min(...allValues);
+
+    return (
+        <div className="relative h-96 w-full">
+            <AnimatePresence>
+                {activeData && (
+                    <motion.div
+                        className="absolute top-0 bottom-0 z-10"
+                        style={{
+                            left: xSpring,
+                            width: 1,
+                            backgroundColor: "rgba(163, 163, 163, 0.5)",
+                            pointerEvents: "none",
+                        }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                    />
+                )}
+            </AnimatePresence>
+            <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                    data={data}
+                    margin={{
+                        top: 5,
+                        right: 10,
+                        left: -20,
+                        bottom: 5,
+                    }}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                >
+                    <CartesianGrid
+                        strokeDasharray="3 3"
+                        stroke="rgba(163, 163, 163, 0.2)"
+                        vertical={false}
+                    />
+                    <XAxis
+                        dataKey="month"
+                        tick={{ fill: "rgb(163, 163, 163)", fontSize: 12 }}
+                        axisLine={{ stroke: "rgba(163, 163, 163, 0.2)" }}
+                        tickLine={false}
+                    />
+                    <YAxis
+                        tick={{ fill: "rgb(163, 163, 163)", fontSize: 12 }}
+                        axisLine={false}
+                        tickLine={false}
+                        domain={[dataMin - 50000, "dataMax + 50000"]}
+                        tickFormatter={formatYAxis}
+                    />
+                    <Tooltip
+                        cursor={false}
+                        animationDuration={300}
+                        contentStyle={{
+                            backgroundColor: "rgba(23, 23, 23, 0.8)",
+                            borderColor: "rgb(51, 51, 51)",
+                            color: "#fff",
+                            borderRadius: "8px",
+                            fontSize: "12px",
+                        }}
+                        labelStyle={{ fontWeight: "bold" }}
+                        formatter={(value: number, name: string) => [
+                            `${value.toLocaleString("de-DE")} €`,
+                            name === "miete" ? "Mieteinnahmen" : "Tilgung",
+                        ]}
+                    />
+                    <Line
+                        name="miete"
+                        type="step"
+                        dataKey="miete"
+                        stroke="#3b82f6"
+                        strokeWidth={2}
+                        dot={{
+                            r: 4,
+                            fill: "#3b82f6",
+                            stroke: "rgba(23, 23, 23, 0.8)",
+                            strokeWidth: 2,
+                        }}
+                        activeDot={{
+                            r: 6,
+                            fill: "#3b82f6",
+                            stroke: "rgba(23, 23, 23, 0.8)",
+                            strokeWidth: 2,
+                        }}
+                    />
+                    <Line
+                        name="tilgung"
+                        type="step"
+                        dataKey="tilgung"
+                        stroke="#ef4444"
+                        strokeWidth={2}
+                        dot={{
+                            r: 4,
+                            fill: "#ef4444",
+                            stroke: "rgba(23, 23, 23, 0.8)",
+                            strokeWidth: 2,
+                        }}
+                        activeDot={{
+                            r: 6,
+                            fill: "#ef4444",
+                            stroke: "rgba(23, 23, 23, 0.8)",
+                            strokeWidth: 2,
+                        }}
+                    />
+                </LineChart>
+            </ResponsiveContainer>
+        </div>
+    );
+};
+
 const PriorKnowledgeCheckFeature = ({
     items,
 }: {
@@ -447,62 +601,6 @@ const PriorKnowledgeCheckFeature = ({
                 ))}
             </div>
             </motion.div>
-        </div>
-    );
-};
-
-const InvestorMatchFeature = ({
-    matches,
-}: {
-    matches: Array<{
-        investor: string;
-        propertyHint: string;
-        score: number;
-        color?: string;
-    }>;
-}) => {
-    const getColorClass = (color = "emerald") => {
-        const colors = {
-            emerald: "text-emerald-500 dark:text-emerald-400",
-            blue: "text-blue-500 dark:text-blue-400",
-            amber: "text-amber-500 dark:text-amber-400",
-            rose: "text-rose-500 dark:text-rose-400",
-        };
-        return colors[color as keyof typeof colors] || colors.emerald;
-    };
-
-    return (
-        <div className="mt-3 space-y-2.5">
-            <div className="grid grid-cols-3 gap-2 text-sm text-neutral-500 dark:text-neutral-400 font-semibold px-1">
-                <span>INVESTOR</span>
-                <span className="text-center">PROPERTY</span>
-                <span className="text-right">MATCH</span>
-            </div>
-            {matches.map((match, index) => (
-                <motion.div
-                    key={`match-${match.investor
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")}`}
-                    className="grid grid-cols-3 gap-2 items-center"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.15 * index }}
-                >
-                    <div className="text-base font-medium text-neutral-800 dark:text-neutral-200 truncate">
-                        {match.investor}
-                    </div>
-                    <div className="text-sm font-mono text-neutral-600 dark:text-neutral-400 text-center bg-neutral-100 dark:bg-neutral-800/50 rounded-sm px-1 py-0.5 truncate">
-                        {match.propertyHint}
-                    </div>
-                    <div
-                        className={`text-base font-bold text-right ${getColorClass(
-                            match.color
-                        )}`}
-                    >
-                        {match.score}%
-                    </div>
-                </motion.div>
-            ))}
         </div>
     );
 };
@@ -651,6 +749,10 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
 
 
 
+                        {item.feature === "chart" && item.chartData && (
+                            <LineChartFeature data={item.chartData} />
+                        )}
+
                         {item.feature === "timeline" && item.timeline && (
                             <TimelineFeature timeline={item.timeline} />
                         )}
@@ -690,13 +792,6 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                 </motion.div>
                             </div>
                         )}
-
-                        {item.feature === "investorMatch" &&
-                            item.investorMatches && (
-                                <InvestorMatchFeature
-                                    matches={item.investorMatches}
-                                />
-                            )}
 
                         {item.feature === "priorKnowledgeCheck" &&
                             item.priorKnowledgeItems && (
