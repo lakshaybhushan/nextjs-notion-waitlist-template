@@ -99,9 +99,9 @@ const bentoItems: BentoItem[] = [
     },
     {
         id: "investitionsentscheidungen",
-        title: "Sichere Investitionsentscheidungen treffen. ",
+        title: "Passende Investments für jeden Investor.",
         description:
-            "Automatisierte Cashflow-Berechnung und Vorkenntnisprüfung.",
+            "KI-gestützte Investor-CRM mit automatischer Präferenzabgleichung.",
         href: "#",
         feature: "priorKnowledgeCheck",
         priorKnowledgeItems: [
@@ -117,9 +117,9 @@ const bentoItems: BentoItem[] = [
     },
     {
         id: "investments",
-        title: "Passende Investments für jeden Investor. ",
+        title: "Sichere Investitionsentscheidungen treffen.",
         description:
-            "KI-gestützte Investor-CRM mit automatischer Präferenzabgleichung.",
+            "Automatisierte Cashflow-Berechnung und Vorkenntnisprüfung.",
         href: "#",
         feature: "investorMatch",
         investorMatches: [
