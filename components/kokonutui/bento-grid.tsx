@@ -984,7 +984,10 @@ export default function BentoGrid() {
                         <motion.div
                             variants={fadeInUp}
                             key={item.id}
-                            className={item.className}
+                            className={cn(
+                                item.className,
+                                "min-h-[500px]"
+                            )}
                         >
                             <BentoCard item={item} />
                         </motion.div>
