@@ -15,6 +15,9 @@ import {
     ArrowUpRight,
     CheckCircle2,
     Database,
+    UploadCloud,
+    Bot,
+    FileText,
 } from "lucide-react";
 import {
     motion,
@@ -107,7 +110,8 @@ interface BentoItem {
         | "investorMatch"
         | "priorKnowledgeCheck"
         | "praesentation"
-        | "export";
+        | "export"
+        | "howItWorks";
     spotlightItems?: string[];
     timeline?: Array<{ year: string; event: string }>;
     code?: string;
@@ -209,6 +213,16 @@ const bentoItems: BentoItem[] = [
         href: "#",
         feature: "export",
         className: "col-span-1",
+    },
+    {
+        id: "how-it-works",
+        title: "So einfach funktioniert es.",
+        description:
+            "In drei einfachen Schritten zu besseren Investitionsentscheidungen.",
+        href: "#",
+        feature: "howItWorks",
+        className:
+            "md:col-span-2 border-t border-neutral-200/60 dark:border-neutral-800/60",
     },
 ];
 
@@ -329,6 +343,79 @@ const TypingCodeFeature = ({ text }: { text: string }) => {
                     {displayedText}
                     <span className="animate-pulse">|</span>
                 </pre>
+            </div>
+        </div>
+    );
+};
+
+const HowItWorksFeature = () => {
+    const steps = [
+        {
+            icon: <UploadCloud className="h-6 w-6 text-neutral-500" />,
+            title: "1. Daten hochladen",
+            description:
+                "Laden Sie Ihre Immobiliendaten, Dokumente und Bilder sicher in die Plattform hoch.",
+        },
+        {
+            icon: <Bot className="h-6 w-6 text-neutral-500" />,
+            title: "2. KI-Analyse starten",
+            description:
+                "Unsere KI extrahiert, standardisiert und analysiert alle relevanten Informationen automatisch.",
+        },
+        {
+            icon: <FileText className="h-6 w-6 text-neutral-500" />,
+            title: "3. Ergebnisse erhalten",
+            description:
+                "Erhalten Sie fertige Auswertungen, Cashflow-Modelle und Präsentationen mit einem Klick.",
+        },
+    ];
+
+    return (
+        <div className="mt-12 max-w-2xl mx-auto">
+            <div className="relative">
+                <motion.div
+                    initial={{ scaleY: 0, originY: 0 }}
+                    whileInView={{ scaleY: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                    className="absolute left-4 -top-4 w-0.5 h-[calc(100%+2rem)] bg-neutral-200 dark:bg-neutral-800"
+                />
+                {steps.map((step, index) => (
+                    <motion.div
+                        key={step.title}
+                        className="flex items-start gap-6 pl-12 mb-10 last:mb-0 relative"
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{
+                            delay: 0.5 + index * 0.3,
+                            duration: 0.6,
+                        }}
+                    >
+                        <motion.div
+                            className="absolute left-0 top-0 flex items-center justify-center h-8 w-8 rounded-full bg-neutral-100 dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800"
+                            initial={{ scale: 0 }}
+                            whileInView={{ scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{
+                                delay: 0.4 + index * 0.3,
+                                duration: 0.4,
+                                type: "spring",
+                                stiffness: 200,
+                            }}
+                        >
+                            {step.icon}
+                        </motion.div>
+                        <div>
+                            <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+                                {step.title}
+                            </h3>
+                            <p className="mt-2 text-base text-neutral-600 dark:text-neutral-400">
+                                {step.description}
+                            </p>
+                        </div>
+                    </motion.div>
+                ))}
             </div>
         </div>
     );
@@ -861,6 +948,8 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                 />
                             </div>
                         )}
+
+                        {item.feature === "howItWorks" && <HowItWorksFeature />}
 
                         {item.feature === "chart" && item.chartData && (
                             <LineChartFeature data={item.chartData} />

@@ -135,7 +135,6 @@ export default function Home() {
       <BentoGrid />
 
       <Footer />
-
     </main>
   );
 }
