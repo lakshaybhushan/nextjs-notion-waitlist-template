@@ -296,7 +296,7 @@ const TimelineFeature = ({
     return (
         <div className="mt-3 relative">
             <div className="absolute top-0 bottom-0 left-[11px] w-[3px] bg-neutral-200 dark:bg-neutral-700" />
-            {timeline.map((item) => (
+            {timeline.map((item, index) => (
                 <motion.div
                     key={`timeline-${item.year}-${item.event
                         .toLowerCase()
@@ -369,19 +369,19 @@ const TypingCodeFeature = ({ text }: { text: string }) => {
 const HowItWorksFeature = () => {
     const steps = [
         {
-            title: "1. Daten hochladen",
+            title: "PDF hochladen.",
             description:
-                "Laden Sie Ihre Immobiliendaten, Dokumente und Bilder sicher in die Plattform hoch.",
+                "Egal ob 1 oder 100 gleichzeitig.",
         },
         {
-            title: "2. KI-Analyse starten",
+            title: "Kurz Kaffee holen.",
             description:
-                "Unsere KI extrahiert, standardisiert und analysiert alle relevanten Informationen automatisch.",
+                "whisper macht die Analyse Arbeit.",
         },
         {
-            title: "3. Ergebnisse erhalten",
+            title: "Verhandeln.",
             description:
-                "Erhalten Sie fertige Auswertungen, Cashflow-Modelle und Präsentationen mit einem Klick.",
+                "Jetzt nur noch mit Kunden reden.",
         },
     ];
 
@@ -420,14 +420,17 @@ const HowItWorksFeature = () => {
                                     stiffness: 200,
                                 }}
                             >
-                                {/* An empty div to ensure the circle is rendered */}
+                                <span className="text-sm font-semibold text-white">
+                                    {index + 1}
+                                </span>
                             </motion.div>
                             <div>
-                                <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
-                                    {step.title}
-                                </h3>
-                                <p className="mt-2 text-base text-neutral-600 dark:text-neutral-400">
-                                    {step.description}
+                                <p className="text-[24px] text-neutral-900 dark:text-neutral-100">
+                                    <span className="font-semibold">{step.title}</span>
+                                    <span className="text-neutral-600 dark:text-neutral-400">
+                                        {" "}
+                                        {step.description}
+                                    </span>
                                 </p>
                             </div>
                         </motion.div>
