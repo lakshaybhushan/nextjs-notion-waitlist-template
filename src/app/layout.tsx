@@ -6,9 +6,9 @@ import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
-  title: "whisper",
+  title: "whisper | Immobilien analysieren in Sekunden.",
   description:
-    "A simple Next.js waitlist template with Notion as CMS and Resend to send emails created with React Email and Upstash Redis for rate limiting. Deployed on Vercel.",
+    "Whisper verwandelt Off-Market-Deals in Sekundenschnelle in fertige Analysen, Präsentationen und Verkaufstools.",
 };
 
 export default function RootLayout({
