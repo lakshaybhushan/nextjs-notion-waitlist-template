@@ -98,6 +98,7 @@ interface BentoItem {
     description: string;
     icons?: boolean;
     href?: string;
+    cta?: string;
     feature?:
         | "chart"
         | "counter"
@@ -223,6 +224,7 @@ const bentoItems: BentoItem[] = [
         description:
             "In drei einfachen Schritten zu besseren Investitionsentscheidungen.",
         href: "#",
+        cta: "Jetzt loslegen!",
         className:
             "md:col-span-1 border-t border-neutral-200/60 dark:border-neutral-800/60",
         textClassName: "text-4xl",
@@ -928,24 +930,32 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                     }}
                 >
                     <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                            <h3
-                                className={cn(
-                                    "max-w-lg text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors duration-300",
-                                    item.textClassName,
-                                )}
-                            >
-                                {item.title}
-                                <span
+                        <div className="flex items-start justify-between">
+                            <div>
+                                <h3
+                                    className={cn(
+                                        "max-w-lg text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors duration-300",
+                                        item.textClassName,
+                                    )}
+                                >
+                                    {item.title}
+                                </h3>
+                                <p
                                     className={cn(
                                         "font-normal text-neutral-600 dark:text-neutral-400",
                                         item.descriptionClassName,
                                     )}
                                 >
-                                    {" "}
                                     {item.description}
-                                </span>
-                            </h3>
+                                </p>
+                                {item.cta && (
+                                    <div className="mt-12">
+                                        <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                                            {item.cta}
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
                             <div className="text-neutral-400 dark:text-neutral-500 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                                 <ArrowUpRight className="h-5 w-5" />
                             </div>
