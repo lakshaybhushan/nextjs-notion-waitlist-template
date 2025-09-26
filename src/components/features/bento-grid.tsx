@@ -240,6 +240,7 @@ const bentoItems: BentoItem[] = [
         feature: "howItWorks",
         className:
             "md:col-span-1 border-t border-l border-neutral-200/60 dark:border-neutral-800/60",
+        contentClassName: "justify-start",
     },
 ];
 
@@ -368,19 +369,16 @@ const TypingCodeFeature = ({ text }: { text: string }) => {
 const HowItWorksFeature = () => {
     const steps = [
         {
-            icon: <UploadCloud className="h-6 w-6 text-neutral-500" />,
             title: "1. Daten hochladen",
             description:
                 "Laden Sie Ihre Immobiliendaten, Dokumente und Bilder sicher in die Plattform hoch.",
         },
         {
-            icon: <Bot className="h-6 w-6 text-neutral-500" />,
             title: "2. KI-Analyse starten",
             description:
                 "Unsere KI extrahiert, standardisiert und analysiert alle relevanten Informationen automatisch.",
         },
         {
-            icon: <FileText className="h-6 w-6 text-neutral-500" />,
             title: "3. Ergebnisse erhalten",
             description:
                 "Erhalten Sie fertige Auswertungen, Cashflow-Modelle und Präsentationen mit einem Klick.",
@@ -411,7 +409,7 @@ const HowItWorksFeature = () => {
                             }}
                         >
                             <motion.div
-                                className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full border-2 border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900"
+                                className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full border-2 border-neutral-200 bg-[#09090b] dark:border-neutral-800"
                                 initial={{ scale: 0 }}
                                 whileInView={{ scale: 1 }}
                                 viewport={{ once: true }}
@@ -422,7 +420,7 @@ const HowItWorksFeature = () => {
                                     stiffness: 200,
                                 }}
                             >
-                                {step.icon}
+                                {/* An empty div to ensure the circle is rendered */}
                             </motion.div>
                             <div>
                                 <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
@@ -904,6 +902,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
             onHoverStart={() => setIsHovered(true)}
             onHoverEnd={handleMouseLeave}
             onMouseMove={handleMouseMove}
+            className="h-full"
             style={{
                 rotateX,
                 rotateY,
@@ -968,7 +967,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className="h-full">
                         {/* Feature specific content */}
                         {item.feature === "spotlight" &&
                             item.spotlightItems && (
