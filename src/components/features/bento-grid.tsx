@@ -12,6 +12,7 @@
 
 import { cn } from "@/lib/utils";
 import {
+    ArrowRight,
     ArrowUpRight,
     CheckCircle2,
     Database,
@@ -950,8 +951,11 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                 </p>
                                 {item.cta && (
                                     <div className="mt-12">
-                                        <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                                        <button className="bg-black border border-[#1b1b1c] text-white font-semibold py-4 px-8 rounded-full text-[48px] tracking-[-2.88px] transition-colors hover:bg-gray-800 flex items-center gap-4">
                                             {item.cta}
+                                            <span className="bg-white rounded-full p-2">
+                                                <ArrowRight className="h-8 w-8 text-black" />
+                                            </span>
                                         </button>
                                     </div>
                                 )}
