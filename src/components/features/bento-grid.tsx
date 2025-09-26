@@ -913,8 +913,9 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
             }}
         >
             <div
+                id={item.id}
                 className={`
-                    relative flex flex-col h-full p-12
+                    relative flex flex-col h-full p-12 scroll-mt-32
                     transition-all duration-500 ease-out
                 `}
             >

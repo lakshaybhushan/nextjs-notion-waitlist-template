@@ -73,6 +73,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    @apply scroll-smooth;
+  }
 }
 
 body {
