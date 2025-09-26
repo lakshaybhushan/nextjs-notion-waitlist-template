@@ -285,16 +285,16 @@ const bentoItems: BentoItem[] = [
         feature: "threeSections",
         subsections: [
             {
-                title: "Automated code checks.",
-                description: "Keep an eye on your code. With conformance, catch issues that could become security vulnerabilities in your application."
+                title: "Family Offices.",
+                description: "Verwalten und analysieren Sie Ihr Portfolio effizient – mit automatischer Datenverarbeitung und präzisem Investment-Matching, selbst für komplexe Portfolios und kleine Teams."
             },
             {
-                title: "Highly available by default.",
-                description: "Vercel simplifies 99.99% uptime with built in high-availability features that require no additional setup or maintenance overhead."
+                title: "Private Equity.",
+                description: "Beschleunigen Sie Kaufentscheidungen durch vollautomatisierte Due Diligence inklusive Wirtschaftlichkeits- und ESG-Prüfung – exportierbare Analysen liefern schnelle Klarheit."
             },
             {
-                title: "Industry-leading DDoS mitigation.",
-                description: "Automatic prevention at the network layer, on-call teams responding to larger, distributed attacks, and user-defined IP blocking rules to restrict access."
+                title: "Investmentbüros.",
+                description: "Vereinfachen Sie die Investorenzuordnung mit KI-basiertem Matching und standardisierten Daten – automatische Reports und Präsentationen sorgen für schnelle, transparente Entscheidungen."
             }
         ],
     }
@@ -307,26 +307,6 @@ const ICONS: { [key: string]: React.ComponentType<any> } = {
     "Präsentation": UploadCloud,
     "Datenexport": FileUp,
 };
-
-const ThreeVerticalSections = ({ subsections }: { subsections: { title: string; description: string }[] }) => {
-    return (
-        <div className="flex h-full">
-            {subsections.map((section, index) => (
-                <div key={index} className="flex-1 p-8 border-r border-neutral-200/60 dark:border-neutral-800/60 last:border-r-0 flex flex-col justify-between">
-                    <div>
-                        <h3 className="text-2xl font-semibold text-white">{section.title}</h3>
-                        <p className="mt-4 text-neutral-400">{section.description}</p>
-                    </div>
-                    <div className="mt-8">
-                        <div className="w-10 h-10 rounded-full border border-neutral-700 flex items-center justify-center">
-                            <ArrowRight className="h-5 w-5 text-neutral-400" />
-                        </div>
-                    </div>
-                </div>
-            ))}
-        </div>
-    )
-}
 
 const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 20 },
@@ -1007,7 +987,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                     transition-all duration-500 ease-out
                 `}
             >
-                {item.id === "new-section" && (
+                {["new-section", "security-title", "security-features"].includes(item.id) && (
                     <>
                         <div className="absolute top-0 left-1/3 h-full w-px bg-neutral-200/60 dark:bg-neutral-800/60" />
                         <div className="absolute top-0 left-2/3 h-full w-px bg-neutral-200/60 dark:bg-neutral-800/60" />
@@ -1105,7 +1085,14 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                             )}
 
                             {item.feature === "threeSections" && item.subsections && (
-                                <ThreeVerticalSections subsections={item.subsections} />
+                                <div className="mt-12 flex w-full gap-32">
+                                    {item.subsections.map((section, index) => (
+                                        <div key={index} className="w-1/4 flex flex-col items-start text-left">
+                                            <h4 className="font-semibold text-[20px] tracking-[-0.4px] text-white">{section.title}</h4>
+                                            <p className="text-neutral-400 mt-2 text-[16px] tracking-[-0.4px]">{section.description}</p>
+                                        </div>
+                                    ))}
+                                </div>
                             )}
 
                             {item.feature === "praesentation" && (
