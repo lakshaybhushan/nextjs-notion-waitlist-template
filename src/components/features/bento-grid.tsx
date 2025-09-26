@@ -388,51 +388,53 @@ const HowItWorksFeature = () => {
     ];
 
     return (
-        <div className="mt-12 max-w-2xl mx-auto">
-            <div className="relative">
-                <motion.div
-                    initial={{ scaleY: 0, originY: 0 }}
-                    whileInView={{ scaleY: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, ease: "easeInOut" }}
-                    className="absolute left-4 -top-4 w-0.5 h-[calc(100%+2rem)] bg-neutral-200 dark:bg-neutral-800"
-                />
-                {steps.map((step, index) => (
-                    <motion.div
-                        key={step.title}
-                        className="flex items-start gap-6 pl-12 mb-10 last:mb-0 relative"
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{
-                            delay: 0.5 + index * 0.3,
-                            duration: 0.6,
-                        }}
-                    >
+        <div className="relative h-full">
+            <motion.div
+                initial={{ scaleY: 0, originY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: "easeInOut" }}
+                className="absolute left-4 top-0 w-0.5 h-full bg-neutral-200 dark:bg-neutral-800"
+            />
+            <div className="flex h-full items-center">
+                <div className="max-w-2xl">
+                    {steps.map((step, index) => (
                         <motion.div
-                            className="absolute left-0 top-0 flex items-center justify-center h-8 w-8 rounded-full bg-neutral-100 dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800"
-                            initial={{ scale: 0 }}
-                            whileInView={{ scale: 1 }}
+                            key={step.title}
+                            className="relative mb-10 flex items-start gap-6 pl-12 last:mb-0"
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{
-                                delay: 0.4 + index * 0.3,
-                                duration: 0.4,
-                                type: "spring",
-                                stiffness: 200,
+                                delay: 0.5 + index * 0.3,
+                                duration: 0.6,
                             }}
                         >
-                            {step.icon}
+                            <motion.div
+                                className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full border-2 border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900"
+                                initial={{ scale: 0 }}
+                                whileInView={{ scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{
+                                    delay: 0.4 + index * 0.3,
+                                    duration: 0.4,
+                                    type: "spring",
+                                    stiffness: 200,
+                                }}
+                            >
+                                {step.icon}
+                            </motion.div>
+                            <div>
+                                <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+                                    {step.title}
+                                </h3>
+                                <p className="mt-2 text-base text-neutral-600 dark:text-neutral-400">
+                                    {step.description}
+                                </p>
+                            </div>
                         </motion.div>
-                        <div>
-                            <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
-                                {step.title}
-                            </h3>
-                            <p className="mt-2 text-base text-neutral-600 dark:text-neutral-400">
-                                {step.description}
-                            </p>
-                        </div>
-                    </motion.div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     );
@@ -943,7 +945,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                 </h3>
                                 <p
                                     className={cn(
-                                        "font-normal text-neutral-600 dark:text-neutral-400",
+                                        "font-normal text-neutral-600 dark:text-neutral-400 text-2xl",
                                         item.descriptionClassName,
                                     )}
                                 >
