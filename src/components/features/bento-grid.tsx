@@ -1146,7 +1146,7 @@ export default function BentoGrid() {
                                 item.id === "how-it-works"
                                     ? "min-h-[750px]"
                                     : item.id === "new-section"
-                                      ? "min-h-[950px]"
+                                      ? "min-h-[1000px]"
                                       : "min-h-[500px]",
                             )}
                         >
