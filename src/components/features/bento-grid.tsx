@@ -283,18 +283,19 @@ const bentoItems: BentoItem[] = [
         description: "",
         className: "md:col-span-2",
         feature: "threeSections",
+        contentClassName: "justify-center",
         subsections: [
             {
                 title: "Family Offices.",
-                description: "Verwalten und analysieren Sie Ihr Portfolio effizient – mit automatischer Datenverarbeitung und präzisem Investment-Matching, selbst für komplexe Portfolios und kleine Teams."
+                description: "Verwalte und analysiere dein Portfolio effizient – mit automatischer Datenverarbeitung und präzisem Investment-Matching, selbst für komplexe Portfolios und kleine Teams."
             },
             {
                 title: "Private Equity.",
-                description: "Beschleunigen Sie Kaufentscheidungen durch vollautomatisierte Due Diligence inklusive Wirtschaftlichkeits- und ESG-Prüfung – exportierbare Analysen liefern schnelle Klarheit."
+                description: "Beschleunige Kaufentscheidungen durch vollautomatisierte Due Diligence inklusive Wirtschaftlichkeits- und ESG-Prüfung – exportierbare Analysen liefern schnelle Klarheit."
             },
             {
                 title: "Investmentbüros.",
-                description: "Vereinfachen Sie die Investorenzuordnung mit KI-basiertem Matching und standardisierten Daten – automatische Reports und Präsentationen sorgen für schnelle, transparente Entscheidungen."
+                description: "Vereinfache das Investorenmatching mit KI-basiertem Matching und standardisierten Daten – automatische Reports und Präsentationen sorgen für schnelle, transparente Entscheidungen."
             }
         ],
     }
@@ -1088,8 +1089,8 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                 <div className="mt-12 flex w-full gap-32">
                                     {item.subsections.map((section, index) => (
                                         <div key={index} className="w-1/4 flex flex-col items-start text-left">
-                                            <h4 className="font-semibold text-[20px] tracking-[-0.4px] text-white">{section.title}</h4>
-                                            <p className="text-neutral-400 mt-2 text-[16px] tracking-[-0.4px]">{section.description}</p>
+                                            <h4 className="font-semibold text-[24px] tracking-[-0.4px] text-white">{section.title}</h4>
+                                            <p className="text-neutral-400 mt-2 text-[20px] tracking-[-0.4px]">{section.description}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -1202,7 +1203,7 @@ export default function BentoGrid() {
                                       : item.id === "security-title"
                                         ? "min-h-[300px]"
                                         : item.id === "security-features"
-                                          ? "min-h-[500px]"
+                                          ? "min-h-[400px]"
                                           : "min-h-[500px]",
                             )}
                         >
