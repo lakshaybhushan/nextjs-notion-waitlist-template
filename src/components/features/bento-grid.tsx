@@ -409,7 +409,12 @@ const HowItWorksFeature = () => {
                             }}
                         >
                             <motion.div
-                                className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full border-2 border-neutral-200 bg-[#09090b] dark:border-neutral-800"
+                                className={cn(
+                                    "absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full border-2 bg-[#09090b]",
+                                    index === steps.length - 1
+                                        ? "border-[#f8ff9c]"
+                                        : "border-neutral-200 dark:border-neutral-800",
+                                )}
                                 initial={{ scale: 0 }}
                                 whileInView={{ scale: 1 }}
                                 viewport={{ once: true }}
@@ -425,12 +430,11 @@ const HowItWorksFeature = () => {
                                 </span>
                             </motion.div>
                             <div>
-                                <p className="text-[24px] text-neutral-900 dark:text-neutral-100">
-                                    <span className="font-semibold">{step.title}</span>
-                                    <span className="text-neutral-600 dark:text-neutral-400">
-                                        {" "}
-                                        {step.description}
-                                    </span>
+                                <h3 className="text-[24px] font-semibold text-neutral-900 dark:text-neutral-100">
+                                    {step.title}
+                                </h3>
+                                <p className="mt-0.5 text-[24px] text-neutral-600 dark:text-neutral-400">
+                                    {step.description}
                                 </p>
                             </div>
                         </motion.div>
