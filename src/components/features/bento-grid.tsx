@@ -241,10 +241,11 @@ const bentoItems: BentoItem[] = [
     },
     {
         id: "new-section",
-        title: "Neue Sektion",
-        description: "Hier ist Platz für neuen Inhalt.",
+        title: "Eine volle Inbox soll motivieren, nicht überfordern.",
+        description: "Mit intelligenter Automatisierung wird aus Informationsflut echte Übersicht und Produktivität.",
         className:
-            "md:col-span-1 border-t border-neutral-200/60 dark:border-neutral-800/60",
+            "md:col-span-2 border-t border-neutral-200/60 dark:border-neutral-800/60",
+        contentClassName: "items-center",
     },
 ];
 
@@ -940,6 +941,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                         })
                     }}
                 >
+                    {item.id === "new-section" && <div className="h-1/6 flex-shrink-0" />}
                     <div>
                         {item.tagline && (
                             <div className="flex items-center gap-2 mb-2 text-neutral-500">
@@ -951,8 +953,10 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                 <div>
                                     <h3
                                         className={cn(
-                                            "max-w-lg text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors duration-300",
+                                            "max-w-lg text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100",
                                             item.textClassName,
+                                            item.id === "new-section" &&
+                                                "text-center text-[48px] max-w-none tracking-[-2.4px]",
                                         )}
                                     >
                                         {item.title}
@@ -961,6 +965,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                         className={cn(
                                             "font-normal text-neutral-600 dark:text-neutral-400 text-2xl",
                                             item.descriptionClassName,
+                                            item.id === "new-section" && "text-center text-[20px] leading-[36px]",
                                         )}
                                     >
                                         {item.description}
@@ -980,90 +985,92 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                         </div>
                     </div>
 
-                    <div className="h-full mt-12">
-                        {/* Feature specific content */}
-                        {item.feature === "spotlight" &&
-                            item.spotlightItems && (
-                                <SpotlightFeature
-                                    items={item.spotlightItems}
-                                />
-                            )}
-
-                        {item.feature === "praesentation" && (
-                            <div className="flex justify-center items-center h-full">
-                                <Image
-                                    src="/praesentation2.svg"
-                                    alt="Präsentation"
-                                    width={500}
-                                    height={400}
-                                />
-                            </div>
-                        )}
-
-                        {item.feature === "export" && (
-                            <div className="flex justify-center items-center h-full">
-                                <Image
-                                    src="/group34.svg"
-                                    alt="Export"
-                                    width={200}
-                                    height={150}
-                                />
-                            </div>
-                        )}
-
-                        {item.feature === "howItWorks" && <HowItWorksFeature />}
-
-                        {item.feature === "chart" && item.chartData && (
-                            <LineChartFeature data={item.chartData} />
-                        )}
-
-                        {item.feature === "timeline" && item.timeline && (
-                            <TimelineFeature timeline={item.timeline} />
-                        )}
-
-                        {item.feature === "typing" && item.typingText && (
-                            <div className="relative max-w-md mx-auto h-[182px]">
-                                <motion.div
-                                    initial={{ y: 0, scale: 1 }}
-                                    animate={{ y: -20, scale: 0.95 }}
-                                    transition={{
-                                        delay: 1.2,
-                                        duration: 0.5,
-                                        ease: "easeOut",
-                                    }}
-                                    className="rounded-lg border border-neutral-200/80 dark:border-neutral-800/80 overflow-hidden"
-                                >
-                                    <div className="flex items-center gap-2 p-2 bg-neutral-100/30 dark:bg-neutral-900/30 border-b border-neutral-200/80 dark:border-neutral-800/80">
-                                        <div className="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
-                                        <div className="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
-                                        <div className="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
-                                    </div>
-                                    <TypingCodeFeature
-                                        text={item.typingText}
+                    {item.feature && (
+                        <div className="h-full mt-12">
+                            {/* Feature specific content */}
+                            {item.feature === "spotlight" &&
+                                item.spotlightItems && (
+                                    <SpotlightFeature
+                                        items={item.spotlightItems}
                                     />
-                                </motion.div>
-                                <motion.div
-                                    className="absolute -bottom-4 right-0 w-[70%] shadow-2xl"
-                                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    transition={{
-                                        delay: 1.5,
-                                        duration: 0.5,
-                                        ease: "easeOut",
-                                    }}
-                                >
-                                    <DashboardWindow />
-                                </motion.div>
-                            </div>
-                        )}
+                                )}
 
-                        {item.feature === "priorKnowledgeCheck" &&
-                            item.priorKnowledgeItems && (
-                                <PriorKnowledgeCheckFeature
-                                    items={item.priorKnowledgeItems}
-                                />
+                            {item.feature === "praesentation" && (
+                                <div className="flex justify-center items-center h-full">
+                                    <Image
+                                        src="/praesentation2.svg"
+                                        alt="Präsentation"
+                                        width={500}
+                                        height={400}
+                                    />
+                                </div>
                             )}
-                    </div>
+
+                            {item.feature === "export" && (
+                                <div className="flex justify-center items-center h-full">
+                                    <Image
+                                        src="/group34.svg"
+                                        alt="Export"
+                                        width={200}
+                                        height={150}
+                                    />
+                                </div>
+                            )}
+
+                            {item.feature === "howItWorks" && <HowItWorksFeature />}
+
+                            {item.feature === "chart" && item.chartData && (
+                                <LineChartFeature data={item.chartData} />
+                            )}
+
+                            {item.feature === "timeline" && item.timeline && (
+                                <TimelineFeature timeline={item.timeline} />
+                            )}
+
+                            {item.feature === "typing" && item.typingText && (
+                                <div className="relative max-w-md mx-auto h-[182px]">
+                                    <motion.div
+                                        initial={{ y: 0, scale: 1 }}
+                                        animate={{ y: -20, scale: 0.95 }}
+                                        transition={{
+                                            delay: 1.2,
+                                            duration: 0.5,
+                                            ease: "easeOut",
+                                        }}
+                                        className="rounded-lg border border-neutral-200/80 dark:border-neutral-800/80 overflow-hidden"
+                                    >
+                                        <div className="flex items-center gap-2 p-2 bg-neutral-100/30 dark:bg-neutral-900/30 border-b border-neutral-200/80 dark:border-neutral-800/80">
+                                            <div className="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
+                                            <div className="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
+                                            <div className="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
+                                        </div>
+                                        <TypingCodeFeature
+                                            text={item.typingText}
+                                        />
+                                    </motion.div>
+                                    <motion.div
+                                        className="absolute -bottom-4 right-0 w-[70%] shadow-2xl"
+                                        initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        transition={{
+                                            delay: 1.5,
+                                            duration: 0.5,
+                                            ease: "easeOut",
+                                        }}
+                                    >
+                                        <DashboardWindow />
+                                    </motion.div>
+                                </div>
+                            )}
+
+                            {item.feature === "priorKnowledgeCheck" &&
+                                item.priorKnowledgeItems && (
+                                    <PriorKnowledgeCheckFeature
+                                        items={item.priorKnowledgeItems}
+                                    />
+                                )}
+                        </div>
+                    )}
                 </div>
             </div>
         </motion.div>
