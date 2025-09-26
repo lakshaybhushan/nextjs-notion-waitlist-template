@@ -100,6 +100,7 @@ interface BentoItem {
     tagline?: string;
     cta?: string;
     svgName?: string;
+    subsections?: { title: string; description: string }[];
     feature?:
         | "chart"
         | "counter"
@@ -247,6 +248,20 @@ const bentoItems: BentoItem[] = [
         description: "Mit intelligenter Automatisierung wird aus Informationsflut echte Übersicht und Produktivität.",
         feature: "customSvg",
         svgName: "ueberfordert2.svg",
+        subsections: [
+            {
+                title: "Gemeinsam, gewinnbringend.",
+                description: "Alle im Team sehen sofort, worauf es ankommt – Zusammenarbeit ohne Umwege."
+            },
+            {
+                title: "Zentraler Datahub",
+                description: "Alle Daten an einem Ort. Immer aktuell, sofort nutzbar."
+            },
+            {
+                title: "Professionell skalierbar.",
+                description: "Angebote treffen gezielt die richtigen Investoren – und das in Sekunden."
+            }
+        ],
         className:
             "md:col-span-2 border-t border-neutral-200/60 dark:border-neutral-800/60",
         contentClassName: "items-center",
@@ -1006,13 +1021,25 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                 )}
 
                             {item.feature === "customSvg" && item.svgName && (
-                                <div className="mt-8 flex justify-center">
-                                    <Image
-                                        src={`/${item.svgName}`}
-                                        alt="Feature illustration"
-                                        width={1200}
-                                        height={720}
-                                    />
+                                <div>
+                                    <div className="flex justify-center">
+                                        <Image
+                                            src={`/${item.svgName}`}
+                                            alt="Feature illustration"
+                                            width={1200}
+                                            height={720}
+                                        />
+                                    </div>
+                                    {item.subsections && (
+                                        <div className="mt-12 flex w-full gap-32">
+                                            {item.subsections.map((section, index) => (
+                                                <div key={index} className="w-1/4 flex flex-col items-start text-left">
+                                                    <h4 className="font-semibold text-[20px] tracking-[-0.4px] text-white">{section.title}</h4>
+                                                    <p className="text-neutral-400 mt-2 text-[16px] tracking-[-0.4px]">{section.description}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                             )}
 
@@ -1119,7 +1146,7 @@ export default function BentoGrid() {
                                 item.id === "how-it-works"
                                     ? "min-h-[750px]"
                                     : item.id === "new-section"
-                                      ? "min-h-[800px]"
+                                      ? "min-h-[950px]"
                                       : "min-h-[500px]",
                             )}
                         >
