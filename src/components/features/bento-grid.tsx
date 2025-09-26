@@ -219,14 +219,14 @@ const bentoItems: BentoItem[] = [
     },
     {
         id: "how-it-works",
-        title: "So einfach funktioniert es.",
+        title: "Für Family Offices, Private Equity und Asset Managers.",
         description:
             "In drei einfachen Schritten zu besseren Investitionsentscheidungen.",
         href: "#",
         className:
             "md:col-span-1 border-t border-neutral-200/60 dark:border-neutral-800/60",
         textClassName: "text-4xl",
-        descriptionClassName: "block mt-4 text-4xl",
+        descriptionClassName: "block mt-4 text-2xl",
         contentClassName: "!justify-start items-start h-full",
     },
     {
