@@ -13,7 +13,6 @@
 import { cn } from "@/lib/utils";
 import {
     ArrowRight,
-    ArrowUpRight,
     CheckCircle2,
     Database,
     UploadCloud,
@@ -28,7 +27,6 @@ import {
     useSpring,
     AnimatePresence,
 } from "framer-motion";
-import Link from "next/link";
 import { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import {
@@ -98,7 +96,6 @@ interface BentoItem {
     title: string;
     description: string;
     icons?: boolean;
-    href?: string;
     cta?: string;
     feature?:
         | "chart"
@@ -157,7 +154,6 @@ const bentoItems: BentoItem[] = [
         title: "Sofort Überblick erhalten. ",
         description:
             "Automatische Extraktion und Standardisierung aller Immobiliendaten.",
-        href: "#",
         feature: "typing",
         typingText: `{\n  "property_name": "Berlin Central Tower",\n  "location": "Berlin, Germany",\n  "size_sqm": 25000,\n  "noi_eur": 4500000,\n  "cap_rate": "5.5%",\n  "status": "Validated"\n}`,
         className: "col-span-1",
@@ -167,7 +163,6 @@ const bentoItems: BentoItem[] = [
         title: "Passende Investments für jeden Investor.",
         description:
             "KI-gestützte Investor-CRM mit automatischer Präferenzabgleichung.",
-        href: "#",
         feature: "priorKnowledgeCheck",
         priorKnowledgeItems: [
             { object: "City villa", city: "Munich", priorKnowledge: false },
@@ -185,7 +180,6 @@ const bentoItems: BentoItem[] = [
         title: "Sichere Investitionsentscheidungen treffen.",
         description:
             "Automatisierte Cashflow-Berechnung und Vorkenntnisprüfung.",
-        href: "#",
         feature: "chart",
         chartData: [
             { month: "Jan", miete: 1200000, tilgung: 950000 },
@@ -206,7 +200,6 @@ const bentoItems: BentoItem[] = [
         id: "praesentieren",
         title: "Beeindruckend präsentieren, mit einem Klick. ",
         description: "Automatische Teaser-Deck-Generierung.",
-        href: "#",
         feature: "praesentation",
         className: "col-span-1",
     },
@@ -215,7 +208,6 @@ const bentoItems: BentoItem[] = [
         title: "Schneller verhandeln und überzeugen.",
         description:
             "Exporte fertiger Berechnungen für Pitch und Verhandlung.",
-        href: "#",
         feature: "export",
         className: "col-span-1",
     },
@@ -224,7 +216,6 @@ const bentoItems: BentoItem[] = [
         title: "Für Family Offices, Private Equity und Asset Managers.",
         description:
             "In drei einfachen Schritten zu besseren Investitionsentscheidungen.",
-        href: "#",
         cta: "Jetzt loslegen!",
         className:
             "md:col-span-1 border-t border-neutral-200/60 dark:border-neutral-800/60",
@@ -236,7 +227,6 @@ const bentoItems: BentoItem[] = [
         id: "how-it-works-2",
         title: "",
         description: "",
-        href: "#",
         feature: "howItWorks",
         className:
             "md:col-span-1 border-t border-l border-neutral-200/60 dark:border-neutral-800/60",
@@ -916,10 +906,9 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                 transformStyle: "preserve-3d",
             }}
         >
-            <Link
-                href={item.href || "#"}
+            <div
                 className={`
-                    group relative flex flex-col h-full p-12
+                    relative flex flex-col h-full p-12
                     transition-all duration-500 ease-out
                 `}
                 tabIndex={0}
@@ -967,9 +956,6 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                         </button>
                                     </div>
                                 )}
-                            </div>
-                            <div className="text-neutral-400 dark:text-neutral-500 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                                <ArrowUpRight className="h-5 w-5" />
                             </div>
                         </div>
                     </div>
@@ -1060,7 +1046,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
 
                     </div>
                 </div>
-            </Link>
+            </div>
         </motion.div>
     );
 };
