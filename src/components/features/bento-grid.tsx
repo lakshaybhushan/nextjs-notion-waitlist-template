@@ -928,6 +928,12 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                     transition-all duration-500 ease-out
                 `}
             >
+                {item.id === "new-section" && (
+                    <>
+                        <div className="absolute top-0 left-1/3 h-full w-px bg-neutral-200/60 dark:bg-neutral-800/60" />
+                        <div className="absolute top-0 left-2/3 h-full w-px bg-neutral-200/60 dark:bg-neutral-800/60" />
+                    </>
+                )}
                 <div
                     className={cn(
                         "relative z-10 flex flex-col h-full",
