@@ -266,6 +266,13 @@ const bentoItems: BentoItem[] = [
             "md:col-span-2 border-t border-neutral-200/60 dark:border-neutral-800/60",
         contentClassName: "items-center",
     },
+    {
+        id: "new-section-2",
+        title: "Placeholder Title",
+        description: "This is a new full-width section.",
+        className:
+            "md:col-span-2 border-t border-neutral-200/60 dark:border-neutral-800/60",
+    },
 ];
 
 const fadeInUp: Variants = {
