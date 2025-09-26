@@ -947,7 +947,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                     {item.description}
                                 </p>
                                 {item.cta && (
-                                    <div className="mt-12">
+                                    <div className="mt-24">
                                         <button className="bg-black border border-[#1b1b1c] text-white font-semibold py-4 px-8 rounded-full text-[48px] tracking-[-2.88px] transition-colors hover:bg-gray-800 flex items-center gap-4">
                                             {item.cta}
                                             <span className="bg-white rounded-full p-2">
