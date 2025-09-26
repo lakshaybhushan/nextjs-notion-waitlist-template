@@ -144,6 +144,9 @@ interface BentoItem {
     };
     size?: "sm" | "md" | "lg";
     className?: string;
+    textClassName?: string;
+    descriptionClassName?: string;
+    contentClassName?: string;
 }
 
 const bentoItems: BentoItem[] = [
@@ -220,15 +223,18 @@ const bentoItems: BentoItem[] = [
         description:
             "In drei einfachen Schritten zu besseren Investitionsentscheidungen.",
         href: "#",
-        feature: "howItWorks",
         className:
             "md:col-span-1 border-t border-neutral-200/60 dark:border-neutral-800/60",
+        textClassName: "text-4xl",
+        descriptionClassName: "block mt-4 text-4xl",
+        contentClassName: "!justify-start items-start h-full",
     },
     {
         id: "how-it-works-2",
         title: "",
         description: "",
         href: "#",
+        feature: "howItWorks",
         className:
             "md:col-span-1 border-t border-l border-neutral-200/60 dark:border-neutral-800/60",
     },
@@ -909,15 +915,35 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                 aria-label={`${item.title} - ${item.description}`}
             >
                 <div
-                    className="relative z-10 flex flex-col h-full justify-center gap-16"
-                    style={{ transform: "translateZ(20px)" }}
+                    className={cn(
+                        "relative z-10 flex flex-col h-full justify-center gap-16",
+                        item.contentClassName,
+                    )}
+                    style={{ 
+                        transform: "translateZ(20px)",
+                        ...(item.id === "how-it-works" && {
+                            justifyContent: "flex-start",
+                            paddingTop: "25%"
+                        })
+                    }}
                 >
                     <div className="space-y-2">
                         <div className="flex items-center justify-between">
-                            <h3 className="max-w-lg text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors duration-300">
+                            <h3
+                                className={cn(
+                                    "max-w-lg text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors duration-300",
+                                    item.textClassName,
+                                )}
+                            >
                                 {item.title}
-                                <span className="font-normal text-neutral-600 dark:text-neutral-400">
-                                    {" "}{item.description}
+                                <span
+                                    className={cn(
+                                        "font-normal text-neutral-600 dark:text-neutral-400",
+                                        item.descriptionClassName,
+                                    )}
+                                >
+                                    {" "}
+                                    {item.description}
                                 </span>
                             </h3>
                             <div className="text-neutral-400 dark:text-neutral-500 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
@@ -1035,7 +1061,7 @@ export default function BentoGrid() {
                             key={item.id}
                             className={cn(
                                 item.className,
-                                "min-h-[500px]"
+                                item.id === "how-it-works" ? "min-h-[750px]" : "min-h-[500px]"
                             )}
                         >
                             <BentoCard item={item} />
