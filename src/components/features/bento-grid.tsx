@@ -19,6 +19,7 @@ import {
     Bot,
     FileText,
     BarChart,
+    FileUp,
 } from "lucide-react";
 import {
     motion,
@@ -115,7 +116,8 @@ interface BentoItem {
         | "praesentation"
         | "export"
         | "howItWorks"
-        | "customSvg";
+        | "customSvg"
+        | "threeSections";
     spotlightItems?: string[];
     timeline?: Array<{ year: string; event: string }>;
     code?: string;
@@ -267,13 +269,64 @@ const bentoItems: BentoItem[] = [
         contentClassName: "items-center",
     },
     {
-        id: "new-section-2",
-        title: "Placeholder Title",
-        description: "This is a new full-width section.",
+        id: "security-title",
+        title: "Mehr treffen. Schneller entscheiden.",
+        description: "",
         className:
             "md:col-span-2 border-t border-neutral-200/60 dark:border-neutral-800/60",
+        textClassName: "text-[48px]",
+        contentClassName: "justify-end",
     },
+    {
+        id: "security-features",
+        title: "",
+        description: "",
+        className: "md:col-span-2",
+        feature: "threeSections",
+        subsections: [
+            {
+                title: "Automated code checks.",
+                description: "Keep an eye on your code. With conformance, catch issues that could become security vulnerabilities in your application."
+            },
+            {
+                title: "Highly available by default.",
+                description: "Vercel simplifies 99.99% uptime with built in high-availability features that require no additional setup or maintenance overhead."
+            },
+            {
+                title: "Industry-leading DDoS mitigation.",
+                description: "Automatic prevention at the network layer, on-call teams responding to larger, distributed attacks, and user-defined IP blocking rules to restrict access."
+            }
+        ],
+    }
 ];
+
+const ICONS: { [key: string]: React.ComponentType<any> } = {
+    "Datenextraktion": BarChart,
+    "Investor Matching": Bot,
+    "Cashflow Analyse": FileText,
+    "Präsentation": UploadCloud,
+    "Datenexport": FileUp,
+};
+
+const ThreeVerticalSections = ({ subsections }: { subsections: { title: string; description: string }[] }) => {
+    return (
+        <div className="flex h-full">
+            {subsections.map((section, index) => (
+                <div key={index} className="flex-1 p-8 border-r border-neutral-200/60 dark:border-neutral-800/60 last:border-r-0 flex flex-col justify-between">
+                    <div>
+                        <h3 className="text-2xl font-semibold text-white">{section.title}</h3>
+                        <p className="mt-4 text-neutral-400">{section.description}</p>
+                    </div>
+                    <div className="mt-8">
+                        <div className="w-10 h-10 rounded-full border border-neutral-700 flex items-center justify-center">
+                            <ArrowRight className="h-5 w-5 text-neutral-400" />
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    )
+}
 
 const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 20 },
@@ -989,6 +1042,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                             item.textClassName,
                                             item.id === "new-section" &&
                                                 "text-center text-[48px] max-w-none tracking-[-2.4px]",
+                                            item.id === "security-title" && "text-center max-w-none",
                                         )}
                                     >
                                         {item.title}
@@ -1048,6 +1102,10 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                         </div>
                                     )}
                                 </div>
+                            )}
+
+                            {item.feature === "threeSections" && item.subsections && (
+                                <ThreeVerticalSections subsections={item.subsections} />
                             )}
 
                             {item.feature === "praesentation" && (
@@ -1153,8 +1211,12 @@ export default function BentoGrid() {
                                 item.id === "how-it-works"
                                     ? "min-h-[750px]"
                                     : item.id === "new-section"
-                                      ? "min-h-[1000px]"
-                                      : "min-h-[500px]",
+                                      ? "min-h-[950px]"
+                                      : item.id === "security-title"
+                                        ? "min-h-[300px]"
+                                        : item.id === "security-features"
+                                          ? "min-h-[500px]"
+                                          : "min-h-[500px]",
                             )}
                         >
                             <BentoCard item={item} />
