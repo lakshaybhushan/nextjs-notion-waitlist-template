@@ -27,7 +27,7 @@ import {
     useSpring,
     AnimatePresence,
 } from "framer-motion";
-import { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import {
     LineChart,
@@ -96,6 +96,7 @@ interface BentoItem {
     title: string;
     description: string;
     icons?: boolean;
+    tagline?: string;
     cta?: string;
     feature?:
         | "chart"
@@ -155,6 +156,7 @@ const bentoItems: BentoItem[] = [
         description:
             "Automatische Extraktion und Standardisierung aller Immobiliendaten.",
         feature: "typing",
+        tagline: "Datenextraktion",
         typingText: `{\n  "property_name": "Berlin Central Tower",\n  "location": "Berlin, Germany",\n  "size_sqm": 25000,\n  "noi_eur": 4500000,\n  "cap_rate": "5.5%",\n  "status": "Validated"\n}`,
         className: "col-span-1",
     },
@@ -164,6 +166,7 @@ const bentoItems: BentoItem[] = [
         description:
             "KI-gestützte Investor-CRM mit automatischer Präferenzabgleichung.",
         feature: "priorKnowledgeCheck",
+        tagline: "Investor Matching",
         priorKnowledgeItems: [
             { object: "City villa", city: "Munich", priorKnowledge: false },
             {
@@ -181,6 +184,7 @@ const bentoItems: BentoItem[] = [
         description:
             "Automatisierte Cashflow-Berechnung und Vorkenntnisprüfung.",
         feature: "chart",
+        tagline: "Cashflow Analyse",
         chartData: [
             { month: "Jan", miete: 1200000, tilgung: 950000 },
             { month: "", miete: 1250000, tilgung: 950000 },
@@ -201,6 +205,7 @@ const bentoItems: BentoItem[] = [
         title: "Beeindruckend präsentieren, mit einem Klick. ",
         description: "Automatische Teaser-Deck-Generierung.",
         feature: "praesentation",
+        tagline: "Präsentation",
         className: "col-span-1",
     },
     {
@@ -209,6 +214,7 @@ const bentoItems: BentoItem[] = [
         description:
             "Exporte fertiger Berechnungen für Pitch und Verhandlung.",
         feature: "export",
+        tagline: "Datenexport",
         className: "col-span-1",
     },
     {
@@ -911,12 +917,10 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                     relative flex flex-col h-full p-12
                     transition-all duration-500 ease-out
                 `}
-                tabIndex={0}
-                aria-label={`${item.title} - ${item.description}`}
             >
                 <div
                     className={cn(
-                        "relative z-10 flex flex-col h-full justify-center gap-16",
+                        "relative z-10 flex flex-col h-full",
                         item.contentClassName,
                     )}
                     style={{ 
@@ -927,40 +931,47 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                         })
                     }}
                 >
-                    <div className="space-y-2">
-                        <div className="flex items-start justify-between">
-                            <div>
-                                <h3
-                                    className={cn(
-                                        "max-w-lg text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors duration-300",
-                                        item.textClassName,
+                    <div>
+                        {item.tagline && (
+                            <div className="flex items-center gap-2 mb-2 text-neutral-500">
+                                <p className="font-semibold">_{item.tagline}</p>
+                            </div>
+                        )}
+                        <div className="space-y-2">
+                            <div className="flex items-start justify-between">
+                                <div>
+                                    <h3
+                                        className={cn(
+                                            "max-w-lg text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors duration-300",
+                                            item.textClassName,
+                                        )}
+                                    >
+                                        {item.title}
+                                    </h3>
+                                    <p
+                                        className={cn(
+                                            "font-normal text-neutral-600 dark:text-neutral-400 text-2xl",
+                                            item.descriptionClassName,
+                                        )}
+                                    >
+                                        {item.description}
+                                    </p>
+                                    {item.cta && (
+                                        <div className="mt-24">
+                                            <button className="bg-black border border-[#1b1b1c] text-white font-semibold py-4 px-8 rounded-full text-[48px] tracking-[-2.88px] transition-colors hover:bg-gray-800 flex items-center gap-4">
+                                                {item.cta}
+                                                <span className="bg-white rounded-full p-2">
+                                                    <ArrowRight className="h-8 w-8 text-black" />
+                                                </span>
+                                            </button>
+                                        </div>
                                     )}
-                                >
-                                    {item.title}
-                                </h3>
-                                <p
-                                    className={cn(
-                                        "font-normal text-neutral-600 dark:text-neutral-400 text-2xl",
-                                        item.descriptionClassName,
-                                    )}
-                                >
-                                    {item.description}
-                                </p>
-                                {item.cta && (
-                                    <div className="mt-24">
-                                        <button className="bg-black border border-[#1b1b1c] text-white font-semibold py-4 px-8 rounded-full text-[48px] tracking-[-2.88px] transition-colors hover:bg-gray-800 flex items-center gap-4">
-                                            {item.cta}
-                                            <span className="bg-white rounded-full p-2">
-                                                <ArrowRight className="h-8 w-8 text-black" />
-                                            </span>
-                                        </button>
-                                    </div>
-                                )}
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="h-full">
+                    <div className="h-full mt-12">
                         {/* Feature specific content */}
                         {item.feature === "spotlight" &&
                             item.spotlightItems && (
@@ -1043,7 +1054,6 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                     items={item.priorKnowledgeItems}
                                 />
                             )}
-
                     </div>
                 </div>
             </div>
