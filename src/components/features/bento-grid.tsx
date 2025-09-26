@@ -99,6 +99,7 @@ interface BentoItem {
     icons?: boolean;
     tagline?: string;
     cta?: string;
+    svgName?: string;
     feature?:
         | "chart"
         | "counter"
@@ -112,7 +113,8 @@ interface BentoItem {
         | "priorKnowledgeCheck"
         | "praesentation"
         | "export"
-        | "howItWorks";
+        | "howItWorks"
+        | "customSvg";
     spotlightItems?: string[];
     timeline?: Array<{ year: string; event: string }>;
     code?: string;
@@ -243,6 +245,8 @@ const bentoItems: BentoItem[] = [
         id: "new-section",
         title: "Eine volle Inbox soll motivieren, nicht überfordern.",
         description: "Mit intelligenter Automatisierung wird aus Informationsflut echte Übersicht und Produktivität.",
+        feature: "customSvg",
+        svgName: "ueberfordert2.svg",
         className:
             "md:col-span-2 border-t border-neutral-200/60 dark:border-neutral-800/60",
         contentClassName: "items-center",
@@ -1000,6 +1004,17 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                         items={item.spotlightItems}
                                     />
                                 )}
+
+                            {item.feature === "customSvg" && item.svgName && (
+                                <div className="mt-8 flex justify-center">
+                                    <Image
+                                        src={`/${item.svgName}`}
+                                        alt="Feature illustration"
+                                        width={1200}
+                                        height={720}
+                                    />
+                                </div>
+                            )}
 
                             {item.feature === "praesentation" && (
                                 <div className="flex justify-center items-center h-full">
