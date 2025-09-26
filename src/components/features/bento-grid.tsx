@@ -18,6 +18,7 @@ import {
     UploadCloud,
     Bot,
     FileText,
+    BarChart,
 } from "lucide-react";
 import {
     motion,
@@ -237,6 +238,13 @@ const bentoItems: BentoItem[] = [
         className:
             "md:col-span-1 border-t border-l border-neutral-200/60 dark:border-neutral-800/60",
         contentClassName: "justify-start",
+    },
+    {
+        id: "new-section",
+        title: "Neue Sektion",
+        description: "Hier ist Platz für neuen Inhalt.",
+        className:
+            "md:col-span-1 border-t border-neutral-200/60 dark:border-neutral-800/60",
     },
 ];
 
@@ -1080,7 +1088,11 @@ export default function BentoGrid() {
                             key={item.id}
                             className={cn(
                                 item.className,
-                                item.id === "how-it-works" ? "min-h-[750px]" : "min-h-[500px]"
+                                item.id === "how-it-works"
+                                    ? "min-h-[750px]"
+                                    : item.id === "new-section"
+                                      ? "min-h-[800px]"
+                                      : "min-h-[500px]",
                             )}
                         >
                             <BentoCard item={item} />
