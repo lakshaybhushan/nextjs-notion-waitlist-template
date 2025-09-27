@@ -1014,7 +1014,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                     item.feature === "calEmbed" ? "p-12" : "p-12" // Ensure padding for calEmbed
                 )}
             >
-                {["new-section", "security-title", "security-features"].includes(item.id) && (
+                {["new-section", "security-title", "security-features", "call-booking"].includes(item.id) && (
                     <>
                         <div className="absolute top-0 left-1/3 h-full w-px bg-neutral-200/60 dark:bg-neutral-800/60" />
                         <div className="absolute top-0 left-2/3 h-full w-px bg-neutral-200/60 dark:bg-neutral-800/60" />
@@ -1059,7 +1059,7 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                     
                     {/* Render title for calEmbed here, then hide the generic one */}
                     {item.feature === "calEmbed" && (
-                        <h3 className="text-4xl font-semibold tracking-tight text-center mb-8">
+                        <h3 className="text-[48px] font-semibold tracking-[-2.4px] text-center mb-8 mt-12">
                             Buchen Sie eine Demo
                         </h3>
                     )}
