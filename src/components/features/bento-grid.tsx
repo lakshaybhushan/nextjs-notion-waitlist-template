@@ -117,7 +117,10 @@ interface BentoItem {
         | "export"
         | "howItWorks"
         | "customSvg"
-        | "threeSections";
+        | "threeSections"
+        | "pricing"
+        | "pricingTiers"
+        | "calEmbed";
     spotlightItems?: string[];
     timeline?: Array<{ year: string; event: string }>;
     code?: string;
@@ -298,7 +301,30 @@ const bentoItems: BentoItem[] = [
                 description: "Vereinfache das Investorenmatching mit KI-basiertem Matching und standardisierten Daten – automatische Reports und Präsentationen sorgen für schnelle, transparente Entscheidungen."
             }
         ],
-    }
+    },
+    {
+        id: "pricing",
+        title: "",
+        description: "",
+        feature: "pricing",
+        className: "md:col-span-2",
+        contentClassName: "justify-center items-center",
+    },
+    {
+        id: "pricing-tiers",
+        title: "",
+        description: "",
+        feature: "pricingTiers",
+        className: "md:col-span-2 -mt-px bg-black",
+        contentClassName: "justify-center items-center",
+    },
+    {
+        id: "call-booking",
+        title: "",
+        description: "",
+        feature: "calEmbed",
+        className: "md:col-span-2 border-t border-neutral-200/60 dark:border-neutral-800/60",
+    },
 ];
 
 const ICONS: { [key: string]: React.ComponentType<any> } = {
@@ -983,16 +1009,38 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
         >
             <div
                 id={item.id}
-                className={`
-                    relative flex flex-col h-full p-12 scroll-mt-32
-                    transition-all duration-500 ease-out
-                `}
+                className={cn(
+                    "relative flex flex-col h-full scroll-mt-32 transition-all duration-500 ease-out",
+                    item.feature === "calEmbed" ? "p-12" : "p-12" // Ensure padding for calEmbed
+                )}
             >
                 {["new-section", "security-title", "security-features"].includes(item.id) && (
                     <>
                         <div className="absolute top-0 left-1/3 h-full w-px bg-neutral-200/60 dark:bg-neutral-800/60" />
                         <div className="absolute top-0 left-2/3 h-full w-px bg-neutral-200/60 dark:bg-neutral-800/60" />
                     </>
+                )}
+                {item.id === "pricing" && (
+                    <div className="absolute inset-0 w-full h-full overflow-hidden">
+                        {/* Vertical lines */}
+                        <div className="absolute inset-0 w-full h-full flex justify-around">
+                            {[...Array(12)].map((_, i) => (
+                                <div
+                                    key={`v-${i}`}
+                                    className="w-px h-full bg-neutral-200/60 dark:bg-neutral-800/60"
+                                />
+                            ))}
+                        </div>
+                        {/* Horizontal lines */}
+                        <div className="absolute inset-0 w-full h-full flex flex-col justify-around">
+                             {[...Array(5)].map((_, i) => (
+                                <div
+                                    key={`h-${i}`}
+                                    className="h-px w-full bg-neutral-200/60 dark:bg-neutral-800/60"
+                                />
+                            ))}
+                        </div>
+                    </div>
                 )}
                 <div
                     className={cn(
@@ -1008,52 +1056,62 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                     }}
                 >
                     {item.id === "new-section" && <div className="h-1/6 flex-shrink-0" />}
-                    <div>
-                        {item.tagline && (
-                            <div className="flex items-center gap-2 mb-2 text-neutral-500">
-                                <p className="font-semibold">_{item.tagline}</p>
-                            </div>
-                        )}
-                        <div className="space-y-2">
-                            <div className="flex items-start justify-between">
-                                <div>
-                                    <h3
-                                        className={cn(
-                                            "max-w-lg text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100",
-                                            item.textClassName,
-                                            item.id === "new-section" &&
-                                                "text-center text-[48px] max-w-none tracking-[-2.4px]",
-                                            item.id === "security-title" && "text-center max-w-none",
+                    
+                    {/* Render title for calEmbed here, then hide the generic one */}
+                    {item.feature === "calEmbed" && (
+                        <h3 className="text-4xl font-semibold tracking-tight text-center mb-8">
+                            Buchen Sie eine Demo
+                        </h3>
+                    )}
+
+                    {item.feature !== "calEmbed" && (
+                        <div>
+                            {item.tagline && (
+                                <div className="flex items-center gap-2 mb-2 text-neutral-500">
+                                    <p className="font-semibold">_{item.tagline}</p>
+                                </div>
+                            )}
+                            <div className="space-y-2">
+                                <div className="flex items-start justify-between">
+                                    <div>
+                                        <h3
+                                            className={cn(
+                                                "max-w-lg text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100",
+                                                item.textClassName,
+                                                item.id === "new-section" &&
+                                                    "text-center text-[48px] max-w-none tracking-[-2.4px]",
+                                                item.id === "security-title" && "text-center max-w-none",
+                                            )}
+                                        >
+                                            {item.title}
+                                        </h3>
+                                        <p
+                                            className={cn(
+                                                "font-normal text-neutral-600 dark:text-neutral-400 text-2xl",
+                                                item.descriptionClassName,
+                                                item.id === "new-section" && "text-center text-[20px] leading-[36px]",
+                                            )}
+                                        >
+                                            {item.description}
+                                        </p>
+                                        {item.cta && (
+                                            <div className="mt-24">
+                                                <button className="bg-black border border-[#1b1b1c] text-white font-semibold py-4 px-8 rounded-full text-[48px] tracking-[-2.88px] transition-colors hover:bg-gray-800 flex items-center gap-4">
+                                                    {item.cta}
+                                                    <span className="bg-white rounded-full p-2">
+                                                        <ArrowRight className="h-8 w-8 text-black" />
+                                                    </span>
+                                                </button>
+                                            </div>
                                         )}
-                                    >
-                                        {item.title}
-                                    </h3>
-                                    <p
-                                        className={cn(
-                                            "font-normal text-neutral-600 dark:text-neutral-400 text-2xl",
-                                            item.descriptionClassName,
-                                            item.id === "new-section" && "text-center text-[20px] leading-[36px]",
-                                        )}
-                                    >
-                                        {item.description}
-                                    </p>
-                                    {item.cta && (
-                                        <div className="mt-24">
-                                            <button className="bg-black border border-[#1b1b1c] text-white font-semibold py-4 px-8 rounded-full text-[48px] tracking-[-2.88px] transition-colors hover:bg-gray-800 flex items-center gap-4">
-                                                {item.cta}
-                                                <span className="bg-white rounded-full p-2">
-                                                    <ArrowRight className="h-8 w-8 text-black" />
-                                                </span>
-                                            </button>
-                                        </div>
-                                    )}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    )}
 
                     {item.feature && (
-                        <div className="h-full mt-12">
+                        <div className={cn("h-full", item.feature !== "calEmbed" && "mt-12")}>
                             {/* Feature specific content */}
                             {item.feature === "spotlight" &&
                                 item.spotlightItems && (
@@ -1170,11 +1228,128 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                         items={item.priorKnowledgeItems}
                                     />
                                 )}
+                            {item.feature === "pricing" && <PricingFeature />}
+                            {item.feature === "pricingTiers" && <PricingTiersFeature />}
+                            {item.feature === "calEmbed" && <CalEmbedFeature />}
                         </div>
                     )}
                 </div>
             </div>
         </motion.div>
+    );
+};
+
+const CalEmbedFeature = () => {
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        
+        const Cal = (window as any).Cal;
+        Cal("init", "sales-call", {origin:"https://app.cal.com"});
+
+        Cal.ns["sales-call"]("inline", {
+            elementOrSelector:"#my-cal-inline-sales-call",
+            config: {"layout":"month_view"},
+            calLink: "nyka-technologies/sales-call",
+        });
+
+        Cal.ns["sales-call"]("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#000000"},"dark":{"cal-brand":"#1ab8a3"}},"hideEventTypeDetails":false,"layout":"month_view"});
+    }, []);
+
+    return (
+        <div className="w-full h-full overflow-scroll" id="my-cal-inline-sales-call"></div>
+    );
+};
+
+const pricingTiersData = [
+    {
+        name: "Starter",
+        price: "€0",
+        description: "Für Einzelpersonen und kleine Teams, die gerade erst anfangen.",
+        features: ["1 Projekt", "Bis zu 100 Objekte", "Grundlegende Analysen", "Community-Support"],
+        cta: "Jetzt starten",
+    },
+    {
+        name: "Pro",
+        price: "€99",
+        description: "Für wachsende Unternehmen, die mehr Leistung und Support benötigen.",
+        features: ["10 Projekte", "Bis zu 1.000 Objekte", "Erweiterte Analysen", "Priorisierter E-Mail-Support"],
+        cta: "Plan wählen",
+        popular: true,
+    },
+    {
+        name: "Enterprise",
+        price: "Kontakt",
+        description: "Für große Organisationen mit speziellen Anforderungen.",
+        features: ["Unbegrenzte Projekte", "Unbegrenzte Objekte", "Dedizierter Account Manager", "SLA & SSO"],
+        cta: "Vertrieb kontaktieren",
+    },
+];
+
+const PricingTiersFeature = () => {
+    return (
+        <div className="grid md:grid-cols-3 w-full h-full">
+            {pricingTiersData.map((tier, index) => (
+                <div
+                    key={tier.name}
+                    className={cn(
+                        "p-8 flex flex-col relative",
+                        index > 0 && "border-l border-neutral-200/60 dark:border-neutral-800/60"
+                    )}
+                >
+                    {tier.popular && (
+                        <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                           <span className="bg-white text-black text-sm font-semibold px-4 py-1.5 rounded-full border border-neutral-200/60 dark:border-neutral-800/60">
+                               Popular
+                           </span>
+                       </div>
+                    )}
+                    <h3 className="text-2xl font-semibold">{tier.name}</h3>
+                    <p className="mt-4 text-4xl font-bold">
+                        {tier.price}
+                        {tier.name !== "Enterprise" && <span className="text-lg font-normal text-neutral-500"> / Monat</span>}
+                    </p>
+                    <p className="mt-4 text-neutral-500">{tier.description}</p>
+                    <ul className="mt-8 pt-8 space-y-4 border-t border-neutral-200/60 dark:border-neutral-800/60">
+                        {tier.features.map((feature) => (
+                            <li key={feature} className="flex items-center gap-2">
+                                <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+                                <span>{feature}</span>
+                            </li>
+                        ))}
+                    </ul>
+                    <div className="mt-auto pt-8 border-t border-neutral-200/60 dark:border-neutral-800/60">
+                        <button className="w-full py-3 rounded-lg bg-neutral-900 dark:bg-white text-white dark:text-black font-semibold hover:opacity-90 transition-opacity">
+                            {tier.cta}
+                        </button>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+};
+
+const PricingFeature = () => {
+    const title = "Finde den passenden Plan für deine Deals.";
+    const description = "whisper unterstützt Teams jeder Größe mit einer Preisgestaltung, die mitwächst.";
+
+    return (
+        <div className="relative text-center w-full">
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+            >
+                <h2 className="text-6xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+                    {title}
+                </h2>
+                <p className="mt-6 text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+                    {description}
+                </p>
+            </motion.div>
+        </div>
     );
 };
 
@@ -1204,7 +1379,13 @@ export default function BentoGrid() {
                                         ? "min-h-[300px]"
                                         : item.id === "security-features"
                                           ? "min-h-[400px]"
-                                          : "min-h-[500px]",
+                                          : item.id === "pricing"
+                                            ? "min-h-[300px]"
+                                            : item.id === "pricing-tiers"
+                                              ? "min-h-[500px]"
+                                              : item.id === "call-booking"
+                                                ? "min-h-[800px]"
+                                                : "min-h-[500px]",
                             )}
                         >
                             <BentoCard item={item} />

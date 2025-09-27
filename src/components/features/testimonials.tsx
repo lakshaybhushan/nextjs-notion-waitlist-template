@@ -36,9 +36,9 @@ export default function Testimonials() {
     return (
         <section className="py-24 sm:py-32">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
                     {/* Left Column */}
-                    <div className="flex flex-col justify-between min-h-[12rem]">
+                    <div className="md:col-span-2 flex flex-col justify-between min-h-[12rem] pl-12">
                         <div className="relative h-24">
                             <AnimatePresence mode="wait">
                                 <motion.div
@@ -55,29 +55,41 @@ export default function Testimonials() {
                             </AnimatePresence>
                         </div>
                         <div className="flex flex-wrap gap-2">
-                            {categories.map((category) => (
-                                <Button 
-                                    key={category} 
-                                    variant="secondary" 
-                                    size="sm" 
-                                    className="rounded-lg bg-neutral-800 text-neutral-400 hover:bg-neutral-700 border border-neutral-700"
+                            {categories.map((category, i) => (
+                                <motion.div
+                                    key={category}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: 0.1 * i }}
                                 >
-                                    {category}
-                                </Button>
+                                    <Button
+                                        variant="secondary"
+                                        size="sm"
+                                        className="rounded-lg bg-neutral-800 text-neutral-400 hover:bg-neutral-700 border border-neutral-700"
+                                    >
+                                        {category}
+                                    </Button>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
 
                     {/* Right Column */}
-                    <div className="flex flex-col justify-between items-start">
-                        <p className="text-neutral-400 max-w-md text-lg">
-                            Get started using our pre-built templates. Easily stream long-running LLM responses for a better user experience with zero-config infrastructure that's always globally performant.
-                        </p>
-                        <Button className="mt-8 bg-white text-black hover:bg-neutral-200 rounded-lg font-semibold">
-                            Deploy AI Apps in seconds
-                            <Sparkles className="ml-2 h-4 w-4" />
-                        </Button>
-                    </div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="flex flex-col justify-between items-start"
+                    >
+                        <div>
+                            <p className="text-[40px] font-semibold text-black bg-white tracking-[-2.4px] px-2">
+                                €160.000.000
+                            </p>
+                            <p className="text-lg text-neutral-400 mt-2">
+                                in Transaktionsvolumen analysiert
+                            </p>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
         </section>

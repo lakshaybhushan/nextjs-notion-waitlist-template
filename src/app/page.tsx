@@ -127,7 +127,9 @@ export default function Home() {
             handleSubmit={handleSubmit}
             loading={loading}
           />
+        </section>
 
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Testimonials />
         </section>
       </div>
