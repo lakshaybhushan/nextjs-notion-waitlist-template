@@ -315,7 +315,7 @@ const bentoItems: BentoItem[] = [
         title: "",
         description: "",
         feature: "pricingTiers",
-        className: "md:col-span-2 -mt-px bg-black",
+        className: "md:col-span-2 -mt-px bg-black border-t border-b border-neutral-200/60 dark:border-neutral-800/60",
         contentClassName: "justify-center items-center",
     },
     {
