@@ -5,6 +5,57 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../ui/button";
 import { Sparkles } from "lucide-react";
 
+// Smoother counter hook with easing
+const useCountUp = (end: number, duration: number = 3, delay: number = 0.5) => {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            let startTime: number;
+            
+            const animate = (currentTime: number) => {
+                if (!startTime) startTime = currentTime;
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / (duration * 1000), 1);
+                
+                // Easing function for smoother animation (ease-out)
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const currentCount = Math.floor(easeOut * end);
+                
+                setCount(currentCount);
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    setCount(end);
+                }
+            };
+            
+            requestAnimationFrame(animate);
+        }, delay * 1000);
+
+        return () => clearTimeout(timer);
+    }, [end, duration, delay]);
+
+    return count;
+};
+
+// Animated Counter Component
+const AnimatedCounter = () => {
+    const count = useCountUp(160000000, 3, 0.5); // 160 Million over 3 seconds with 0.5s delay
+    
+    // Format number with dots as thousand separators
+    const formatNumber = (num: number) => {
+        return num.toLocaleString('de-DE');
+    };
+
+    return (
+        <p className="text-[40px] font-semibold text-black bg-white tracking-[-2.4px] px-2">
+            €{formatNumber(count)}
+        </p>
+    );
+};
+
 const testimonials = [
     {
         company: "Die Portfoliorendite ",
@@ -82,9 +133,7 @@ export default function Testimonials() {
                         className="flex flex-col justify-between items-start"
                     >
                         <div>
-                            <p className="text-[40px] font-semibold text-black bg-white tracking-[-2.4px] px-2">
-                                €160.000.000
-                            </p>
+                            <AnimatedCounter />
                             <p className="text-lg text-neutral-400 mt-2">
                                 in Transaktionsvolumen analysiert
                             </p>
