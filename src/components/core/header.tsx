@@ -77,7 +77,7 @@ export default function Header() {
         </motion.div>
         <motion.div variants={itemVariants}>
           <Button asChild className="bg-white text-black hover:bg-neutral-200 rounded-lg font-semibold">
-            <Link href="/signup">Sign Up</Link>
+            <Link href="#call-booking">Mit Sales sprechen</Link>
           </Button>
         </motion.div>
       </div>
