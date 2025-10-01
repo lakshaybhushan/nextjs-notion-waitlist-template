@@ -1288,6 +1288,13 @@ const CalEmbedFeature = () => {
         ];
 
 const PricingTiersFeature = () => {
+    const scrollToCalEmbed = () => {
+        const calSection = document.getElementById('call-booking');
+        if (calSection) {
+            calSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <div className="grid md:grid-cols-3 w-full h-full">
             {pricingTiersData.map((tier, index) => (
@@ -1321,14 +1328,17 @@ const PricingTiersFeature = () => {
                         ))}
                     </ul>
                     <div className="mt-auto pt-8 border-t border-neutral-200/60 dark:border-neutral-800/60">
-                         <button className={cn(
-                             "w-full py-3 rounded-lg font-medium hover:opacity-90 transition-opacity text-sm",
-                             tier.name === "Starter" 
-                                 ? "bg-transparent border border-neutral-300 dark:border-neutral-600 text-neutral-900 dark:text-neutral-100" 
-                                 : tier.name === "Pro"
-                                 ? "bg-blue-600 hover:bg-blue-700 text-white"
-                                 : "bg-neutral-900 dark:bg-white text-white dark:text-black"
-                         )}>
+                         <button 
+                             onClick={scrollToCalEmbed}
+                             className={cn(
+                                 "w-full py-3 rounded-lg font-medium hover:opacity-90 transition-opacity text-sm",
+                                 tier.name === "Starter" 
+                                     ? "bg-transparent border border-neutral-300 dark:border-neutral-600 text-neutral-900 dark:text-neutral-100" 
+                                     : tier.name === "Pro"
+                                     ? "bg-blue-600 hover:bg-blue-700 text-white"
+                                     : "bg-neutral-900 dark:bg-white text-white dark:text-black"
+                             )}
+                         >
                              {tier.cta}
                          </button>
                     </div>
