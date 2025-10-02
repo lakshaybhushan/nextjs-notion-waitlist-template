@@ -1059,9 +1059,29 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                     
                     {/* Render title for calEmbed here, then hide the generic one */}
                     {item.feature === "calEmbed" && (
-                        <h3 className="text-[48px] font-semibold tracking-[-2.4px] text-center mb-8 mt-12">
-                            Buchen Sie eine Demo
-                        </h3>
+                        <>
+                            <h3 className="text-[48px] font-semibold tracking-[-2.4px] text-center mb-8 mt-12">
+                                Buchen Sie eine Demo
+                            </h3>
+                            <div className="flex justify-center items-center gap-8 mb-8">
+                                <Image 
+                                    src="/Sebastian Sales.png" 
+                                    alt="Sebastian Sales Manager" 
+                                    width={120} 
+                                    height={120} 
+                                    className="rounded-full"
+                                />
+                                <blockquote className="p-4 border-l-4 border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 max-w-md">
+                                    <p className="text-xl italic text-neutral-700 dark:text-neutral-300">
+                                        "Ich bin überzeugt, dass wir Ihre Immobilienanalyse auf ein neues Level heben können. Lassen Sie uns in einem kurzen Gespräch herausfinden, wie whisper Sie dabei unterstützen kann."
+                                    </p>
+                                    <footer className="mt-4 text-right">
+                                        <p className="font-semibold text-neutral-800 dark:text-neutral-200">- Sebastian</p>
+                                        <p className="text-sm text-neutral-600 dark:text-neutral-400">Sales Manager</p>
+                                    </footer>
+                                </blockquote>
+                            </div>
+                        </>
                     )}
 
                     {item.feature !== "calEmbed" && (
@@ -1374,7 +1394,7 @@ const PricingFeature = () => {
 export default function BentoGrid() {
     return (
         <section className="relative pb-24 sm:pb-32 overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Bento Grid */}
                 <motion.div
                     initial="hidden"
@@ -1402,7 +1422,7 @@ export default function BentoGrid() {
                                             : item.id === "pricing-tiers"
                                               ? "min-h-[500px]"
                                               : item.id === "call-booking"
-                                                ? "min-h-[800px]"
+                                                ? "min-h-[600px]"
                                                 : "min-h-[500px]",
                             )}
                         >
