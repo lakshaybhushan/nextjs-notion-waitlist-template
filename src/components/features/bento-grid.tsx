@@ -1067,8 +1067,8 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                 <Image 
                                     src="/Sebastian Sales.png" 
                                     alt="Sebastian Sales Manager" 
-                                    width={120} 
-                                    height={120} 
+                                    width={160} 
+                                    height={160} 
                                     className="rounded-full"
                                 />
                                 <blockquote className="p-4 border-l-4 border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 max-w-md">
