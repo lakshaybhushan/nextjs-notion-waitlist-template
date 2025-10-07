@@ -14,60 +14,47 @@ interface EmailProps {
   userFirstname: string;
 }
 
-export const NotionWaitlistEmail = ({ userFirstname }: EmailProps) => (
+export const PraediaEmail = ({ userFirstname }: EmailProps) => (
   <Html>
     <Head />
-    <Preview>Thanks for Joining the Waitlist, {userFirstname}! 🎉</Preview>
+    <Preview>Willkommen bei praedia, {userFirstname}! 🎉</Preview>
     <Body style={main}>
       <Container style={container}>
         <Img
-          src={`https://nextjs-notion-waitlist.vercel.app/waitlist-logo.png`}
+          src={`https://praedia.com/logo.svg`}
           width="220"
           height="100"
-          alt="Notion Waitlist Logo"
+          alt="praedia Logo"
           style={logo}
         />
-        <Text style={greeting}>Hi {userFirstname},</Text>
+        <Text style={greeting}>Hallo {userFirstname},</Text>
         <Text style={paragraph}>
-          Thanks for joining the waitlist for our Next.js + Notion CMS waitlist
-          template! I'm Lakshay, the developer behind this project. I'm glad to
-          have you on board.
+          Vielen Dank für Ihr Interesse an praedia! Wir freuen uns, Sie dabei zu haben.
         </Text>
         <Text style={paragraph}>
-          I'll keep you posted on the progress and notify you as soon as it's
-          ready for you to use. In the meantime, if you have any questions or
-          feedback, don't hesitate to reach out by replying directly to{" "}
-          <a href="mailto:lakshb.work@gmail.com" style={link}>
-            this email {""}
-          </a>
-          — I'm here to listen!
-        </Text>
-        <Text style={paragraph}>
-          You can also follow me on X/Twitter for updates:{" "}
-          <a href="https://x.com/blakssh" style={link}>
-            @blakssh
-          </a>
+          Unser Team wird sich in Kürze bei Ihnen melden. Bei Fragen können Sie uns jederzeit
+          direkt per E-Mail kontaktieren.
         </Text>
         <Text style={signOff}>
-          Best regards,
+          Beste Grüße,
           <br />
-          Lakshay
+          Das praedia Team
         </Text>
         <Hr style={hr} />
         <Text style={footer}>
-          You received this email because you signed up for the Notion waitlist.
-          If you believe this is a mistake, feel free to ignore this email.
+          Sie haben diese E-Mail erhalten, weil Sie sich für praedia registriert haben.
+          Falls dies ein Fehler war, können Sie diese E-Mail ignorieren.
         </Text>
       </Container>
     </Body>
   </Html>
 );
 
-NotionWaitlistEmail.PreviewProps = {
-  userFirstname: "Tyler",
+PraediaEmail.PreviewProps = {
+  userFirstname: "Max",
 } as EmailProps;
 
-export default NotionWaitlistEmail;
+export default PraediaEmail;
 
 const main = {
   background: "linear-gradient(-225deg, #FFE29F 0%, #FFA99F 48%, #FF719A 100%)",
