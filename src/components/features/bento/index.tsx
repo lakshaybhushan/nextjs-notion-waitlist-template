@@ -128,7 +128,7 @@ const bentoItems: BentoItem[] = [
         className:
             "md:col-span-2 border-t border-neutral-200/60 dark:border-neutral-800/60",
         textClassName: "text-3xl md:text-[48px]",
-        contentClassName: "justify-end",
+        contentClassName: "justify-end pt-36 md:pt-0",
     },
     {
         id: "security-features",

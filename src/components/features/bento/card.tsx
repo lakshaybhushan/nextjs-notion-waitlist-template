@@ -191,7 +191,7 @@ export const BentoCard = ({ item }: { item: BentoItem }) => {
                     )}
 
                     {item.feature && (
-                        <div className={cn("h-full", item.feature !== "calEmbed" && "mt-12")}>
+                        <div className={cn("h-full", item.feature !== "calEmbed" && item.feature !== 'threeSections' && "mt-12")}>
                             {/* Feature specific content */}
                             {item.feature === "spotlight" &&
                                 item.spotlightItems && (
@@ -225,7 +225,7 @@ export const BentoCard = ({ item }: { item: BentoItem }) => {
                             )}
 
                             {item.feature === "threeSections" && item.subsections && (
-                                <div className="mt-8 md:mt-12 flex flex-col md:flex-row w-full gap-8 md:gap-32">
+                                <div className="mt-0 md:mt-12 flex flex-col md:flex-row w-full gap-8 md:gap-32">
                                     {item.subsections.map((section, index) => (
                                         <div key={index} className="w-full md:w-1/4 flex flex-col items-start text-left">
                                             <h4 className="font-semibold text-[24px] tracking-[-0.4px] text-white">{section.title}</h4>
