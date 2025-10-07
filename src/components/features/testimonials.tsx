@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "../ui/button";
-import { Sparkles } from "lucide-react";
 
 // Smoother counter hook with easing
 const useCountUp = (end: number, duration: number = 3, delay: number = 0.5) => {
@@ -71,7 +69,6 @@ const testimonials = [
     },
 ];
 
-const categories = ["Rendite", "Leerstand", "Vorkenntnis"];
 
 export default function Testimonials() {
     const [index, setIndex] = useState(0);
@@ -104,24 +101,6 @@ export default function Testimonials() {
                                     <span className="text-neutral-400"> {testimonials[index].quote}</span>
                                 </motion.div>
                             </AnimatePresence>
-                        </div>
-                        <div className="flex flex-wrap gap-2">
-                            {categories.map((category, i) => (
-                                <motion.div
-                                    key={category}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.5, delay: 0.1 * i }}
-                                >
-                                    <Button
-                                        variant="secondary"
-                                        size="sm"
-                                        className="rounded-lg bg-neutral-800 text-neutral-400 hover:bg-neutral-700 border border-neutral-700"
-                                    >
-                                        {category}
-                                    </Button>
-                                </motion.div>
-                            ))}
                         </div>
                     </div>
 
