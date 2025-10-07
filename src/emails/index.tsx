@@ -21,11 +21,11 @@ export const PraediaEmail = ({ userFirstname }: EmailProps) => (
     <Body style={main}>
       <Container style={container}>
         <Img
-          src={`https://praedia.com/logo.svg`}
-          width="220"
-          height="100"
+          className="mx-auto my-0"
+          src={`https://praedia.com/brand-asset-01.svg`}
           alt="praedia Logo"
-          style={logo}
+          width="120"
+          height="24"
         />
         <Text style={greeting}>Hallo {userFirstname},</Text>
         <Text style={paragraph}>

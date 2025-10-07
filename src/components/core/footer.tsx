@@ -87,9 +87,11 @@ export default function Footer() {
 
                 {/* Logo and Slogan Column (Now on the right) */}
                 <div className="text-right">
-                    <div className="flex justify-end items-center gap-2">
-                        <Image src="/logo.svg" alt="praedia Logo" width={32} height={32} />
-                        <span className="text-xl font-semibold text-white">praedia</span>
+                    <div className="flex items-center gap-4">
+                        <Link href="/">
+                            <Image src="/brand-asset-01.svg" alt="praedia Logo" width={32} height={32} />
+                        </Link>
+                        <p className="text-xl font-semibold">praedia</p>
                     </div>
                      <p className="mt-4 max-w-xs text-sm ml-auto">
                         Die KI-gestützte Plattform für bessere Immobilieninvestitionen.

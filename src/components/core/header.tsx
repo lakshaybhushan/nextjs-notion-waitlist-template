@@ -48,7 +48,7 @@ export default function Header() {
       <div className="flex w-full max-w-7xl mx-auto items-center justify-between p-4">
         <motion.div variants={itemVariants} className="flex items-center gap-6">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.svg" alt="logo" width={24} height={24} />
+            <Image src="/brand-asset-01.svg" alt="logo" width={24} height={24} />
             <span className="font-bold text-white">praedia</span>
           </Link>
           <div className="flex items-center gap-4">

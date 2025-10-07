@@ -21,7 +21,7 @@ export default function Video() {
               muted
               playsInline
             >
-              <source src="/demo-video.mp4" type="video/mp4" />
+              <source src="/v-01.mp4" type="video/mp4" />
               Ihr Browser unterstützt das Video-Tag nicht.
             </video>
           </div>

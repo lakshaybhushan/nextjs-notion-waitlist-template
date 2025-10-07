@@ -21,9 +21,9 @@ Vollständige Liste aller relevanten Dateien, Komponenten und Funktionen vor der
 - `app/layout.tsx`: Root-Layout der Anwendung.
 - `app/page.tsx`: Hauptseite der Anwendung.
 - `app/globals.css`: Globale CSS-Stile.
-- `app/datenschutz/page.tsx`: Datenschutz-Seite.
+- `app/datenschutz/page.tsx`: Seite für die Datenschutzerklärung.
 - `app/impressum/page.tsx`: Impressum-Seite.
-- `app/api/mail/route.ts`: API-Endpunkt für den E-Mail-Versand.
+- `app/api/send-confirmation/route.ts`: API-Endpunkt für den E-Mail-Versand.
 
 ### Komponenten (`src/components`)
 - **Core Components (`core/`)**

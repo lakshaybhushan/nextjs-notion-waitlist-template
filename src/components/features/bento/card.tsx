@@ -117,8 +117,8 @@ export const BentoCard = ({ item }: { item: BentoItem }) => {
                             </h3>
                             <div className="flex justify-center items-center gap-8 mb-8">
                                 <Image 
-                                    src="/Sebastian Sales.png" 
-                                    alt="Sebastian Sales Manager" 
+                                    src="/testimonial-01.png" 
+                                    alt="Sebastian Sales" 
                                     width={120} 
                                     height={120} 
                                     className="rounded-full"
