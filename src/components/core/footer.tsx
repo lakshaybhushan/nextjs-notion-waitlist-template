@@ -33,9 +33,9 @@ export default function Footer() {
 
     return (
         <footer className="text-neutral-400 px-4 pt-0 sm:px-6 lg:px-4 w-full">
-            <div className="max-w-6xl mx-auto flex flex-wrap justify-between items-start gap-12">
+            <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:flex-wrap justify-between items-start gap-8 md:gap-12">
                     {/* Links Column */}
-                    <div className="flex gap-16">
+                    <div className="flex flex-col md:flex-row gap-8 md:gap-16 w-full md:w-auto">
                         {/* Column 1: Features */}
                         <div>
                             <h3 className="text-sm font-semibold text-neutral-200 tracking-wide">Features</h3>
@@ -85,15 +85,15 @@ export default function Footer() {
                         </div>
                 </div>
 
-                {/* Logo and Slogan Column (Now on the right) */}
-                <div className="text-right">
+                {/* Logo and Slogan Column */}
+                <div className="text-left md:text-right w-full md:w-auto">
                     <div className="flex items-center gap-4">
                         <Link href="/">
                             <Image src="/brand-asset-01.svg" alt="praedia Logo" width={32} height={32} />
                         </Link>
-                        <p className="text-xl font-semibold">praedia</p>
+                        <p className="text-xl font-semibold text-white">praedia</p>
                     </div>
-                     <p className="mt-4 max-w-xs text-sm ml-auto">
+                     <p className="mt-4 max-w-xs text-sm ml-0 md:ml-auto">
                         Die KI-gestützte Plattform für bessere Immobilieninvestitionen.
                     </p>
                 </div>

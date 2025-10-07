@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/lib/animation-variants";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import React from "react";
+import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -38,6 +39,8 @@ const features: { title: string; href: string }[] = [
 ]
 
 export default function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <motion.div
       variants={containerVariants}
@@ -46,11 +49,16 @@ export default function Header() {
       className="fixed left-0 top-0 z-50 w-full border-b border-white/10 backdrop-blur-sm"
     >
       <div className="flex w-full max-w-7xl mx-auto items-center justify-between p-4">
-        <motion.div variants={itemVariants} className="flex items-center gap-6">
+        {/* Logo */}
+        <motion.div variants={itemVariants}>
           <Link href="/" className="flex items-center gap-2">
             <Image src="/brand-asset-01.svg" alt="logo" width={24} height={24} />
             <span className="font-bold text-white">praedia</span>
           </Link>
+        </motion.div>
+
+        {/* Desktop Navigation */}
+        <motion.div variants={itemVariants} className="hidden md:flex items-center gap-6">
           <div className="flex items-center gap-4">
             <NavigationMenu>
                 <NavigationMenuList>
@@ -74,13 +82,60 @@ export default function Header() {
                 Pricing
             </Link>
           </div>
-        </motion.div>
-        <motion.div variants={itemVariants}>
           <Button asChild className="bg-white text-black hover:bg-neutral-200 rounded-lg font-semibold">
             <Link href="#call-booking">Mit Sales sprechen</Link>
           </Button>
         </motion.div>
+
+        {/* Mobile Menu Button */}
+        <motion.div variants={itemVariants} className="md:hidden">
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="text-white p-2"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </motion.div>
       </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="md:hidden bg-black/95 backdrop-blur-lg border-t border-white/10"
+        >
+          <div className="flex flex-col p-4 space-y-4">
+            <div className="flex flex-col space-y-2">
+              <span className="text-sm font-semibold text-white">Features</span>
+              {features.map((feature) => (
+                <Link
+                  key={feature.title}
+                  href={feature.href}
+                  className="text-neutral-400 hover:text-white transition-colors pl-4 py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {feature.title}
+                </Link>
+              ))}
+            </div>
+            <Link
+              href="#pricing"
+              className="text-neutral-400 hover:text-white transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Pricing
+            </Link>
+            <Button asChild className="bg-white text-black hover:bg-neutral-200 rounded-lg font-semibold w-full">
+              <Link href="#call-booking" onClick={() => setMobileMenuOpen(false)}>
+                Mit Sales sprechen
+              </Link>
+            </Button>
+          </div>
+        </motion.div>
+      )}
     </motion.div>
   );
 }

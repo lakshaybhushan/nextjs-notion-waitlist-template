@@ -19,7 +19,7 @@ export default function Form() {
 
   return (
     <motion.div
-      className="mt-12 flex w-full max-w-md flex-row gap-4"
+      className="mt-12 flex w-full max-w-sm md:max-w-md flex-col md:flex-row gap-4 px-4 md:px-0"
       variants={containerVariants}
       initial="hidden"
       animate="visible">

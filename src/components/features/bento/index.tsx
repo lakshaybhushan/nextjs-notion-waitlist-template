@@ -84,8 +84,8 @@ const bentoItems: BentoItem[] = [
         cta: "Jetzt loslegen!",
         className:
             "md:col-span-1 border-t border-neutral-200/60 dark:border-neutral-800/60",
-        textClassName: "text-4xl",
-        descriptionClassName: "block mt-4 text-2xl",
+        textClassName: "text-3xl md:text-4xl",
+        descriptionClassName: "block mt-2 text-lg md:text-2xl",
         contentClassName: "!justify-start items-start h-full",
     },
     {
@@ -127,7 +127,7 @@ const bentoItems: BentoItem[] = [
         description: "",
         className:
             "md:col-span-2 border-t border-neutral-200/60 dark:border-neutral-800/60",
-        textClassName: "text-[48px]",
+        textClassName: "text-3xl md:text-[48px]",
         contentClassName: "justify-end",
     },
     {
@@ -207,20 +207,20 @@ export default function BentoGrid() {
                             className={cn(
                                 item.className,
                                 item.id === "how-it-works"
-                                    ? "min-h-[750px]"
+                                    ? "min-h-[600px] md:min-h-[750px]"
                                     : item.id === "new-section"
-                                      ? "min-h-[950px]"
+                                      ? "min-h-[700px] md:min-h-[950px]"
                                       : item.id === "security-title"
-                                        ? "min-h-[300px]"
+                                        ? "min-h-[250px] md:min-h-[300px]"
                                         : item.id === "security-features"
-                                          ? "min-h-[400px]"
+                                          ? "min-h-[350px] md:min-h-[400px]"
                                           : item.id === "pricing"
-                                            ? "min-h-[300px]"
+                                            ? "min-h-[250px] md:min-h-[300px]"
                                             : item.id === "pricing-tiers"
-                                              ? "min-h-[500px]"
+                                              ? "min-h-[450px] md:min-h-[500px]"
                                               : item.id === "call-booking"
-                                                ? "min-h-[600px]"
-                                                : "min-h-[500px]",
+                                                ? "min-h-[800px] md:min-h-[600px]"
+                                                : "min-h-[400px] md:min-h-[500px]",
                             )}
                         >
                             <BentoCard item={item} />

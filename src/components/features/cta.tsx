@@ -20,16 +20,16 @@ export default function CTA() {
         </div>
       </motion.div>
 
-      <motion.div variants={itemVariants}>
+      <motion.div variants={itemVariants} className="px-4">
         <TextBlur
-          className="text-center text-6xl font-black tracking-tighter sm:text-6xl whitespace-nowrap"
+          className="text-center text-4xl md:text-6xl font-black tracking-tighter md:whitespace-nowrap"
           text={"Immobilien analysiert in Sekunden."}
         />
       </motion.div>
 
       <motion.div variants={itemVariants}>
         <TextBlur
-          className="mx-auto max-w-[42rem] pt-1.5 text-center text-base text-zinc-300 sm:text-lg"
+          className="mx-auto max-w-[42rem] pt-1.5 text-center text-base md:text-lg text-zinc-300"
           text="Praedia verwandelt Off-Market-Deals in Sekundenschnelle in fertige Analysen, Präsentationen und Verkaufstools."
           duration={0.8}
         />

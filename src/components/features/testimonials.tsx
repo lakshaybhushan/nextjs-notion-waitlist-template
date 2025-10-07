@@ -48,7 +48,7 @@ const AnimatedCounter = () => {
     };
 
     return (
-        <p className="text-[40px] font-semibold text-black bg-white tracking-[-2.4px] px-2">
+        <p className="text-[40px] md:text-[40px] font-semibold text-black bg-white tracking-[-2.4px] px-2">
             €{formatNumber(count)}
         </p>
     );
@@ -84,10 +84,10 @@ export default function Testimonials() {
     return (
         <section className="pt-24 pb-2 sm:pt-32 sm:pb-2">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
                     {/* Left Column */}
-                    <div className="md:col-span-2 flex flex-col justify-between min-h-[12rem] pl-12">
-                        <div className="relative h-24">
+                    <div className="md:col-span-2 flex flex-col justify-between min-h-[12rem] pl-4 md:pl-12">
+                        <div className="relative h-32 md:h-24">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={index}
@@ -95,7 +95,7 @@ export default function Testimonials() {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
                                     transition={{ duration: 0.5 }}
-                                    className="text-3xl absolute inset-0"
+                                    className="text-2xl md:text-3xl absolute inset-0"
                                 >
                                     <span className="font-normal text-white">{testimonials[index].company}</span> 
                                     <span className="text-neutral-400"> {testimonials[index].quote}</span>
@@ -109,11 +109,11 @@ export default function Testimonials() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
-                        className="flex flex-col justify-between items-start"
+                        className="flex flex-col justify-between items-start pl-4 md:pl-0"
                     >
                         <div>
                             <AnimatedCounter />
-                            <p className="text-lg text-neutral-400 mt-2">
+                            <p className="text-base md:text-lg text-neutral-400 mt-2">
                                 in Transaktionsvolumen analysiert
                             </p>
                         </div>

@@ -63,7 +63,7 @@ export const BentoCard = ({ item }: { item: BentoItem }) => {
                 id={item.id}
                 className={cn(
                     "relative flex flex-col h-full scroll-mt-32 transition-all duration-500 ease-out",
-                    item.feature === "calEmbed" ? "p-12" : "p-12" // Ensure padding for calEmbed
+                    item.feature === "calEmbed" ? "p-6 md:p-12" : "p-6 md:p-12"
                 )}
             >
                 {["new-section", "security-title", "security-features", "call-booking"].includes(item.id) && (
@@ -112,19 +112,19 @@ export const BentoCard = ({ item }: { item: BentoItem }) => {
                     {/* Render title for calEmbed here, then hide the generic one */}
                     {item.feature === "calEmbed" && (
                         <>
-                            <h3 className="text-[48px] font-semibold tracking-[-2.4px] text-center mb-8 mt-12">
+                            <h3 className="text-[32px] md:text-[48px] font-semibold tracking-[-2.4px] text-center mb-6 md:mb-8 mt-8 md:mt-12">
                                 Buchen Sie eine Demo
                             </h3>
-                            <div className="flex justify-center items-center gap-8 mb-8">
+                            <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 mb-6 md:mb-8">
                                 <Image 
                                     src="/testimonial-01.png" 
                                     alt="Sebastian Sales" 
-                                    width={120} 
-                                    height={120} 
-                                    className="rounded-full"
+                                    width={100} 
+                                    height={100} 
+                                    className="rounded-full md:w-[120px] md:h-[120px]"
                                 />
                                 <blockquote className="p-4 border-l-4 border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 max-w-md">
-                                    <p className="text-xl italic text-neutral-700 dark:text-neutral-300">
+                                    <p className="text-base md:text-xl italic text-neutral-700 dark:text-neutral-300">
                                         "Ich bin überzeugt, dass wir Ihre Immobilienanalyse auf ein neues Level heben können. Lassen Sie uns in einem kurzen Gespräch herausfinden, wie praedia Sie dabei unterstützen kann."
                                     </p>
                                     <footer className="mt-4 text-right">
@@ -148,26 +148,26 @@ export const BentoCard = ({ item }: { item: BentoItem }) => {
                                     <div>
                                         <h3
                                             className={cn(
-                                                "max-w-lg text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100",
+                                                "max-w-lg text-xl md:text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100",
                                                 item.textClassName,
                                                 item.id === "new-section" &&
-                                                    "text-center text-[48px] max-w-none tracking-[-2.4px]",
-                                                item.id === "security-title" && "text-center max-w-none",
+                                                    "text-left text-3xl md:text-[48px] max-w-none",
+                                                item.id === "security-title" && "text-left max-w-none",
                                             )}
                                         >
                                             {item.title}
                                         </h3>
                                         <p
                                             className={cn(
-                                                "font-normal text-neutral-600 dark:text-neutral-400 text-2xl",
+                                                "font-normal text-neutral-600 dark:text-neutral-400 text-lg md:text-2xl",
                                                 item.descriptionClassName,
-                                                item.id === "new-section" && "text-center text-[20px] leading-[36px]",
+                                                item.id === "new-section" && "text-center text-lg md:text-[20px] leading-[28px] md:leading-[36px]",
                                             )}
                                         >
                                             {item.description}
                                         </p>
                                         {item.cta && (
-                                            <div className="mt-24">
+                                            <div className="mt-12 md:mt-24">
                                                 <button 
                                                     onClick={() => {
                                                         const calSection = document.getElementById('call-booking');
@@ -175,11 +175,11 @@ export const BentoCard = ({ item }: { item: BentoItem }) => {
                                                             calSection.scrollIntoView({ behavior: 'smooth' });
                                                         }
                                                     }}
-                                                    className="bg-black border border-[#1b1b1c] text-white font-semibold py-4 px-8 rounded-full text-[48px] tracking-[-2.88px] transition-colors hover:bg-gray-800 flex items-center gap-4"
+                                                    className="bg-black border border-[#1b1b1c] text-white font-semibold py-3 md:py-4 px-6 md:px-8 rounded-full text-[28px] md:text-[48px] tracking-[-2.88px] transition-colors hover:bg-gray-800 flex items-center gap-2 md:gap-4"
                                                 >
                                                     {item.cta}
-                                                    <span className="bg-white rounded-full p-2">
-                                                        <ArrowRight className="h-8 w-8 text-black" />
+                                                    <span className="bg-white rounded-full p-1.5 md:p-2">
+                                                        <ArrowRight className="h-5 w-5 md:h-8 md:w-8 text-black" />
                                                     </span>
                                                 </button>
                                             </div>
@@ -206,14 +206,15 @@ export const BentoCard = ({ item }: { item: BentoItem }) => {
                                         <Image
                                             src={`/${item.svgName}`}
                                             alt="Feature illustration"
-                                            width={1200}
-                                            height={720}
+                                            width={800}
+                                            height={480}
+                                            className="w-full md:w-auto max-w-[80%] md:max-w-none h-auto"
                                         />
                                     </div>
                                     {item.subsections && (
-                                        <div className="mt-12 flex w-full gap-32">
+                                        <div className="mt-8 md:mt-12 flex flex-col md:flex-row w-full gap-8 md:gap-32">
                                             {item.subsections.map((section, index) => (
-                                                <div key={index} className="w-1/4 flex flex-col items-start text-left">
+                                                <div key={index} className="w-full md:w-1/4 flex flex-col items-start text-left">
                                                     <h4 className="font-semibold text-[20px] tracking-[-0.4px] text-white">{section.title}</h4>
                                                     <p className="text-neutral-400 mt-2 text-[16px] tracking-[-0.4px]">{section.description}</p>
                                                 </div>
@@ -224,9 +225,9 @@ export const BentoCard = ({ item }: { item: BentoItem }) => {
                             )}
 
                             {item.feature === "threeSections" && item.subsections && (
-                                <div className="mt-12 flex w-full gap-32">
+                                <div className="mt-8 md:mt-12 flex flex-col md:flex-row w-full gap-8 md:gap-32">
                                     {item.subsections.map((section, index) => (
-                                        <div key={index} className="w-1/4 flex flex-col items-start text-left">
+                                        <div key={index} className="w-full md:w-1/4 flex flex-col items-start text-left">
                                             <h4 className="font-semibold text-[24px] tracking-[-0.4px] text-white">{section.title}</h4>
                                             <p className="text-neutral-400 mt-2 text-[20px] tracking-[-0.4px]">{section.description}</p>
                                         </div>
