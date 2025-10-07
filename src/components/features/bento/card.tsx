@@ -107,7 +107,7 @@ export const BentoCard = ({ item }: { item: BentoItem }) => {
                         })
                     }}
                 >
-                    {item.id === "new-section" && <div className="h-1/6 flex-shrink-0" />}
+                    {item.id === "new-section" && <div className="h-0 md:h-1/6 flex-shrink-0" />}
                     
                     {/* Render title for calEmbed here, then hide the generic one */}
                     {item.feature === "calEmbed" && (
