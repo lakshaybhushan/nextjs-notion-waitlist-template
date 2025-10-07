@@ -1,79 +1,44 @@
-import Link from "next/link";
-import { ChangeEvent } from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaXTwitter } from "react-icons/fa6";
-import { Input } from "@/components/ui/input";
-import { FaArrowRightLong } from "react-icons/fa6";
-import { EnhancedButton } from "@/components/ui/enhanced-btn";
+import { Button } from "@/components/ui/button";
 import { containerVariants, itemVariants } from "@/lib/animation-variants";
 
-interface FormProps {
-  name: string;
-  email: string;
-  handleNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleEmailChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: () => void;
-  loading: boolean;
-}
+export default function Form() {
+  const scrollToCalEmbed = () => {
+    const calSection = document.getElementById('call-booking');
+    if (calSection) {
+      calSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-export default function Form({
-  name,
-  email,
-  handleNameChange,
-  handleEmailChange,
-  handleSubmit,
-  loading,
-}: FormProps) {
+  const scrollToHowItWorks = () => {
+    const howItWorksSection = document.getElementById('how-it-works');
+    if (howItWorksSection) {
+      howItWorksSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <motion.div
-      className="mt-6 flex w-full max-w-[24rem] flex-col gap-2"
+      className="mt-12 flex w-full max-w-md flex-row gap-4"
       variants={containerVariants}
       initial="hidden"
       animate="visible">
-      <motion.div variants={itemVariants}>
-        <Input
-          type="text"
-          placeholder="Your Name"
-          value={name}
-          onChange={handleNameChange}
-        />
+      <motion.div variants={itemVariants} className="flex-1">
+        <Button 
+          onClick={scrollToCalEmbed}
+          className="w-full bg-white text-black hover:bg-neutral-200 rounded-lg font-semibold py-3 px-3 text-sm"
+        >
+          Mit Sales sprechen
+        </Button>
       </motion.div>
-      <motion.div variants={itemVariants}>
-        <Input
-          type="email"
-          placeholder="Your Email Address"
-          value={email}
-          onChange={handleEmailChange}
-        />
-      </motion.div>
-      <motion.div variants={itemVariants}>
-        <EnhancedButton
-          variant="expandIcon"
-          Icon={FaArrowRightLong}
-          onClick={handleSubmit}
-          iconPlacement="right"
-          className="mt-2 w-full"
-          disabled={loading}>
-          {loading ? "Loading..." : "Join Waitlist!"}
-        </EnhancedButton>
-      </motion.div>
-      <motion.div
-        variants={itemVariants}
-        className="mt-4 flex w-full items-center justify-center gap-1 text-muted-foreground">
-        <p>For any queries, reach out at </p>
-        <Link
-          href="https://x.com/blakssh"
-          rel="noopener noreferrer"
-          target="_blank">
-          <FaXTwitter className="h-4 w-4 transition-all duration-200 ease-linear hover:text-yellow-200" />
-        </Link>
-        or
-        <Link
-          href="https://github.com/lakshaybhushan"
-          rel="noopener noreferrer"
-          target="_blank">
-          <FaGithub className="ml-0.5 h-5 w-5 transition-all duration-200 ease-linear hover:text-yellow-200" />
-        </Link>
+      <motion.div variants={itemVariants} className="flex-1">
+        <Button 
+          onClick={scrollToHowItWorks}
+          variant="outline"
+          className="w-full border-2 border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white rounded-lg font-semibold py-3 px-3 text-sm"
+        >
+          How does it work?
+        </Button>
       </motion.div>
     </motion.div>
   );
