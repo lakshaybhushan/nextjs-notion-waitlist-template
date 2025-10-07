@@ -73,9 +73,10 @@ export default function DatenschutzPage() {
                                 Hauptstraße 23<br />
                                 40789 Monheim am Rhein
                             </p>
-                            <p>
-                                Telefon: +49 (0) 123 44 55 66<br />
-                                E-Mail: info@beispielfirma.de
+                            <p className="text-lg text-gray-400">
+                                Telefon: +49 123 456789
+                                <br />
+                                E-Mail: jamil.hashemi(at)nyka(dot)com
                             </p>
                             <p>Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z. B. Namen, E-Mail-Adressen o. Ä.) entscheidet.</p>
                             

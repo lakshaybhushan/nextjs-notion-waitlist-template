@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Disallow crawling of API endpoints for all bots
+Disallow: /api/

@@ -15,9 +15,10 @@ const redis = new Redis({
 });
 
 const ratelimit = new Ratelimit({
-  redis,
-  // 2 requests per minute from the same IP address in a sliding window of 1 minute duration which means that the window slides forward every second and the rate limit is reset every minute for each IP address.
-  limiter: Ratelimit.slidingWindow(2, "1 m"),
+  redis: Redis.fromEnv(),
+  limiter: Ratelimit.slidingWindow(5, "10 s"),
+  analytics: true,
+  prefix: "@upstash/ratelimit",
 });
 
 export async function POST(request: NextRequest, response: NextResponse) {
