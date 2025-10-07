@@ -161,7 +161,7 @@ export const BentoCard = ({ item }: { item: BentoItem }) => {
                                             className={cn(
                                                 "font-normal text-neutral-600 dark:text-neutral-400 text-lg md:text-2xl",
                                                 item.descriptionClassName,
-                                                item.id === "new-section" && "text-center text-lg md:text-[20px] leading-[28px] md:leading-[36px]",
+                                                item.id === "new-section" && "text-left md:text-center text-lg md:text-[20px] leading-[28px] md:leading-[36px]",
                                             )}
                                         >
                                             {item.description}

@@ -207,7 +207,7 @@ export default function BentoGrid() {
                             className={cn(
                                 item.className,
                                 item.id === "how-it-works"
-                                    ? "min-h-[600px] md:min-h-[750px]"
+                                    ? "min-h-[400px] md:min-h-[750px]"
                                     : item.id === "new-section"
                                       ? "min-h-[700px] md:min-h-[950px]"
                                       : item.id === "security-title"

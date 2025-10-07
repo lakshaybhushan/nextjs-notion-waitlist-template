@@ -84,10 +84,10 @@ export default function Testimonials() {
     return (
         <section className="pt-24 pb-2 sm:pt-32 sm:pb-2">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-16">
                     {/* Left Column */}
-                    <div className="md:col-span-2 flex flex-col justify-between min-h-[12rem] pl-4 md:pl-12">
-                        <div className="relative h-32 md:h-24">
+                    <div className="md:col-span-2 flex flex-col justify-center md:justify-between md:min-h-[12rem] pl-4 md:pl-12">
+                        <div className="relative h-20 md:h-24">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={index}
