@@ -37,7 +37,7 @@ export default function Form() {
           variant="outline"
           className="w-full border-2 border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white rounded-lg font-semibold py-3 px-3 text-sm"
         >
-          How does it work?
+          So funktioniert's
         </Button>
       </motion.div>
     </motion.div>
