@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Toaster } from "@/components/ui/sonner";
-import { Analytics } from "@vercel/analytics/react";
+
+const geist = GeistSans;
 
 export const metadata: Metadata = {
   title: "praedia | Immobilien analysieren in Sekunden.",
@@ -19,7 +20,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${GeistMono.variable} dark`}
+      className={`${geist.variable} ${GeistMono.variable} dark`}
       suppressHydrationWarning
     >
       <meta property="og:image" content="/opengraph-image.png" />
@@ -38,10 +39,9 @@ export default function RootLayout({
       <meta name="twitter:image:type" content="image/png" />
       <meta name="twitter:image:width" content="1280" />
       <meta name="twitter:image:height" content="832" />
-      <body>
-        {children}
-        <Toaster richColors position="top-center" />
-        <Analytics />
+      <body className={geist.className}>
+        <main>{children}</main>
+        <Toaster />
       </body>
     </html>
   );
