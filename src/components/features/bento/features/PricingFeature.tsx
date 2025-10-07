@@ -7,7 +7,7 @@ export const PricingFeature = () => {
     const description = "praedia unterstützt Teams jeder Größe mit einer Preisgestaltung, die mitwächst.";
 
     return (
-        <div className="relative text-left w-full px-4">
+        <div className="relative text-left w-full">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
