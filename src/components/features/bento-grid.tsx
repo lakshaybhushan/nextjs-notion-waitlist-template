@@ -1116,7 +1116,15 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                         </p>
                                         {item.cta && (
                                             <div className="mt-24">
-                                                <button className="bg-black border border-[#1b1b1c] text-white font-semibold py-4 px-8 rounded-full text-[48px] tracking-[-2.88px] transition-colors hover:bg-gray-800 flex items-center gap-4">
+                                                <button 
+                                                    onClick={() => {
+                                                        const calSection = document.getElementById('call-booking');
+                                                        if (calSection) {
+                                                            calSection.scrollIntoView({ behavior: 'smooth' });
+                                                        }
+                                                    }}
+                                                    className="bg-black border border-[#1b1b1c] text-white font-semibold py-4 px-8 rounded-full text-[48px] tracking-[-2.88px] transition-colors hover:bg-gray-800 flex items-center gap-4"
+                                                >
                                                     {item.cta}
                                                     <span className="bg-white rounded-full p-2">
                                                         <ArrowRight className="h-8 w-8 text-black" />
