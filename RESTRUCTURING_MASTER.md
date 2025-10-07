@@ -1,224 +1,104 @@
-# Code Base Restructuring: Master Tracking
+# Code Base Restructuring: Master Document
 
-Dieses Dokument dient als zentrale Anlaufstelle für die Planung, Durchführung und Dokumentation der Codebase-Umstrukturierung gemäß `refactoring.md`.
+Dieses Dokument dient als zentrale Steuerung und Dokumentation für die gesamte Code-Restrukturierung.
 
-## 0. Setup und Dokumentation
+## 0. Planungsübersicht
 
-- **Master-Datei**: `RESTRUCTURING_MASTER.md` (dieses Dokument) wurde erstellt.
-- **Prinzipien**: Zero Tolerance für Feature-Verlust. Implementierung in kleinen, validierten Batches. Kontinuierliche Dokumentation.
+- **Phase 1: Bestandsaufnahme & Risiko-Assessment** - Abgeschlossen
+- **Phase 2: Ordnerstruktur-Analyse & Soll-Konzept** - In Arbeit
+- **Phase 3: Datei-Refactoring** - Pendent
+- **Phase 4: Strukturverbesserungen** - Pendent
+- **Phase 5: Umsetzungsplan** - Pendent
+- **Phase 6: Validierung** - Pendent
 
 ---
 
 ## 1. Komponenten-Inventar
 
-Vollständige Liste aller bestehenden Komponenten, Funktionen und Features.
+Vollständige Liste aller relevanten Dateien, Komponenten und Funktionen vor der Umstrukturierung.
 
-### `app/`
-- **`api/mail/route.ts`**: API-Endpunkt für den E-Mail-Versand.
-- **`api/notion/route.ts`**: API-Endpunkt für die Anbindung an die Notion-Datenbank.
-- **`favicon.ico`**: Favicon der Webseite.
-- **`globals.css`**: Globale CSS-Stile.
-- **`layout.tsx`**: Hauptlayout der Next.js-Anwendung.
-- **`opengraph-image.png`**: Bild für Open Graph Metadaten.
-- **`page.tsx`**: Hauptseite der Anwendung.
-- **`twitter-image.png`**: Bild für Twitter Cards.
+### App-Struktur (`src/app`)
+- `app/layout.tsx`: Root-Layout der Anwendung.
+- `app/page.tsx`: Hauptseite der Anwendung.
+- `app/globals.css`: Globale CSS-Stile.
+- `app/datenschutz/page.tsx`: Datenschutz-Seite.
+- `app/impressum/page.tsx`: Impressum-Seite.
+- `app/api/mail/route.ts`: API-Endpunkt für den E-Mail-Versand.
 
-### `components/`
-- **`cta.tsx`**: Call-to-Action-Sektion.
-- **`footer.tsx`**: Footer der Seite.
-- **`form.tsx`**: E-Mail-Eingabeformular.
-- **`grid-background.tsx`**: Hintergrund mit Gittermuster.
-- **`header.tsx`**: Header der Seite.
-- **`kokonutui/bento-grid.tsx`**: Bento-Grid-Layout zur Feature-Darstellung.
-- **`testimonials.tsx`**: Testimonials-Sektion.
-- **`ui/`**: Allgemeine UI-Komponenten.
-  - **`button.tsx`**: Standard-Button.
-  - **`enhanced-btn.tsx`**: Button mit erweitertem Styling.
-  - **`input.tsx`**: Standard-Eingabefeld.
-  - **`shimmer-text.tsx`**: Text mit Schimmer-Effekt.
-  - **`sonner.tsx`**: Komponente für Benachrichtigungen (Toasts).
-  - **`text-blur.tsx`**: Text mit Weichzeichner-Effekt.
+### Komponenten (`src/components`)
+- **Core Components (`core/`)**
+  - `footer.tsx`: Footer der Seite.
+  - `header.tsx`: Header der Seite.
+- **Feature Components (`features/`)**
+  - `bento-grid.tsx`: Komplexes Bento-Grid-Layout zur Feature-Darstellung.
+  - `cta.tsx`: Call-to-Action Sektion im Hero-Bereich.
+  - `form.tsx`: CTA-Buttons ("Mit Sales sprechen", "How does it work?").
+  - `testimonials.tsx`: Testimonials-Sektion mit rotierendem Text.
+  - `video.tsx`: Komponente zur Einbettung des Demo-Videos.
+- **UI Components (`ui/`)**
+  - `button.tsx`: Shadcn UI Button-Komponente.
+  - `grid-background.tsx`: Animiertes Gitter im Hintergrund.
+  - `navigation-menu.tsx`: Shadcn UI Navigationsmenü.
+  - `shimmer-text.tsx`: Animierter Schimmer-Effekt für Text.
+  - `sonner.tsx`: Komponente für Toast-Benachrichtigungen.
+  - `text-blur.tsx`: Animierter Text-Unschärfe-Effekt.
 
-### `emails/`
-- **`index.tsx`**: E-Mail-Template (wahrscheinlich mit React Email).
+### Hilfsfunktionen & Konfiguration (`src/lib`)
+- `lib/animation-variants.ts`: Framer Motion Animationsvarianten.
+- `lib/utils.ts`: Hilfsfunktionen (z.B. `cn` für `clsx`).
 
-### `lib/`
-- **`animation-variants.ts`**: Framer Motion Animationsvarianten.
-- **`utils.ts`**: Hilfsfunktionen (z.B. `cn` für `clsx`).
-
-### `public/`
-- Diverse Vektor- und Bilddateien für Logos und die UI.
-
-### Konfigurationsdateien
-- `next.config.mjs`, `postcss.config.mjs`, `tailwind.config.ts`, `tsconfig.json`, `components.json`, `package.json`, etc.
+### E-Mails (`src/emails`)
+- `index.tsx`: React-E-Mail-Template.
 
 ---
 
 ## 2. Abhängigkeits-Matrix
 
-Detaillierte Map aller Import/Export Beziehungen.
-
-- **`app/page.tsx`**:
-  - `sonner` -> `toast`
-  - `react` -> `useState`
-  - `@/components/cta`
-  - `@/components/form`
-  - `@/components/header`
-  - `@/components/footer`
-  - `@/components/kokonutui/bento-grid`
-  - `next/image`
-  - `framer-motion`
-  - `@/components/testimonials`
-  - `@/components/grid-background`
-- **`app/layout.tsx`**:
-  - `geist/font/sans` -> `GeistSans`
-  - `geist/font/mono` -> `GeistMono`
-  - `@/components/ui/sonner` -> `Toaster`
-  - `@vercel/analytics/react` -> `Analytics`
-- **`components/cta.tsx`**:
-  - `framer-motion`
-  - `@/components/ui/text-blur`
-  - `@/components/ui/shimmer-text`
-  - `@/lib/animation-variants`
-- **`components/form.tsx`**:
-  - `next/link`
-  - `react` -> `ChangeEvent`
-  - `framer-motion`
-  - `react-icons/fa6`
-  - `@/components/ui/input`
-  - `@/components/ui/enhanced-btn`
-  - `@/lib/animation-variants`
-- **`components/header.tsx`**:
-  - `next/link`
-  - `framer-motion`
-  - `@/lib/animation-variants`
-  - `next/image`
-  - `./ui/button`
-- **`components/footer.tsx`**:
-  - `next/link`
-  - `framer-motion`
-  - `@/lib/animation-variants`
-- **`components/testimonials.tsx`**:
-  - `react` -> `useState`, `useEffect`
-  - `framer-motion` -> `motion`, `AnimatePresence`
-  - `./ui/button`
-  - `lucide-react` -> `Sparkles`
-- **`components/kokonutui/bento-grid.tsx`**:
-  - `@/lib/utils` -> `cn`
-  - `lucide-react`
-  - `framer-motion`
-  - `next/link`
-  - `react`
-- **`api/mail/route.ts`**:
-  - `@react-email/render`
-  - `../../../emails`
-  - `resend`
-  - `next/server`
-  - `@upstash/redis`
-  - `@upstash/ratelimit`
-- **`api/notion/route.ts`**:
-  - `@notionhq/client`
-  - `next/server`
+*Diese Sektion wird während der Analyse befüllt, um alle Import/Export-Beziehungen abzubilden.*
 
 ---
 
 ## 3. Migrations-Protokoll
 
-Schritt-für-Schritt Log aller geplanten und durchgeführten Änderungen.
+Schritt-für-Schritt-Log aller geplanten und durchgeführten Änderungen.
 
-### SOLL-Konzept: Neue Ordnerstruktur
-
-```
-src/
-├── app/
-├── components/
-│   ├── core/         # (neu) Haupt-Layout-Komponenten
-│   ├── features/     # (neu) Sektions-spezifische Komponenten
-│   └── ui/           # Allgemeine, wiederverwendbare UI-Elemente
-├── emails/
-├── lib/
-└── public/
-```
-
-### Phase 1: `src` Ordner erstellen und Code verschieben
-
-| Phase | Aktion | Quelle | Ziel | Status | Anmerkungen |
-|---|---|---|---|---|---|
-| 1.1 | Ordner erstellen | - | `src/` | **Erledigt** | Haupt-Source-Verzeichnis |
-| 1.2 | Verschieben | `app/` | `src/app/` | **Erledigt** | Next.js App-Router |
-| 1.3 | Verschieben | `components/` | `src/components/` | **Erledigt** | Alle Komponenten |
-| 1.4 | Verschieben | `emails/` | `src/emails/` | **Erledigt** | E-Mail-Templates |
-| 1.5 | Verschieben | `lib/` | `src/lib/` | **Erledigt** | Hilfsfunktionen |
-
-### Phase 2: `components` Ordner restrukturieren
-
-| Phase | Aktion | Quelle | Ziel | Status | Anmerkungen |
-|---|---|---|---|---|---|
-| 2.1 | Ordner erstellen | - | `src/components/core/` | **Erledigt** | Für Header, Footer |
-| 2.2 | Ordner erstellen | - | `src/components/features/` | **Erledigt** | Für komplexe Sektionen |
-| 2.3 | Verschieben | `src/components/header.tsx` | `src/components/core/header.tsx` | **Erledigt** | Core-Komponente |
-| 2.4 | Verschieben | `src/components/footer.tsx` | `src/components/core/footer.tsx` | **Erledigt** | Core-Komponente |
-| 2.5 | Verschieben | `src/components/cta.tsx` | `src/components/features/cta.tsx` | **Erledigt** | Feature-Komponente |
-| 2.6 | Verschieben | `src/components/testimonials.tsx` | `src/components/features/testimonials.tsx` | **Erledigt** | Feature-Komponente |
-| 2.7 | Verschieben | `src/components/kokonutui/bento-grid.tsx` | `src/components/features/bento-grid.tsx` | **Erledigt** | Feature-Komponente |
-| 2.8 | Aufräumen | `src/components/kokonutui/` | - | **Erledigt** | Leeren Ordner löschen |
-| 2.9 | Verschieben | `src/components/form.tsx` | `src/components/features/form.tsx` | **Erledigt** | Gehört logisch zum Waitlist-Feature |
-| 2.10 | Verschieben | `src/components/grid-background.tsx` | `src/components/ui/grid-background.tsx` | **Erledigt** | Ist eine wiederverwendbare UI-Komponente |
-
-### Phase 3: Import-Pfade aktualisieren
-
-| Phase | Aktion | Betroffene Dateien | Status | Anmerkungen |
+| Datum | Aktion | Datei(en) | Beschreibung | Status |
 |---|---|---|---|---|
-| 3.1 | Pfade anpassen | Alle Dateien mit `@/` Imports | **Erledigt** | Pfade müssen auf `src/` verweisen. Manuelle Validierung empfohlen. |
+| *tbd* | **Analyse** | `bento-grid.tsx` | Identifizierung von Sub-Komponenten zur Extraktion. | **Abgeschlossen** |
+| *tbd* | **Refactor** | `bento-grid.tsx` | Aufteilung in kleinere, wiederverwendbare Komponenten. | **Abgeschlossen** |
+| *tbd* | **Struktur** | `src/components` | Einführung einer neuen, logischeren Ordnerstruktur. | **Abgeschlossen** |
 
 ---
 
 ## 4. Feature-Checkliste
 
-Stellt sicher, dass alle Features erhalten bleiben. **Status: Manuelle Überprüfung ausstehend.**
+Stellt sicher, dass alle Features nach der Umstrukturierung erhalten bleiben.
 
-- [ ] **Hauptseite**: Lädt die `app/page.tsx` ohne Fehler im Browser?
-- [ ] **Header & Footer**: Werden `header.tsx` und `footer.tsx` korrekt auf der Hauptseite dargestellt?
-- [ ] **CTA & Formular**:
-  - [ ] Wird das Formular (`form.tsx`) korrekt angezeigt?
-  - [ ] Funktioniert die Eingabevalidierung für Name und E-Mail?
-  - [ ] Löst der Submit-Button die `handleSubmit`-Funktion aus?
-  - [ ] Werden Erfolgs- und Fehlermeldungen (Toast-Notifications via `sonner`) korrekt angezeigt?
-- [ ] **Bento Grid**:
-  - [ ] Wird das Grid (`bento-grid.tsx`) mit dem 2-1-2 Layout korrekt angezeigt?
-  - [ ] Funktionieren alle verbliebenen Mikrointeraktionen (`typing`, `priorKnowledgeCheck`, `investorMatch`, `timeline`, `spotlight`) wie erwartet?
-- [ ] **Testimonials**:
-  - [ ] Wird die `testimonials.tsx`-Komponente angezeigt?
-  - [ ] Rotiert der Text automatisch alle paar Sekunden?
-- [ ] **Allgemein**:
-  - [ ] Gibt es keine Konsolenfehler im Browser?
-  - [ ] Ist das responsive Verhalten der Seite intakt?
+- [ ] Header-Navigation funktioniert.
+- [ ] Hero-Sektion mit CTA-Buttons wird korrekt angezeigt.
+- [ ] Scroll-Funktionalität der CTA-Buttons funktioniert.
+- [ ] Testimonials-Sektion funktioniert (Text rotiert).
+- [ ] Demo-Video wird korrekt abgespielt.
+- [ ] Bento-Grid wird mit allen Features und Animationen korrekt angezeigt.
+- [ ] Pricing-Sektion funktioniert.
+- [ ] Cal.com-Integration funktioniert.
+- [ ] Footer wird korrekt angezeigt.
+- [ ] Impressum- und Datenschutz-Seiten sind erreichbar.
+- [ ] E-Mail-Versand über die API funktioniert (falls testbar).
 
 ---
 
 ## 5. Import-Tracking
 
-Liste aller zu aktualisierenden Import-Pfade nach der Umstrukturierung.
+Liste aller Import-Pfade, die während der Migration aktualisiert werden müssen.
 
-| Datei | Alter Pfad | Neuer Pfad | Status |
-|---|---|---|---|
-| | | | |
+*Wird während der Planung befüllt.*
 
 ---
 
 ## 6. Rollback-Plan
 
-Strategie zur Rückgängigmachung von Änderungen bei unerwarteten Problemen.
-
-1.  **Backup**: Vor jeder Phase wird ein Git-Commit erstellt.
-2.  **Batch-Größe**: Änderungen werden in kleinen, überschaubaren Batches (5-10 Dateien) durchgeführt.
-3.  **Rollback-Prozedur**: Bei Fehlern, die nicht sofort behoben werden können, wird der letzte Commit mittels `git reset --hard HEAD~1` zurückgesetzt.
-
----
-
-## 7. Validierungs-Report
-
-- **Status**: Technisch abgeschlossen.
-- **Zusammenfassung**: Die Codebasis wurde erfolgreich in eine `src/`-Verzeichnisstruktur migriert. Die Komponenten wurden logisch in `core`, `features` und `ui` unterteilt. Alle Konfigurationsdateien (`tsconfig.json`, `tailwind.config.ts`) und Import-Pfade wurden entsprechend angepasst.
-- **Ergebnis**: Die Umstrukturierung wurde gemäß dem Migrationsplan vollständig umgesetzt. Es wurden keine Funktionen geändert oder entfernt.
-- **Nächster Schritt**: Manuelle Überprüfung aller Punkte in der **Feature-Checkliste**, um die volle Funktionalität der Anwendung nach dem Refactoring zu garantieren.
+1.  Alle Änderungen werden in einem separaten Git-Branch durchgeführt.
+2.  Vor Beginn der Umstrukturierung wird ein initialer Commit erstellt (`git commit -m "refactor: initial state before restructuring"`).
+3.  Die Umstrukturierung erfolgt in kleinen, atomaren Batches. Nach jedem erfolgreichen Batch wird ein Commit erstellt.
+4.  Bei kritischen Fehlern, die nicht sofort behoben werden können, kann der Branch mittels `git reset --hard <commit-hash>` auf einen früheren, stabilen Zustand zurückgesetzt werden.

@@ -4,7 +4,7 @@ import CTA from "@/components/features/cta";
 import Form from "@/components/features/form";
 import Header from "@/components/core/header";
 import Footer from "@/components/core/footer";
-import BentoGrid from "@/components/features/bento-grid";
+import BentoGrid from "@/components/features/bento";
 import Testimonials from "@/components/features/testimonials";
 import Video from "@/components/features/video";
 import GridBackground from "@/components/ui/grid-background";

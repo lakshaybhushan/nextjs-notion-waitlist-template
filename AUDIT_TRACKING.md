@@ -1,99 +1,71 @@
-# Code Base Audit: Tracking
+# Code Base Audit Tracking
 
-Dieses Dokument verfolgt die Analyse und Bereinigung der Codebasis gemäß den Anweisungen in `audit.md`.
-
-## 0. Setup und Dokumentation
-
-- **Tracking-Datei**: `AUDIT_TRACKING.md` (dieses Dokument) wurde erstellt.
-- **Prinzipien**: Es werden nur Löschungen durchgeführt, kein Refactoring. Alle Features müssen erhalten bleiben.
-
----
+Dieses Dokument verfolgt die systematische Analyse und Bereinigung der Codebase.
 
 ## 1. Komponenten-Inventar
 
-Hier werden alle Komponenten und ihre Funktionen aufgelistet.
+Hier wird eine vollständige Liste aller bestehenden Komponenten und Funktionen geführt.
 
-- `cta.tsx`: Call-to-Action Sektion.
-- `footer.tsx`: Footer der Seite.
-- `form.tsx`: Formular zur Eingabe von E-Mail-Adressen für die Warteliste.
-- `grid-background.tsx`: Hintergrund mit Gittermuster.
-- `header.tsx`: Header der Seite.
-- `testimonials.tsx`: Testimonials-Sektion.
-- `icons/`: Verschiedene Icon-Komponenten.
-  - `anthropic-dark.tsx`
-  - `anthropic.tsx`
-  - `deepseek.tsx`
-  - `gemini.tsx`
-  - `mistral.tsx`
-  - `open-ai-dark.tsx`
-  - `open-ai.tsx`
-- `kokonutui/bento-grid.tsx`: Bento-Grid-Layout zur Darstellung von Features.
-- `ui/`: UI-Elemente.
-  - `button.tsx`: Standard-Button.
-  - `enhanced-btn.tsx`: Button mit erweitertem Styling.
-  - `input.tsx`: Standard-Input-Feld.
-  - `particles.tsx`: Partikel-Animation.
-  - `shimmer-text.tsx`: Text mit Schimmer-Effekt.
-  - `sonner.tsx`: Komponente für Benachrichtigungen.
-  - `text-blur.tsx`: Text mit Blur-Effekt.
+### Komponenten (`src/components`)
+- `core/footer.tsx`
+- `core/header.tsx`
+- `features/bento-grid.tsx`
+- `features/cta.tsx`
+- `features/form.tsx`
+- `features/testimonials.tsx`
+- `features/video.tsx`
+- `ui/button.tsx`
+- `ui/enhanced-btn.tsx`
+- `ui/grid-background.tsx`
+- `ui/input.tsx`
+- `ui/navigation-menu.tsx`
+- `ui/shimmer-text.tsx`
+- `ui/sonner.tsx`
+- `ui/text-blur.tsx`
 
----
+### API Routes (`src/app/api`)
+- `api/mail/route.ts`
+- `api/notion/route.ts`
+
+### E-Mail Templates (`src/emails`)
+- `emails/index.tsx`
+
+### Library Funktionen (`src/lib`)
+- `lib/animation-variants.ts`
+- `lib/utils.ts`
 
 ## 2. Abhängigkeits-Map
 
-Diese Sektion zeigt, welche Komponente von welcher anderen genutzt wird.
+Hier wird dokumentiert, welche Komponente welche andere Komponente oder Funktion nutzt.
 
-- **`app/page.tsx`** (Hauptseite) nutzt:
-  - `components/cta.tsx`
-  - `components/form.tsx`
-  - `components/header.tsx`
-  - `components/footer.tsx`
-  - `components/testimonials.tsx`
-  - `components/grid-background.tsx`
-  - `components/kokonutui/bento-grid.tsx`
-  - `components/ui/particles.tsx` (auskommentiert)
-
-*Wird erweitert...*
-
----
+*Wird im nächsten Schritt befüllt.*
 
 ## 3. Bereinigungslog
 
-Hier werden alle geplanten und durchgeführten Änderungen dokumentiert.
+Hier werden alle zur Löschung vorgeschlagenen und schlussendlich gelöschten Elemente mit Begründung dokumentiert.
 
-| Element | Pfad | Grund für Entfernung | Status |
-|---|---|---|---|
-| `Image` component | `app/page.tsx` | Auskommentiert, scheint nicht verwendet zu werden. | **Geplant** |
-| `Particles` component | `app/page.tsx` | Auskommentiert, scheint nicht verwendet zu werden. | **Geplant** |
-| `Mic`, `Plus` (lucide-react) | `components/kokonutui/bento-grid.tsx` | Importiert, aber in keiner aktiven `feature`-Komponente verwendet. | **Geplant** |
-| `Clock`, `Sparkles`, `Zap` (lucide-react) | `components/kokonutui/bento-grid.tsx` | Werden nur in `MetricsFeature` genutzt, das aber keiner `BentoItem` zugewiesen ist. | **Geplant** |
-| `IconsFeature`-Komponente und alle `components/icons/*` | `components/kokonutui/bento-grid.tsx` | Das `icons`-Feature wird keiner `BentoItem` zugewiesen. | **Geplant** |
-| `CounterAnimation`, `ChartAnimation` | `components/kokonutui/bento-grid.tsx` | Die Features `counter` und `chart` werden nicht genutzt. | **Geplant** |
-| `AIInput_Voice` | `components/kokonutui/bento-grid.tsx` | Die Komponente wird definiert, aber nirgends aufgerufen. | **Erledigt** |
-| `sample-db.png` | `public/` | Wird nur in der `README.md` referenziert, nicht in der App selbst. | **Erledigt** |
-| `screenshot.png` | `public/` | Wird nur in einem auskommentierten Code-Block in `app/page.tsx` verwendet. | **Erledigt** |
-| `components/ui/particles.tsx` | `components/ui/` | Komponente wurde nirgends verwendet. | **Erledigt** |
-| `components/icons/*` | `components/` | Alle Icons waren ungenutzt nach Entfernung von `IconsFeature`. | **Erledigt** |
-
----
+| Datei / Komponente      | Status      | Begründung                                       |
+| ----------------------- | ----------- | ------------------------------------------------ |
+| `ui/enhanced-btn.tsx`   | Zu löschen  | Wird nach Formular-Umbau nicht mehr genutzt.   |
+| `ui/input.tsx`          | Zu löschen  | Wird nach Formular-Umbau nicht mehr genutzt.   |
+| `api/notion/route.ts`   | Zu löschen  | Wird nach Formular-Umbau nicht mehr genutzt.   |
+| `public/sample-db.png`  | Zu löschen  | Wird nur in der README verwendet, nicht in der App. |
+| `public/screenshot.png` | Zu löschen  | Wird nicht in der App verwendet.                |
+| `public/waitlist-logo.png` | Zu löschen  | Wird nach E-Mail-Template-Update nicht mehr genutzt. |
 
 ## 4. Funktionalitäts-Checkliste
 
-Diese Checkliste stellt sicher, dass alle ursprünglichen Features nach der Bereinigung noch funktionieren.
+Diese Liste stellt sicher, dass alle wichtigen Features nach der Bereinigung weiterhin funktionieren.
 
-- [ ] **Hauptseite**: Lädt die `app/page.tsx` ohne Fehler im Browser?
-- [ ] **Header & Footer**: Werden `header.tsx` und `footer.tsx` korrekt auf der Hauptseite dargestellt?
-- [ ] **CTA & Formular**:
-  - [ ] Wird das Formular (`form.tsx`) korrekt angezeigt?
-  - [ ] Funktioniert die Eingabevalidierung für Name und E-Mail?
-  - [ ] Löst der Submit-Button die `handleSubmit`-Funktion aus?
-  - [ ] Werden Erfolgs- und Fehlermeldungen (Toast-Notifications via `sonner`) korrekt angezeigt?
-- [ ] **Bento Grid**:
-  - [ ] Wird das Grid (`bento-grid.tsx`) mit dem 2-1-2 Layout korrekt angezeigt?
-  - [ ] Funktionieren alle verbliebenen Mikrointeraktionen (`typing`, `priorKnowledgeCheck`, `investorMatch`, `timeline`, `spotlight`) wie erwartet?
-- [ ] **Testimonials**:
-  - [ ] Wird die `testimonials.tsx`-Komponente angezeigt?
-  - [ ] Rotiert der Text automatisch alle paar Sekunden?
-- [ ] **Allgemein**:
-  - [ ] Gibt es keine Konsolenfehler im Browser?
-  - [ ] Ist das responsive Verhalten der Seite intakt?
+- [ ] Header-Navigation funktioniert
+- [ ] Hero-Sektion wird korrekt angezeigt
+- [ ] "Mit Sales sprechen" Button scrollt zur Cal.com Sektion
+- [ ] "How does it work?" Button scrollt zur How-it-works Sektion
+- [ ] Testimonials werden korrekt angezeigt
+- [ ] Demo-Video wird abgespielt
+- [ ] Bento-Grid wird korrekt angezeigt
+- [ ] Pricing-Tabelle wird korrekt angezeigt
+- [ ] Cal.com Embed wird geladen und ist interaktiv
+- [ ] Footer-Links funktionieren
+- [ ] Impressum-Seite ist erreichbar
+- [ ] Datenschutz-Seite ist erreichbar
