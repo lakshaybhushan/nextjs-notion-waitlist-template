@@ -82,7 +82,7 @@ export default function Testimonials() {
     }, []);
 
     return (
-        <section className="py-24 sm:py-32">
+        <section className="pt-24 pb-2 sm:pt-32 sm:pb-2">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
                     {/* Left Column */}

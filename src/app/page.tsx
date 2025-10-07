@@ -6,6 +6,7 @@ import Header from "@/components/core/header";
 import Footer from "@/components/core/footer";
 import BentoGrid from "@/components/features/bento-grid";
 import Testimonials from "@/components/features/testimonials";
+import Video from "@/components/features/video";
 import GridBackground from "@/components/ui/grid-background";
 
 export default function Home() {
@@ -22,6 +23,10 @@ export default function Home() {
 
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Testimonials />
+        </section>
+
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Video />
         </section>
       </div>
 
