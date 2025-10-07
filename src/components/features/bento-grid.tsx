@@ -467,7 +467,7 @@ const HowItWorksFeature = () => {
         {
             title: "Kurz Kaffee holen.",
             description:
-                "whisper macht die Analyse Arbeit.",
+                "praedia macht die Analyse Arbeit.",
         },
         {
             title: "Verhandeln.",
@@ -1067,16 +1067,16 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
                                 <Image 
                                     src="/Sebastian Sales.png" 
                                     alt="Sebastian Sales Manager" 
-                                    width={160} 
-                                    height={160} 
+                                    width={120} 
+                                    height={120} 
                                     className="rounded-full"
                                 />
                                 <blockquote className="p-4 border-l-4 border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 max-w-md">
                                     <p className="text-xl italic text-neutral-700 dark:text-neutral-300">
-                                        "Ich bin überzeugt, dass wir Ihre Immobilienanalyse auf ein neues Level heben können. Lassen Sie uns in einem kurzen Gespräch herausfinden, wie whisper Sie dabei unterstützen kann."
+                                        "Ich bin überzeugt, dass wir Ihre Immobilienanalyse auf ein neues Level heben können. Lassen Sie uns in einem kurzen Gespräch herausfinden, wie praedia Sie dabei unterstützen kann."
                                     </p>
                                     <footer className="mt-4 text-right">
-                                        <p className="font-semibold text-neutral-800 dark:text-neutral-200">- Sebastian</p>
+                                        <p className="font-semibold text-neutral-800 dark:text-neutral-200">- Sebastian Sales</p>
                                         <p className="text-sm text-neutral-600 dark:text-neutral-400">Sales Manager</p>
                                     </footer>
                                 </blockquote>
@@ -1287,7 +1287,7 @@ const CalEmbedFeature = () => {
                 name: "Starter",
                 price: "Kostenlos",
                 description: "Für Einzelpersonen und kleine Teams, die gerade erst anfangen.",
-                features: ["3 Analysen inklusive", "Erkunde die whisper Platform", "Lade deine ersten Exposés hoch"],
+                features: ["3 Analysen inklusive", "Erkunde die praedia Platform", "Lade deine ersten Exposés hoch"],
                 cta: "Heute starten",
             },
             {
@@ -1370,7 +1370,7 @@ const PricingTiersFeature = () => {
 
 const PricingFeature = () => {
     const title = "Finde den passenden Plan für deine Deals.";
-    const description = "whisper unterstützt Teams jeder Größe mit einer Preisgestaltung, die mitwächst.";
+    const description = "praedia unterstützt Teams jeder Größe mit einer Preisgestaltung, die mitwächst.";
 
     return (
         <div className="relative text-center w-full">
@@ -1394,7 +1394,7 @@ const PricingFeature = () => {
 export default function BentoGrid() {
     return (
         <section className="relative pb-24 sm:pb-32 overflow-hidden">
-            <div className="mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Bento Grid */}
                 <motion.div
                     initial="hidden"

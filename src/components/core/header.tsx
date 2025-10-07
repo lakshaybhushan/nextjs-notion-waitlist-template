@@ -49,7 +49,7 @@ export default function Header() {
         <motion.div variants={itemVariants} className="flex items-center gap-6">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.svg" alt="logo" width={24} height={24} />
-            <span className="font-bold text-white">whisper</span>
+            <span className="font-bold text-white">praedia</span>
           </Link>
           <div className="flex items-center gap-4">
             <NavigationMenu>

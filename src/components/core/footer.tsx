@@ -88,8 +88,8 @@ export default function Footer() {
                 {/* Logo and Slogan Column (Now on the right) */}
                 <div className="text-right">
                     <div className="flex justify-end items-center gap-2">
-                        <Image src="/logo.svg" alt="whisper Logo" width={32} height={32} />
-                        <span className="text-xl font-semibold text-white">whisper</span>
+                        <Image src="/logo.svg" alt="praedia Logo" width={32} height={32} />
+                        <span className="text-xl font-semibold text-white">praedia</span>
                     </div>
                      <p className="mt-4 max-w-xs text-sm ml-auto">
                         Die KI-gestützte Plattform für bessere Immobilieninvestitionen.
@@ -99,7 +99,7 @@ export default function Footer() {
             {/* Bottom Bar */}
             <div className="mt-12 pt-6 pb-6 text-center">
                 <p className="text-sm font-light">
-                    &copy; {new Date().getFullYear()} whisper. Alle Rechte vorbehalten.
+                    &copy; {new Date().getFullYear()} praedia. Alle Rechte vorbehalten.
                 </p>
             </div>
         </footer>

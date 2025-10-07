@@ -6,9 +6,9 @@ import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
-  title: "whisper | Immobilien analysieren in Sekunden.",
+  title: "praedia | Immobilien analysieren in Sekunden.",
   description:
-    "Whisper verwandelt Off-Market-Deals in Sekundenschnelle in fertige Analysen, Präsentationen und Verkaufstools.",
+    "Praedia verwandelt Off-Market-Deals in Sekundenschnelle in fertige Analysen, Präsentationen und Verkaufstools.",
 };
 
 export default function RootLayout({
