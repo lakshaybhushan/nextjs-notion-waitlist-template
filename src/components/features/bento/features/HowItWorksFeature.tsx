@@ -67,10 +67,10 @@ export const HowItWorksFeature = () => {
                                 </span>
                             </motion.div>
                             <div>
-                                <h3 className="text-[24px] font-semibold text-neutral-900 dark:text-neutral-100">
+                                <h3 className="text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
                                     {step.title}
                                 </h3>
-                                <p className="mt-0.5 text-[24px] text-neutral-600 dark:text-neutral-400">
+                                <p className="mt-0.5 text-lg font-normal text-neutral-600 dark:text-neutral-400">
                                     {step.description}
                                 </p>
                             </div>
