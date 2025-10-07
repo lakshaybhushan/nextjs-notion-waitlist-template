@@ -228,8 +228,8 @@ export const BentoCard = ({ item }: { item: BentoItem }) => {
                                 <div className="mt-0 md:mt-12 flex flex-col md:flex-row w-full gap-8 md:gap-32">
                                     {item.subsections.map((section, index) => (
                                         <div key={index} className="w-full md:w-1/4 flex flex-col items-start text-left">
-                                            <h4 className="font-semibold text-[24px] tracking-[-0.4px] text-white">{section.title}</h4>
-                                            <p className="text-neutral-400 mt-2 text-[20px] tracking-[-0.4px]">{section.description}</p>
+                                            <h4 className="font-semibold text-xl tracking-tight text-white">{section.title}</h4>
+                                            <p className="text-neutral-400 mt-2 text-lg font-normal tracking-normal">{section.description}</p>
                                         </div>
                                     ))}
                                 </div>
