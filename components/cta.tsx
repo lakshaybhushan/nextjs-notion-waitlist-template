@@ -6,7 +6,7 @@ import { containerVariants, itemVariants } from "@/lib/animation-variants";
 export default function CTA() {
   return (
     <motion.div
-      className="flex w-full max-w-2xl flex-col gap-2"
+      className="flex w-full max-w-2xl flex-col gap-2 mt-20"
       variants={containerVariants}
       initial="hidden"
       animate="visible">
@@ -20,17 +20,25 @@ export default function CTA() {
         </div>
       </motion.div>
 
-      <motion.img
+      {/* <motion.img
         src="/logo.svg"
         alt="logo"
         className="mx-auto h-24 w-24"
         variants={itemVariants}
-      />
+      /> */}
+      <motion.div variants={itemVariants}>
+        <div className="mx-auto flex items-center justify-center">
+          <h1 className="text-center text-6xl font-extrabold tracking-tight">
+            Reloops
+          </h1>
+        </div>
+      </motion.div>
+
 
       <motion.div variants={itemVariants}>
         <TextBlur
-          className="text-center text-3xl font-medium tracking-tighter sm:text-5xl"
-          text="A Simple Next.js Waitlist Template with Notion as CMS"
+          className="text-center text-2xl font-light tracking-tighter sm:text-5xl"
+          text="Close the loop on feedback"
         />
       </motion.div>
 

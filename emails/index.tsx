@@ -21,41 +21,40 @@ export const NotionWaitlistEmail = ({ userFirstname }: EmailProps) => (
     <Body style={main}>
       <Container style={container}>
         <Img
-          src={`https://nextjs-notion-waitlist.vercel.app/waitlist-logo.png`}
+          src={`https://reloops.app/waitlist-logo.png`}
           width="220"
           height="100"
-          alt="Notion Waitlist Logo"
+          alt="Reloops Waitlist Logo"
           style={logo}
         />
         <Text style={greeting}>Hi {userFirstname},</Text>
         <Text style={paragraph}>
-          Thanks for joining the waitlist for our Next.js + Notion CMS waitlist
-          template! I'm Lakshay, the developer behind this project. I'm glad to
+          Thanks for joining the waitlist for Reloops App! I'm Dheeraj, the developer behind this project. I'm glad to
           have you on board.
         </Text>
         <Text style={paragraph}>
           I'll keep you posted on the progress and notify you as soon as it's
           ready for you to use. In the meantime, if you have any questions or
           feedback, don't hesitate to reach out by replying directly to{" "}
-          <a href="mailto:lakshb.work@gmail.com" style={link}>
+          <a href="mailto:dheeraj@reloops.app" style={link}>
             this email {""}
           </a>
           — I'm here to listen!
         </Text>
         <Text style={paragraph}>
           You can also follow me on X/Twitter for updates:{" "}
-          <a href="https://x.com/blakssh" style={link}>
-            @blakssh
+          <a href="https://x.com/dheerajbhatia2" style={link}>
+            @dheerajbhatia2
           </a>
         </Text>
         <Text style={signOff}>
           Best regards,
           <br />
-          Lakshay
+          Dheeraj Bhatia
         </Text>
         <Hr style={hr} />
         <Text style={footer}>
-          You received this email because you signed up for the Notion waitlist.
+          You received this email because you signed up for the Reloops.app waitlist.
           If you believe this is a mistake, feel free to ignore this email.
         </Text>
       </Container>

@@ -12,11 +12,10 @@ export default function Footer() {
       <motion.div variants={itemVariants}>
         Brought to you by{" "}
         <Link
-          href="https://lakshb.dev"
           rel="noopener noreferrer"
           target="_blank">
           <span className="text-zinc-300 underline underline-offset-2 transition-all duration-200 ease-linear hover:text-yellow-200">
-            lakshaybhushan
+            Dheeraj Bhatia
           </span>
           .
         </Link>

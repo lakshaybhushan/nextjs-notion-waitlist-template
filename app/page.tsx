@@ -124,7 +124,6 @@ export default function Home() {
           loading={loading}
         />
 
-        <Logos />
       </section>
 
       <Footer />
@@ -133,7 +132,7 @@ export default function Home() {
         quantityDesktop={350}
         quantityMobile={100}
         ease={80}
-        color={"#F7FF9B"}
+        color={"#a59bffff"}
         refresh
       />
     </main>
