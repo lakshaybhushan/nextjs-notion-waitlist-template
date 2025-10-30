@@ -144,6 +144,7 @@ Click the "Deploy with Vercel" button above for one-click deployment.
 - **[POSTMARK_SETUP.md](./POSTMARK_SETUP.md)** - Complete guide to setting up Postmark email
 - **[REDIS_SETUP.md](./REDIS_SETUP.md)** - Redis setup guide (Railway vs Upstash)
 - **[RAILWAY_SETUP.md](./RAILWAY_SETUP.md)** - Guide to deploying on Railway
+- **[LOGS_GUIDE.md](./LOGS_GUIDE.md)** - Understanding Railway logs and monitoring
 
 ## License
 

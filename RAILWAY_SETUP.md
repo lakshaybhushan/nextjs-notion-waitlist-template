@@ -122,6 +122,29 @@ Railway Dashboard shows:
 - **Metrics**: CPU, Memory, Network usage
 - **Deployments**: History of all deployments
 
+### Understanding Logs
+
+The app includes comprehensive logging to monitor Redis and email status:
+
+**On startup, you'll see:**
+```
+✅ Railway Redis detected - Rate limiting ENABLED (2 req/min)
+📋 Kontentino Waitlist API Configuration:
+   Postmark: ✅ Configured
+   Redis: ✅ ENABLED
+```
+
+**For each signup request:**
+```
+🔒 Checking rate limit for IP: x.x.x.x
+✅ Rate limit OK (1 requests remaining)
+📧 Processing signup request: user@example.com
+📤 Sending email
+✅ Email sent successfully (MessageID: abc123)
+```
+
+**See full guide**: [LOGS_GUIDE.md](./LOGS_GUIDE.md) for detailed log interpretation
+
 ## Costs
 
 Railway offers:

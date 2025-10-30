@@ -37,23 +37,27 @@ if (process.env.REDIS_URL) {
     limiter: Ratelimit.slidingWindow(2, "1 m"),
   });
 } else {
-  console.warn(
-    "⚠️  Redis NOT configured - Rate limiting DISABLED",
-  );
-  console.warn(
-    "   → For production: Add REDIS_URL (Railway) or UPSTASH_REDIS_REST_URL",
-  );
+  console.warn("⚠️  Redis NOT configured - Rate limiting DISABLED");
+  console.warn("   → For production: Add REDIS_URL (Railway) or UPSTASH_REDIS_REST_URL");
 }
-// If neither is configured, ratelimit will be null and rate limiting will be skipped
+
+// Log startup configuration
+console.log("\n📋 Kontentino Waitlist API Configuration:");
+console.log(`   Postmark: ${process.env.POSTMARK_API_KEY ? "✅ Configured" : "❌ Missing"}`);
+console.log(`   Postmark From: ${process.env.POSTMARK_FROM_EMAIL || "❌ Not set"}`);
+console.log(`   Redis: ${ratelimit ? "✅ ENABLED" : "⚠️  DISABLED (optional)"}`);
+console.log(`   Rate Limit: ${ratelimit ? "2 requests/minute per IP" : "None (not recommended for production)"}\n`);
 
 export async function POST(request: NextRequest, response: NextResponse) {
   const ip = request.ip ?? "127.0.0.1";
 
   // Rate limiting (optional - only if Redis is configured)
   if (ratelimit) {
+    console.log(`🔒 Checking rate limit for IP: ${ip}`);
     const result = await ratelimit.limit(ip);
 
     if (!result.success) {
+      console.warn(`❌ Rate limit exceeded for IP: ${ip} - Request blocked`);
       return Response.json(
         {
           error: "Too many requests!!",
@@ -63,19 +67,23 @@ export async function POST(request: NextRequest, response: NextResponse) {
         },
       );
     }
-  } else {
-    console.warn(
-      "⚠️ Redis not configured - rate limiting is disabled. Configure REDIS_URL or UPSTASH_REDIS_REST_URL to enable.",
+    console.log(
+      `✅ Rate limit OK for IP: ${ip} (${result.remaining} requests remaining)`,
     );
+  } else {
+    console.log(`⚠️  Rate limiting skipped (Redis not configured) for IP: ${ip}`);
   }
 
   const { email, firstname } = await request.json();
+
+  console.log(`📧 Processing signup request: ${email} (${firstname})`);
 
   try {
     const htmlContent = await render(
       WelcomeTemplate({ userFirstname: firstname }),
     );
 
+    console.log(`📤 Sending email to: ${email}`);
     const response = await postmarkClient.sendEmail({
       From: process.env.POSTMARK_FROM_EMAIL || "noreply@kontentino.com",
       To: email,
@@ -86,19 +94,22 @@ export async function POST(request: NextRequest, response: NextResponse) {
     });
 
     if (response.ErrorCode) {
-      console.error("Postmark error:", response.Message);
+      console.error(`❌ Postmark error for ${email}:`, response.Message);
       return NextResponse.json(
         { message: "Failed to send email", error: response.Message },
         { status: 500 },
       );
     }
 
+    console.log(
+      `✅ Email sent successfully to ${email} (MessageID: ${response.MessageID})`,
+    );
     return NextResponse.json({
       message: "Email sent successfully",
       messageId: response.MessageID,
     });
   } catch (error) {
-    console.error("Email sending error:", error);
+    console.error(`❌ Email sending error for ${email}:`, error);
     return NextResponse.json(
       { message: "Failed to send email", error: String(error) },
       { status: 500 },

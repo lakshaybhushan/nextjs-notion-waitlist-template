@@ -17,7 +17,7 @@ interface EmailProps {
 export const NotionWaitlistEmail = ({ userFirstname }: EmailProps) => (
   <Html>
     <Head />
-    <Preview>Thanks for Joining Kontentino GPT Waitlist, {userFirstname}! 🎉</Preview>
+    <Preview>Welcome to Kontentino GPT Apps Beta, {userFirstname}! 🚀</Preview>
     <Body style={main}>
       <Container style={container}>
         <Img
@@ -29,36 +29,37 @@ export const NotionWaitlistEmail = ({ userFirstname }: EmailProps) => (
         />
         <Text style={greeting}>Hi {userFirstname},</Text>
         <Text style={paragraph}>
-          Thanks for joining the waitlist for Kontentino GPT Apps! We're excited
-          to have you on board and appreciate your interest in our AI-powered
-          social media management tools.
+          Welcome to Kontentino GPT Apps — the revolutionary ChatGPT integration
+          that brings AI-powered content creation and instant approvals together.
+          You're now on the list for exclusive early beta access!
         </Text>
         <Text style={paragraph}>
-          We'll keep you updated on our progress and notify you as soon as
-          Kontentino GPT Apps is ready for early access. In the meantime, if you
-          have any questions or feedback, don't hesitate to reach out by replying
-          directly to{" "}
+          <strong>What's coming:</strong> Generate social media posts in ChatGPT,
+          see pixel-perfect platform previews, and share for instant approval —
+          all without leaving your chat. We're launching with Post Preview first,
+          followed by Content Calendar and Post List.
+        </Text>
+        <Text style={paragraph}>
+          We'll notify you as soon as beta access opens. In the meantime, if you
+          have questions, reply to{" "}
           <a href="mailto:support@kontentino.com" style={link}>
             this email
+          </a>{" "}
+          or learn more about{" "}
+          <a href="https://www.kontentino.com" style={link}>
+            Kontentino
           </a>
           .
         </Text>
-        <Text style={paragraph}>
-          Want to learn more about Kontentino?{" "}
-          <a href="https://kontentino.com" style={link}>
-            Visit our website
-          </a>
-        </Text>
         <Text style={signOff}>
-          Best regards,
+          Stay creative,
           <br />
           The Kontentino Team
         </Text>
         <Hr style={hr} />
         <Text style={footer}>
-          You received this email because you signed up for the Kontentino GPT
-          Apps waitlist. If you believe this is a mistake, feel free to ignore
-          this email.
+          You received this email because you signed up for early access to
+          Kontentino GPT Apps. Excited to have you on board!
         </Text>
       </Container>
     </Body>

@@ -54,25 +54,17 @@ export default function Form({
           iconPlacement="right"
           className="mt-2 w-full"
           disabled={loading}>
-          {loading ? "Loading..." : "Join Waitlist!"}
+          {loading ? "Loading..." : "Get Early Access"}
         </EnhancedButton>
       </motion.div>
       <motion.div
         variants={itemVariants}
-        className="mt-4 flex w-full items-center justify-center gap-1 text-muted-foreground">
-        <p>For any queries, reach out at </p>
+        className="mt-4 flex w-full items-center justify-center gap-1 text-muted-foreground text-sm">
+        <p>Questions? Email </p>
         <Link
-          href="https://x.com/blakssh"
-          rel="noopener noreferrer"
-          target="_blank">
-          <FaXTwitter className="h-4 w-4 transition-all duration-200 ease-linear hover:text-yellow-200" />
-        </Link>
-        or
-        <Link
-          href="https://github.com/lakshaybhushan"
-          rel="noopener noreferrer"
-          target="_blank">
-          <FaGithub className="ml-0.5 h-5 w-5 transition-all duration-200 ease-linear hover:text-yellow-200" />
+          href="mailto:support@kontentino.com"
+          className="text-primary hover:text-primary/80 transition-colors">
+          support@kontentino.com
         </Link>
       </motion.div>
     </motion.div>

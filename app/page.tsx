@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { useState } from "react";
 import CTA from "@/components/cta";
 import Form from "@/components/form";
-import Logos from "@/components/logos";
+import AboutSection from "@/components/about-section";
 import Particles from "@/components/ui/particles";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -85,11 +85,11 @@ export default function Home() {
     });
 
     toast.promise(promise, {
-      loading: "Getting you on the waitlist... 🚀",
+      loading: "Securing your beta access... 🚀",
       success: (data) => {
         setName("");
         setEmail("");
-        return "Thank you for joining the waitlist 🎉";
+        return "Welcome! Check your email for next steps 🎉";
       },
       error: (error) => {
         if (error === "Rate limited") {
@@ -109,7 +109,12 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center overflow-x-clip pt-12 md:pt-24">
+    <main className="relative flex min-h-screen flex-col items-center overflow-x-clip pt-12 md:pt-24">
+      {/* Light mode gradient background */}
+      <div className="pointer-events-none absolute inset-0 -z-10 dark:hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/15 via-background to-primary/20" />
+      </div>
+
       <section className="flex flex-col items-center px-4 sm:px-6 lg:px-8">
         <Header />
 
@@ -124,18 +129,32 @@ export default function Home() {
           loading={loading}
         />
 
-        <Logos />
+        <AboutSection />
       </section>
 
       <Footer />
 
-      <Particles
-        quantityDesktop={350}
-        quantityMobile={100}
-        ease={80}
-        color={"#F7FF9B"}
-        refresh
-      />
+      {/* Light mode particles */}
+      <div className="block dark:hidden">
+        <Particles
+          quantityDesktop={200}
+          quantityMobile={80}
+          ease={80}
+          color={"#2146ec"}
+          refresh
+        />
+      </div>
+
+      {/* Dark mode particles */}
+      <div className="hidden dark:block">
+        <Particles
+          quantityDesktop={350}
+          quantityMobile={100}
+          ease={80}
+          color={"#ab7eff"}
+          refresh
+        />
+      </div>
     </main>
   );
 }
