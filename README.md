@@ -5,7 +5,7 @@
 <img src ="https://img.shields.io/badge/Next.js-000000.svg?style=for-the-badge&logo=nextdotjs&logoColor=white">
 <img src ="https://img.shields.io/badge/Upstash-00E9A3.svg?style=for-the-badge&logo=Upstash&logoColor=white">
 <img src ="https://img.shields.io/badge/Notion-000000.svg?style=for-the-badge&logo=Notion&logoColor=white">
-<img src ="https://img.shields.io/badge/Resend-000000.svg?style=for-the-badge&logo=Resend&logoColor=white">
+<img src ="https://img.shields.io/badge/Postmark-FFCD00.svg?style=for-the-badge&logo=Postmark&logoColor=black">
 <img src ="https://img.shields.io/badge/shadcn/ui-000000.svg?style=for-the-badge&logo=shadcn/ui&logoColor=white">
 <img src ="https://img.shields.io/badge/Vercel-000000.svg?style=for-the-badge&logo=Vercel&logoColor=white">
 
@@ -13,7 +13,7 @@
 
 ![GithubBanner](./app/opengraph-image.png)
 
-This is a template repository for creating a waitlist using Next.js 14, Notion as a CMS, Upstash Redis for rate limiting and Resend for sending emails with a custom domain.
+This is a waitlist application for **Kontentino GPT Apps** using Next.js 14, Notion as a CMS, Upstash Redis for rate limiting and **Postmark** for sending transactional emails.
 
 The UI is built using a mix of shadcn/ui, Magic UI and Tailwind CSS.
 
@@ -26,12 +26,12 @@ The UI is built using a mix of shadcn/ui, Magic UI and Tailwind CSS.
 
 ## Features
 
-- **Next.js 14**: The most popular React framework.
-- **Notion as a CMS**: Use Notion to manage your waitlist users.
-- **Upstash Redis**: Use Upstash Redis to rate limit the number of signups in a given time period.
-- **Resend**: Use Resend to send emails to users who sign up.
-- **Vercel**: Deploy the app to Vercel with a single click.
-- **shadcn/ui**: Use shadcn/ui for building the UI components.
+- **Next.js 14**: The most popular React framework
+- **Notion as a CMS**: Manage waitlist users in a Notion database
+- **Upstash Redis**: Rate limit signups to prevent spam
+- **Postmark**: Send transactional emails with high deliverability
+- **Railway/Vercel**: Deploy to Railway or Vercel
+- **shadcn/ui**: Beautiful UI components built with Radix UI and Tailwind CSS
 
 ## Why Notion?
 
@@ -58,13 +58,26 @@ Now you need to get the ID of the database you created. You can get it from the 
 
 You need to copy the `DATABASE_ID` from the URL.
 
-### Upstash Redis
+### Redis (Rate Limiting)
 
-It's fairly simple to get started with Upstash Redis. You can sign up for a free account and create a new Redis database. You will get a `REST URL` and a `TOKEN` that you can use to interact with the Redis database.
+**For local development**: Use Upstash Redis (free tier, 10K requests/day)
+- Sign up at https://console.upstash.com
+- Create new Redis database
+- Copy REST URL and TOKEN
 
-### Resend
+**For production on Railway**: Use Railway Redis (built-in, no setup needed)
+- Add Redis service in Railway dashboard
+- `REDIS_URL` automatically configured
 
-You need to sign up for a Resend account if not already. Then you need to add your domain and verify the DNS records. Once you have done that, you can generate an API key from the Resend dashboard which you will need to send emails.
+The app automatically detects which Redis to use.
+
+**Detailed guide**: See [REDIS_SETUP.md](./REDIS_SETUP.md) for complete instructions.
+
+### Postmark
+
+You need to sign up for a Postmark account (10,000 free emails/month trial). Then verify your sender email address or domain. Generate a Server API token from the Postmark dashboard.
+
+**Detailed guide**: See [POSTMARK_SETUP.md](./POSTMARK_SETUP.md) for step-by-step instructions.
 
 ## Building with this template
 
@@ -76,11 +89,13 @@ There are two ways to use this template:
 
 The above button will create a new Vercel project and clone this repository into your GitHub account. You will need to provide the following environment variables:
 
-- `NOTION_SECRET`: Your Notion secret key.
-- `NOTION_DB`: The ID of the Notion database you want to use.
-- `RESEND_API_KEY`: Your Resend API key.
-- `UPSTASH_REDIS_REST_URL`: Your Upstash Redis REST URL.
-- `UPSTASH_REDIS_REST_TOKEN`: Your Upstash Redis REST token.
+- `NOTION_SECRET`: Your Notion integration secret key
+- `NOTION_DB`: The ID of your Notion database
+- `POSTMARK_API_KEY`: Your Postmark Server API token
+- `POSTMARK_FROM_EMAIL`: Verified sender email address
+- `POSTMARK_REPLY_TO`: Email address for replies
+- `UPSTASH_REDIS_REST_URL`: Your Upstash Redis REST URL
+- `UPSTASH_REDIS_REST_TOKEN`: Your Upstash Redis REST token
 
 2. **Manual Setup**: Fork this repository and clone it to your local machine.
 
@@ -103,6 +118,32 @@ bun email
 ```
 
 Create a `.env.local` file in the root of the project and add the environment variables mentioned above. You can also have a look at the `.env.example` file for reference.
+
+## Deployment Options
+
+### Railway (Recommended for Kontentino)
+
+This project includes Railway configuration for easy deployment.
+
+**See detailed guide**: [RAILWAY_SETUP.md](./RAILWAY_SETUP.md)
+
+**Quick steps**:
+1. Push code to GitHub
+2. Create new Railway project from GitHub repo
+3. Add environment variables in Railway dashboard
+4. Railway auto-deploys on every push
+
+### Vercel
+
+Click the "Deploy with Vercel" button above for one-click deployment.
+
+## Documentation
+
+- **[QUICK_START.md](./QUICK_START.md)** - 15-minute quick start guide
+- **[NOTION_SETUP.md](./NOTION_SETUP.md)** - Complete guide to setting up Notion database
+- **[POSTMARK_SETUP.md](./POSTMARK_SETUP.md)** - Complete guide to setting up Postmark email
+- **[REDIS_SETUP.md](./REDIS_SETUP.md)** - Redis setup guide (Railway vs Upstash)
+- **[RAILWAY_SETUP.md](./RAILWAY_SETUP.md)** - Guide to deploying on Railway
 
 ## License
 

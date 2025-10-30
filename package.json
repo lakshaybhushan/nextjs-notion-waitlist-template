@@ -29,7 +29,7 @@
     "react-dom": "^18",
     "react-email": "2.1.4",
     "react-icons": "^5.2.1",
-    "resend": "^3.3.0",
+    "postmark": "^4.0.5",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"
