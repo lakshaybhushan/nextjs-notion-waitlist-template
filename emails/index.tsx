@@ -72,24 +72,23 @@ NotionWaitlistEmail.PreviewProps = {
 export default NotionWaitlistEmail;
 
 const main = {
-  background: "linear-gradient(135deg, #0c0d0f 0%, #181b1f 50%, #0c0d0f 100%)",
+  backgroundColor: "#f5f7fa",
   fontFamily: 'figtree, "Helvetica Neue", Helvetica, Arial, sans-serif',
-  padding: "40px 0",
-  color: "#f8f9fa",
+  padding: "40px 20px",
 };
 
 const container = {
   margin: "0 auto",
-  padding: "32px 40px",
-  backgroundColor: "#181b1f",
+  padding: "40px",
+  backgroundColor: "#ffffff",
   borderRadius: "12px",
-  border: "1px solid #31363e",
-  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
+  border: "1px solid #e5e7eb",
+  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
   maxWidth: "600px",
 };
 
 const logo = {
-  margin: "0 auto 24px",
+  margin: "0 auto 32px",
   display: "block",
 };
 
@@ -97,7 +96,7 @@ const greeting = {
   fontSize: "20px",
   lineHeight: "28px",
   fontWeight: "600",
-  color: "#f8f9fa",
+  color: "#1f2937",
   marginBottom: "16px",
 };
 
@@ -105,28 +104,30 @@ const paragraph = {
   fontSize: "16px",
   lineHeight: "26px",
   marginBottom: "20px",
-  color: "#f8f9fa",
+  color: "#374151",
 };
 
 const link = {
   color: "#647ef2",
-  textDecoration: "underline",
+  textDecoration: "none",
+  fontWeight: "500",
 };
 
 const signOff = {
   fontSize: "16px",
   lineHeight: "26px",
-  marginTop: "24px",
-  color: "#f8f9fa",
+  marginTop: "32px",
+  color: "#374151",
 };
 
 const hr = {
-  borderColor: "#31363e",
-  margin: "24px 0",
+  borderColor: "#e5e7eb",
+  margin: "32px 0",
 };
 
 const footer = {
-  color: "#a2aab8",
+  color: "#6b7280",
   fontSize: "13px",
   lineHeight: "20px",
+  textAlign: "center" as const,
 };

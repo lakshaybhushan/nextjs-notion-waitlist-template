@@ -43,10 +43,13 @@ async function checkRateLimit(ip: string): Promise<boolean> {
 }
 
 export async function POST(request: NextRequest) {
-  const ip = request.ip ?? "127.0.0.1";
+  // Get real client IP from headers (for Railway/Vercel/proxies)
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  const realIp = request.headers.get("x-real-ip");
+  const ip = forwardedFor?.split(",")[0] ?? realIp ?? request.ip ?? "unknown";
 
-  // Rate limiting check
-  if (redis) {
+  // Rate limiting check (skip for localhost/unknown to prevent blocking everyone)
+  if (redis && ip !== "127.0.0.1" && ip !== "unknown") {
     console.log(`🔒 Checking rate limit for IP: ${ip}`);
     const allowed = await checkRateLimit(ip);
 
@@ -58,6 +61,8 @@ export async function POST(request: NextRequest) {
       );
     }
     console.log(`✅ Rate limit OK for IP: ${ip}`);
+  } else if (redis) {
+    console.warn(`⚠️  Skipping rate limit for IP: ${ip} (localhost/unknown)`);
   }
 
   const { email, firstname } = await request.json();
