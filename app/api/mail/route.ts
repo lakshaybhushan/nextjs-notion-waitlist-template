@@ -4,74 +4,60 @@ import WelcomeTemplate from "../../../emails";
 
 import * as postmark from "postmark";
 import { NextRequest, NextResponse } from "next/server";
-import { Redis } from "@upstash/redis";
-import { Ratelimit } from "@upstash/ratelimit";
+import Redis from "ioredis";
 
 const postmarkClient = new postmark.ServerClient(
   process.env.POSTMARK_API_KEY || "",
 );
 
-// Support both Railway Redis and Upstash Redis (optional - for rate limiting)
-let ratelimit: Ratelimit | null = null;
+// Railway Redis setup for rate limiting
+let redis: Redis | null = null;
 
 if (process.env.REDIS_URL) {
-  // Railway Redis (regular Redis URL)
-  console.log("✅ Railway Redis detected - Rate limiting ENABLED (2 req/min)");
-  const redis = Redis.fromEnv();
-  ratelimit = new Ratelimit({
-    redis,
-    limiter: Ratelimit.slidingWindow(2, "1 m"),
-  });
-} else if (
-  process.env.UPSTASH_REDIS_REST_URL &&
-  process.env.UPSTASH_REDIS_REST_TOKEN
-) {
-  // Upstash Redis (REST API)
-  console.log("✅ Upstash Redis detected - Rate limiting ENABLED (2 req/min)");
-  const redis = new Redis({
-    url: process.env.UPSTASH_REDIS_REST_URL,
-    token: process.env.UPSTASH_REDIS_REST_TOKEN,
-  });
-  ratelimit = new Ratelimit({
-    redis,
-    limiter: Ratelimit.slidingWindow(2, "1 m"),
-  });
+  redis = new Redis(process.env.REDIS_URL);
+  console.log("✅ Railway Redis connected - Rate limiting ENABLED (2 req/min)");
 } else {
   console.warn("⚠️  Redis NOT configured - Rate limiting DISABLED");
-  console.warn("   → For production: Add REDIS_URL (Railway) or UPSTASH_REDIS_REST_URL");
 }
 
 // Log startup configuration
 console.log("\n📋 Kontentino Waitlist API Configuration:");
 console.log(`   Postmark: ${process.env.POSTMARK_API_KEY ? "✅ Configured" : "❌ Missing"}`);
 console.log(`   Postmark From: ${process.env.POSTMARK_FROM_EMAIL || "❌ Not set"}`);
-console.log(`   Redis: ${ratelimit ? "✅ ENABLED" : "⚠️  DISABLED (optional)"}`);
-console.log(`   Rate Limit: ${ratelimit ? "2 requests/minute per IP" : "None (not recommended for production)"}\n`);
+console.log(`   Rate Limit: ${redis ? "✅ ENABLED (2 requests/minute per IP)" : "⚠️  DISABLED"}\n`);
 
-export async function POST(request: NextRequest, response: NextResponse) {
+// Simple rate limiting function
+async function checkRateLimit(ip: string): Promise<boolean> {
+  if (!redis) return true; // Allow if no Redis
+
+  const key = `ratelimit:${ip}`;
+  const count = await redis.incr(key);
+
+  if (count === 1) {
+    // First request, set expiry to 60 seconds
+    await redis.expire(key, 60);
+  }
+
+  // Allow max 2 requests per minute
+  return count <= 2;
+}
+
+export async function POST(request: NextRequest) {
   const ip = request.ip ?? "127.0.0.1";
 
-  // Rate limiting (optional - only if Redis is configured)
-  if (ratelimit) {
+  // Rate limiting check
+  if (redis) {
     console.log(`🔒 Checking rate limit for IP: ${ip}`);
-    const result = await ratelimit.limit(ip);
+    const allowed = await checkRateLimit(ip);
 
-    if (!result.success) {
+    if (!allowed) {
       console.warn(`❌ Rate limit exceeded for IP: ${ip} - Request blocked`);
-      return Response.json(
-        {
-          error: "Too many requests!!",
-        },
-        {
-          status: 429,
-        },
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        { status: 429 },
       );
     }
-    console.log(
-      `✅ Rate limit OK for IP: ${ip} (${result.remaining} requests remaining)`,
-    );
-  } else {
-    console.log(`⚠️  Rate limiting skipped (Redis not configured) for IP: ${ip}`);
+    console.log(`✅ Rate limit OK for IP: ${ip}`);
   }
 
   const { email, firstname } = await request.json();

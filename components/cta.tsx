@@ -28,7 +28,7 @@ export default function CTA() {
 
       <motion.div variants={itemVariants}>
         <TextBlur
-          className="text-balance text-center text-3xl font-medium tracking-tighter sm:text-5xl"
+          className="text-balance text-center text-3xl font-medium tracking-tighter bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent sm:text-5xl"
           text="Create in ChatGPT. Approve with Kontentino."
         />
       </motion.div>

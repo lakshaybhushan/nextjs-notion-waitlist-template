@@ -1,159 +1,317 @@
-<h1 align="center">Next.js + Notion — Wailtist Template</h1>
+# Kontentino GPT Apps - Waitlist Landing Page
 
 <p align="center">
-
-<img src ="https://img.shields.io/badge/Next.js-000000.svg?style=for-the-badge&logo=nextdotjs&logoColor=white">
-<img src ="https://img.shields.io/badge/Upstash-00E9A3.svg?style=for-the-badge&logo=Upstash&logoColor=white">
-<img src ="https://img.shields.io/badge/Notion-000000.svg?style=for-the-badge&logo=Notion&logoColor=white">
-<img src ="https://img.shields.io/badge/Postmark-FFCD00.svg?style=for-the-badge&logo=Postmark&logoColor=black">
-<img src ="https://img.shields.io/badge/shadcn/ui-000000.svg?style=for-the-badge&logo=shadcn/ui&logoColor=white">
-<img src ="https://img.shields.io/badge/Vercel-000000.svg?style=for-the-badge&logo=Vercel&logoColor=white">
-
+<img src="https://img.shields.io/badge/Next.js-000000.svg?style=for-the-badge&logo=nextdotjs&logoColor=white">
+<img src="https://img.shields.io/badge/Notion-000000.svg?style=for-the-badge&logo=Notion&logoColor=white">
+<img src="https://img.shields.io/badge/Postmark-FFCD00.svg?style=for-the-badge&logo=Postmark&logoColor=black">
+<img src="https://img.shields.io/badge/Railway-0B0D0E.svg?style=for-the-badge&logo=Railway&logoColor=white">
 </p>
 
-![GithubBanner](./app/opengraph-image.png)
+![Landing Page Preview](./app/opengraph-image.png)
 
-This is a waitlist application for **Kontentino GPT Apps** using Next.js 14, Notion as a CMS, Upstash Redis for rate limiting and **Postmark** for sending transactional emails.
+A waitlist application for **Kontentino GPT Apps** - the first ChatGPT integration for social media professionals. Generate content with AI, visualize platform-accurate previews, and export to Kontentino for instant approval.
 
-The UI is built using a mix of shadcn/ui, Magic UI and Tailwind CSS.
+**Live Demo:** Coming soon
 
-**Demo:** [https://nextjs-notion-waitlist.vercel.app](https://nextjs-notion-waitlist.vercel.app)
+## What is Kontentino GPT Apps?
 
-**Sample Database** ([Link](https://lakshaybhushan.notion.site/15e45b25609e80408f83ebb97b45882b?v=c949c24dff4a42b3baa31bfb3e8a3354))
-<a href="https://lakshaybhushan.notion.site/15e45b25609e80408f83ebb97b45882b?v=c949c24dff4a42b3baa31bfb3e8a3354" target="_blank" rel="noopener noreferrer">
- <img src ="./public/sample-db.png">
-</a>
+Three powerful ChatGPT applications for social media teams:
+
+- **Post Preview** - Generate and visualize posts with pixel-perfect platform previews
+- **Content Calendar** - Display your month of content at a glance
+- **Post List** - Bulk overview and management for high-volume campaigns
 
 ## Features
 
-- **Next.js 14**: The most popular React framework
-- **Notion as a CMS**: Manage waitlist users in a Notion database
-- **Upstash Redis**: Rate limit signups to prevent spam
-- **Postmark**: Send transactional emails with high deliverability
-- **Railway/Vercel**: Deploy to Railway or Vercel
-- **shadcn/ui**: Beautiful UI components built with Radix UI and Tailwind CSS
+- **Next.js 14** - Modern React framework with App Router
+- **Notion Database** - Waitlist data stored in Notion as CMS
+- **Postmark Email** - Automated welcome emails (10,000 free/month)
+- **Redis Rate Limiting** - Prevent spam (Railway Redis or Upstash)
+- **Beautiful UI** - shadcn/ui components with dark/light theme
+- **Video Showcase** - Product demonstration section
+- **Mobile Responsive** - Optimized for all devices
 
-## Why Notion?
+## Quick Start
 
-Notion is used everywhere nowadays. It's a great tool for managing content and it's free to use. But a lot of people don't know that they can use Notion as a CMS for their websites which stands for Content Management System. This template is a very basic implementation of using Notion as a CMS for a waitlist.
+### Prerequisites
 
-However, You can extend it to use Notion for other types of content as well. Using Notion as a CMS is a great way to manage content without having to build a backend or a database. You can use Notion's API to fetch data from your Notion workspace and display it on your website.
+- Node.js 18+
+- pnpm (recommended) or npm
+- Notion account with database
+- Postmark account (free tier)
+- Redis (Railway or Upstash)
 
-## How to get started?
-
-There are a few things you need to do before you can use this template:
-
-### Notion
-
-Assuming that you have a Notion account and a workspace, you can create a new database in your workspace and add the following columns:
-
-- **Name**: Title
-- **Email**: Email
-
-Now you need to get the `SECRET` key for your workspace. You can create an internal integration and get the secret from the [Notion Integrations page](https://www.notion.so/my-integrations). You will need this key to fetch data from your workspace.
-
-Now you need to get the ID of the database you created. You can get it from the URL of the database. It will look something like this:
-
-`https://www.notion.so/{DATABASE_ID}?v={NUMBERS}`
-
-You need to copy the `DATABASE_ID` from the URL.
-
-### Redis (Rate Limiting)
-
-**For local development**: Use Upstash Redis (free tier, 10K requests/day)
-- Sign up at https://console.upstash.com
-- Create new Redis database
-- Copy REST URL and TOKEN
-
-**For production on Railway**: Use Railway Redis (built-in, no setup needed)
-- Add Redis service in Railway dashboard
-- `REDIS_URL` automatically configured
-
-The app automatically detects which Redis to use.
-
-**Detailed guide**: See [REDIS_SETUP.md](./REDIS_SETUP.md) for complete instructions.
-
-### Postmark
-
-You need to sign up for a Postmark account (10,000 free emails/month trial). Then verify your sender email address or domain. Generate a Server API token from the Postmark dashboard.
-
-**Detailed guide**: See [POSTMARK_SETUP.md](./POSTMARK_SETUP.md) for step-by-step instructions.
-
-## Building with this template
-
-There are two ways to use this template:
-
-1. **Deploy to Vercel**: Click the button below to deploy this template to Vercel with a single click.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flakshaybhushan%2Fnextjs-notion-waitlist-template&env=NOTION_SECRET,NOTION_DB,RESEND_API_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN)
-
-The above button will create a new Vercel project and clone this repository into your GitHub account. You will need to provide the following environment variables:
-
-- `NOTION_SECRET`: Your Notion integration secret key
-- `NOTION_DB`: The ID of your Notion database
-- `POSTMARK_API_KEY`: Your Postmark Server API token
-- `POSTMARK_FROM_EMAIL`: Verified sender email address
-- `POSTMARK_REPLY_TO`: Email address for replies
-- `UPSTASH_REDIS_REST_URL`: Your Upstash Redis REST URL
-- `UPSTASH_REDIS_REST_TOKEN`: Your Upstash Redis REST token
-
-2. **Manual Setup**: Fork this repository and clone it to your local machine.
-
-Install the dependencies, this project uses `bun` as a package manager:
+### Installation
 
 ```bash
-bun install
+# Clone repository
+git clone https://github.com/kontentino/kontentino-gpt-landing-waitlist.git
+cd kontentino-gpt-landing-waitlist
+
+# Install dependencies
+pnpm install
+
+# Copy environment variables
+cp .env.example .env.local
+
+# Add your credentials to .env.local
+# See setup guides below for details
+
+# Run development server
+pnpm dev
+
+# Open http://localhost:3000
 ```
 
-Run the development server:
+### Environment Variables
 
 ```bash
-bun dev
+# Notion
+NOTION_SECRET=secret_xxxxxxxxxxxxx
+NOTION_DB=xxxxxxxxxxxxxxxxxxxxxxx
+
+# Postmark
+POSTMARK_API_KEY=xxxxxxxx-xxxx-xxxx
+POSTMARK_FROM_EMAIL=noreply@kontentino.com
+POSTMARK_REPLY_TO=support@kontentino.com
+
+# Redis (Railway auto-configured, or use Upstash)
+REDIS_URL=redis://...
+# OR
+UPSTASH_REDIS_REST_URL=https://...
+UPSTASH_REDIS_REST_TOKEN=xxxxx
 ```
 
-To run the email server:
+## Setup Guides
 
-```bash
-bun email
-```
+Step-by-step instructions for each service:
 
-Create a `.env.local` file in the root of the project and add the environment variables mentioned above. You can also have a look at the `.env.example` file for reference.
-
-## Deployment Options
-
-### Railway (Recommended for Kontentino)
-
-This project includes Railway configuration for easy deployment.
-
-**See detailed guide**: [RAILWAY_SETUP.md](./RAILWAY_SETUP.md)
-
-**Quick steps**:
-1. Push code to GitHub
-2. Create new Railway project from GitHub repo
-3. Add environment variables in Railway dashboard
-4. Railway auto-deploys on every push
-
-### Vercel
-
-Click the "Deploy with Vercel" button above for one-click deployment.
+- **[QUICK_START.md](./QUICK_START.md)** - Complete setup in 15 minutes
+- **[NOTION_SETUP.md](./NOTION_SETUP.md)** - Configure Notion database
+- **[POSTMARK_SETUP.md](./POSTMARK_SETUP.md)** - Setup email service
+- **[REDIS_SETUP.md](./REDIS_SETUP.md)** - Configure rate limiting
+- **[RAILWAY_SETUP.md](./RAILWAY_SETUP.md)** - Deploy to Railway
+- **[LOGS_GUIDE.md](./LOGS_GUIDE.md)** - Monitor and debug
 
 ## Documentation
 
-- **[QUICK_START.md](./QUICK_START.md)** - 15-minute quick start guide
-- **[NOTION_SETUP.md](./NOTION_SETUP.md)** - Complete guide to setting up Notion database
-- **[POSTMARK_SETUP.md](./POSTMARK_SETUP.md)** - Complete guide to setting up Postmark email
-- **[REDIS_SETUP.md](./REDIS_SETUP.md)** - Redis setup guide (Railway vs Upstash)
-- **[RAILWAY_SETUP.md](./RAILWAY_SETUP.md)** - Guide to deploying on Railway
-- **[LOGS_GUIDE.md](./LOGS_GUIDE.md)** - Understanding Railway logs and monitoring
+Full technical documentation available in [docs/README.md](./docs/README.md):
+
+- Architecture overview
+- API routes specification
+- Component structure
+- Deployment guide
+- Troubleshooting
+
+## Development
+
+### Run Development Server
+
+```bash
+pnpm dev
+```
+
+### Preview Email Templates
+
+```bash
+pnpm email
+# Open http://localhost:3001
+```
+
+### Build for Production
+
+```bash
+pnpm build
+pnpm start
+```
+
+## Deployment
+
+### Railway (Recommended)
+
+Railway provides built-in Redis and automatic deployments.
+
+1. Push code to GitHub
+2. Create new Railway project from repo
+3. Add Redis service in Railway dashboard
+4. Set environment variables
+5. Deploy automatically on every push
+
+See [RAILWAY_SETUP.md](./RAILWAY_SETUP.md) for complete instructions.
+
+### Vercel
+
+One-click deployment to Vercel:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkontentino%2Fkontentino-gpt-landing-waitlist&env=NOTION_SECRET,NOTION_DB,POSTMARK_API_KEY,POSTMARK_FROM_EMAIL,POSTMARK_REPLY_TO,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN)
+
+Note: Vercel requires Upstash Redis (Railway Redis not available).
+
+## Project Structure
+
+```
+├── app/
+│   ├── api/
+│   │   ├── mail/route.ts       # Email sending endpoint
+│   │   └── notion/route.ts     # Notion database endpoint
+│   ├── page.tsx                # Main landing page
+│   └── layout.tsx              # Root layout
+├── components/
+│   ├── cta.tsx                 # Hero section
+│   ├── form.tsx                # Signup form
+│   ├── about-section.tsx       # Video & features
+│   └── ui/                     # shadcn/ui components
+├── emails/
+│   └── index.tsx               # Welcome email template
+├── docs/
+│   └── README.md               # Technical documentation
+└── public/
+    └── kontentino-logo.svg     # Brand assets
+```
+
+## API Routes
+
+### POST /api/mail
+
+Send welcome email via Postmark.
+
+**Request:**
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com"
+}
+```
+
+**Rate Limit:** 2 requests/minute per IP
+
+### POST /api/notion
+
+Add user to Notion waitlist database.
+
+**Request:**
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com"
+}
+```
+
+## Customization
+
+### Update Video
+
+Replace the placeholder video in `components/about-section.tsx`:
+
+```typescript
+const videoUrl = "https://www.youtube.com/embed/YOUR_VIDEO_ID";
+```
+
+### Modify Theme
+
+Edit color scheme in `app/globals.css`:
+
+```css
+--background: 216 25% 5%;    /* Blue-tinted dark */
+--primary: 230 82% 67%;      /* Kontentino blue */
+```
+
+### Change Content
+
+Main content sections:
+- Hero: `components/cta.tsx`
+- Form: `components/form.tsx`
+- About: `components/about-section.tsx`
+- Email: `emails/index.tsx`
+
+## Tech Stack
+
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS + shadcn/ui
+- **Animation:** Framer Motion
+- **Email:** Postmark + React Email
+- **Database:** Notion API
+- **Cache:** Redis (ioredis)
+- **Deployment:** Railway / Vercel
+
+## Monitoring
+
+### View Logs (Railway)
+
+```bash
+railway logs --follow
+```
+
+### Check Email Delivery
+
+Visit [Postmark Dashboard](https://account.postmarkapp.com) to monitor:
+- Email delivery rate
+- Bounce rate
+- Open rate (if tracking enabled)
+
+### Monitor Waitlist
+
+Open your Notion database to see all signups in real-time.
+
+## Troubleshooting
+
+### Email not sending
+- Verify `POSTMARK_API_KEY` is valid
+- Check sender email is verified in Postmark
+- Review Postmark dashboard for errors
+
+### Notion connection fails
+- Ensure database is shared with integration
+- Verify `NOTION_SECRET` and `NOTION_DB` are correct
+- Check database has "Name" (title) and "Email" columns
+
+### Rate limiting not working
+- Confirm Redis is connected (`REDIS_URL` or Upstash)
+- Check Railway Redis service is running
+- Review logs for connection errors
+
+See [docs/README.md](./docs/README.md) for more troubleshooting tips.
+
+## Security
+
+- **Rate Limiting:** 2 requests/minute per IP prevents spam
+- **Email Validation:** Client and server-side validation
+- **Environment Variables:** Never commit `.env.local`
+- **Redis:** Secure connection to Railway or Upstash
+
+## Contributing
+
+### Code Style
+
+- TypeScript for all code
+- Tailwind CSS for styling
+- Follow existing component patterns
+- Use conventional commits
+
+### Commit Format
+
+```
+feat: add new feature
+fix: resolve bug
+docs: update documentation
+style: format code
+refactor: restructure code
+test: add tests
+chore: update config
+```
+
+## Support
+
+For issues or questions:
+- **Email:** support@kontentino.com
+- **Documentation:** [docs/README.md](./docs/README.md)
+- **Setup Guides:** See links above
 
 ## License
 
-You can use this template for personal or commercial projects. You can modify it as you like.
-
-However, if you use this template for commercial projects, please consider [buying me a coffee](https://www.buymeacoffee.com/lakshaybhushan) or sponsoring me on GitHub. It will help me to keep creating more templates like this.
-
-<a href="https://www.buymeacoffee.com/lakshaybhushan" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50" width="200"></a>
+Proprietary - Kontentino
 
 ---
 
-If you have any questions or need help with this template, feel free to reach out to me on [Twitter](https://x.com/blakssh) or leave a comment on this repository.
+Built with ❤️ by the Kontentino Engineering Team

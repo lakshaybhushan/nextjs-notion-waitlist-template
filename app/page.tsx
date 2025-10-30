@@ -137,10 +137,10 @@ export default function Home() {
       {/* Light mode particles */}
       <div className="block dark:hidden">
         <Particles
-          quantityDesktop={200}
-          quantityMobile={80}
+          quantityDesktop={500}
+          quantityMobile={200}
           ease={80}
-          color={"#2146ec"}
+          color={"#0f2a8f"}
           refresh
         />
       </div>

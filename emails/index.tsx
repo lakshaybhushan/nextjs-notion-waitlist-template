@@ -17,7 +17,7 @@ interface EmailProps {
 export const NotionWaitlistEmail = ({ userFirstname }: EmailProps) => (
   <Html>
     <Head />
-    <Preview>Welcome to Kontentino GPT Apps Beta, {userFirstname}! 🚀</Preview>
+    <Preview>Welcome to Kontentino ChatGPT App, {userFirstname}! 🚀</Preview>
     <Body style={main}>
       <Container style={container}>
         <Img
@@ -29,15 +29,14 @@ export const NotionWaitlistEmail = ({ userFirstname }: EmailProps) => (
         />
         <Text style={greeting}>Hi {userFirstname},</Text>
         <Text style={paragraph}>
-          Welcome to Kontentino GPT Apps — the revolutionary ChatGPT integration
-          that brings AI-powered content creation and instant approvals together.
-          You're now on the list for exclusive early beta access!
+          Welcome to <strong>Kontentino ChatGPT App</strong> — you're now on the list for exclusive early beta access!
         </Text>
         <Text style={paragraph}>
-          <strong>What's coming:</strong> Generate social media posts in ChatGPT,
-          see pixel-perfect platform previews, and share for instant approval —
-          all without leaving your chat. We're launching with Post Preview first,
-          followed by Content Calendar and Post List.
+          <strong>Create in ChatGPT. Approve with Kontentino.</strong>
+        </Text>
+        <Text style={paragraph}>
+          Finally—generate posts, preview them perfectly, and share for approval without the tool-switching headache.
+          We're launching with <strong>Content Calendar</strong> first, followed by Post Preview and Post List.
         </Text>
         <Text style={paragraph}>
           We'll notify you as soon as beta access opens. In the meantime, if you
@@ -52,7 +51,7 @@ export const NotionWaitlistEmail = ({ userFirstname }: EmailProps) => (
           .
         </Text>
         <Text style={signOff}>
-          Stay creative,
+          Stay in your creative flow,
           <br />
           The Kontentino Team
         </Text>
@@ -73,54 +72,61 @@ NotionWaitlistEmail.PreviewProps = {
 export default NotionWaitlistEmail;
 
 const main = {
-  background: "linear-gradient(-225deg, #FFE29F 0%, #FFA99F 48%, #FF719A 100%)",
+  background: "linear-gradient(135deg, #0c0d0f 0%, #181b1f 50%, #0c0d0f 100%)",
   fontFamily: 'figtree, "Helvetica Neue", Helvetica, Arial, sans-serif',
   padding: "40px 0",
-  color: "#cccccc",
+  color: "#f8f9fa",
 };
 
 const container = {
   margin: "0 auto",
-  padding: "24px 32px 48px",
-  backgroundColor: "#1a1a1a",
+  padding: "32px 40px",
+  backgroundColor: "#181b1f",
   borderRadius: "12px",
-  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+  border: "1px solid #31363e",
+  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
   maxWidth: "600px",
 };
 
 const logo = {
-  margin: "0 auto",
-  paddingBottom: "20px",
+  margin: "0 auto 24px",
+  display: "block",
 };
 
 const greeting = {
-  fontSize: "18px",
+  fontSize: "20px",
   lineHeight: "28px",
+  fontWeight: "600",
+  color: "#f8f9fa",
+  marginBottom: "16px",
 };
 
 const paragraph = {
   fontSize: "16px",
   lineHeight: "26px",
   marginBottom: "20px",
+  color: "#f8f9fa",
 };
 
 const link = {
-  color: "#F7FF9B",
+  color: "#647ef2",
   textDecoration: "underline",
 };
 
 const signOff = {
   fontSize: "16px",
   lineHeight: "26px",
-  marginTop: "20px",
+  marginTop: "24px",
+  color: "#f8f9fa",
 };
 
 const hr = {
-  borderColor: "#cccccc",
-  margin: "20px 0",
+  borderColor: "#31363e",
+  margin: "24px 0",
 };
 
 const footer = {
-  color: "#8c8c8c",
-  fontSize: "12px",
+  color: "#a2aab8",
+  fontSize: "13px",
+  lineHeight: "20px",
 };

@@ -109,15 +109,21 @@ NOTION_DB=a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6
 - **Solution**: The "Name" column must be type "Title"
 - Every Notion database has one Title column (the first column by default)
 
-## Sample Database Template
+## Sample Database Structure
 
-Want to use a pre-built template? Duplicate this:
-👉 [Sample Waitlist Database](https://lakshaybhushan.notion.site/15e45b25609e80408f83ebb97b45882b?v=c949c24dff4a42b3baa31bfb3e8a3354)
+Your database should follow this structure:
 
-After duplicating:
-1. Create your integration (Step 1)
-2. Share the duplicated database with your integration (Step 4)
-3. Get the DATABASE_ID from your duplicated database URL (Step 5)
+**Column Configuration:**
+- Column 1: `Name` (type: Title) - Required
+- Column 2: `Email` (type: Email) - Required
+- Column 3: `Created time` (type: Created time) - Optional
+- Column 4: `Status` (type: Select) - Optional
+
+**Example entries:**
+| Name | Email | Created time | Status |
+|------|-------|--------------|--------|
+| John Doe | john@example.com | Oct 30, 2025 | New |
+| Jane Smith | jane@example.com | Oct 30, 2025 | Contacted |
 
 ## Advanced: Database Views
 
