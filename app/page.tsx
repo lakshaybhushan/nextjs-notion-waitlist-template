@@ -4,22 +4,29 @@ import { toast } from "sonner";
 import { useState } from "react";
 import CTA from "@/components/cta";
 import Form from "@/components/form";
+import VideoShowcase from "@/components/video-showcase";
 import AboutSection from "@/components/about-section";
+import FinalCTA from "@/components/final-cta";
 import Particles from "@/components/ui/particles";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
 export default function Home() {
-  const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [role, setRole] = useState<string>("");
+  const [linkedin, setLinkedin] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
 
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
+  const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setRole(event.target.value);
+  };
+
+  const handleLinkedInChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLinkedin(event.target.value);
   };
 
   const isValidEmail = (email: string) => {
@@ -28,13 +35,13 @@ export default function Home() {
   };
 
   const handleSubmit = async () => {
-    if (!name || !email) {
-      toast.error("Please fill in all fields 😠");
+    if (!email) {
+      toast.error("Please enter your email address");
       return;
     }
 
     if (!isValidEmail(email)) {
-      toast.error("Please enter a valid email address 😠");
+      toast.error("Please enter a valid email address");
       return;
     }
 
@@ -42,64 +49,45 @@ export default function Home() {
 
     const promise = new Promise(async (resolve, reject) => {
       try {
-        // First, attempt to send the email
-        const mailResponse = await fetch("/api/mail", {
-          cache: "no-store",
+        // Save to Pipedrive CRM
+        const pipedriveResponse = await fetch("/api/pipedrive", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ firstname: name, email }),
+          body: JSON.stringify({ email, role, linkedin }),
         });
 
-        if (!mailResponse.ok) {
-          if (mailResponse.status === 429) {
+        if (!pipedriveResponse.ok) {
+          if (pipedriveResponse.status === 429) {
             reject("Rate limited");
           } else {
-            reject("Email sending failed");
+            reject("Failed to save");
           }
-          return; // Exit the promise early if mail sending fails
+          return;
         }
 
-        // If email sending is successful, proceed to insert into Notion
-        const notionResponse = await fetch("/api/notion", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name, email }),
-        });
-
-        if (!notionResponse.ok) {
-          if (notionResponse.status === 429) {
-            reject("Rate limited");
-          } else {
-            reject("Notion insertion failed");
-          }
-        } else {
-          resolve({ name });
-        }
+        resolve({ email });
       } catch (error) {
         reject(error);
       }
     });
 
     toast.promise(promise, {
-      loading: "Securing your beta access... 🚀",
+      loading: "Securing your beta access...",
       success: (data) => {
-        setName("");
         setEmail("");
-        return "Welcome! Check your email for next steps 🎉";
+        setRole("");
+        setLinkedin("");
+        return "Welcome! You're on the waitlist. We'll be in touch soon.";
       },
       error: (error) => {
         if (error === "Rate limited") {
           return "You're doing that too much. Please try again later";
-        } else if (error === "Email sending failed") {
-          return "Failed to send email. Please try again 😢.";
-        } else if (error === "Notion insertion failed") {
-          return "Failed to save your details. Please try again 😢.";
+        } else if (error === "Failed to save") {
+          return "Failed to save your details. Please try again.";
         }
-        return "An error occurred. Please try again 😢.";
+        return "An error occurred. Please try again.";
       },
     });
 
@@ -109,27 +97,63 @@ export default function Home() {
   };
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center overflow-x-clip pt-12 md:pt-24">
-      {/* Light mode gradient background */}
-      <div className="pointer-events-none absolute inset-0 -z-10 dark:hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/15 via-background to-primary/20" />
-      </div>
+    <main className="relative flex min-h-screen flex-col overflow-x-clip">
+      <Header />
 
-      <section className="flex flex-col items-center px-4 sm:px-6 lg:px-8">
-        <Header />
+      {/* Blue Hero Section */}
+      <section className="relative w-full bg-primary px-4 pb-20 sm:px-6 lg:px-8 lg:pb-32">
+        <div className="mx-auto flex max-w-7xl flex-col items-center">
+          <CTA
+            email={email}
+            role={role}
+            linkedin={linkedin}
+            handleEmailChange={handleEmailChange}
+            handleRoleChange={handleRoleChange}
+            handleLinkedInChange={handleLinkedInChange}
+            handleSubmit={handleSubmit}
+            loading={loading}
+            formComponent={
+              <Form
+                email={email}
+                role={role}
+                linkedin={linkedin}
+                handleEmailChange={handleEmailChange}
+                handleRoleChange={handleRoleChange}
+                handleLinkedInChange={handleLinkedInChange}
+                handleSubmit={handleSubmit}
+                loading={loading}
+              />
+            }
+          />
+        </div>
+      </section>
 
-        <CTA />
+      {/* Video Showcase Section */}
+      <section className="w-full bg-background px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+        <div className="mx-auto max-w-6xl">
+          <VideoShowcase />
+        </div>
+      </section>
 
-        <Form
-          name={name}
-          email={email}
-          handleNameChange={handleNameChange}
-          handleEmailChange={handleEmailChange}
-          handleSubmit={handleSubmit}
-          loading={loading}
-        />
-
+      {/* Main Content Section - Pink Background */}
+      <section className="w-full bg-background">
         <AboutSection />
+      </section>
+
+      {/* Final CTA Section - White Background */}
+      <section className="w-full bg-white px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+        <div className="mx-auto flex max-w-3xl flex-col items-center">
+          <FinalCTA
+            email={email}
+            role={role}
+            linkedin={linkedin}
+            handleEmailChange={handleEmailChange}
+            handleRoleChange={handleRoleChange}
+            handleLinkedInChange={handleLinkedInChange}
+            handleSubmit={handleSubmit}
+            loading={loading}
+          />
+        </div>
       </section>
 
       <Footer />

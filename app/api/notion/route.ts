@@ -14,16 +14,15 @@ export async function POST(request: Request) {
           type: "email",
           email: body?.email,
         },
-        Name: {
-          type: "title",
-          title: [
-            {
-              type: "text",
-              text: {
-                content: body?.name,
-              },
-            },
-          ],
+        Role: {
+          type: "select",
+          select: {
+            name: body?.role || "Other",
+          },
+        },
+        LinkedIn: {
+          type: "url",
+          url: body?.linkedin || null,
         },
       },
     });

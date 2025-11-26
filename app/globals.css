@@ -2,38 +2,129 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Kontentino Fonts - Inter */
+@font-face {
+  font-family: "Inter";
+  src:
+    local("Inter Regular"),
+    local("Inter-Regular"),
+    url("/fonts/inter-regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src:
+    local("Inter Medium"),
+    local("Inter-Medium"),
+    url("/fonts/inter-medium.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src:
+    local("Inter SemiBold"),
+    local("Inter-SemiBold"),
+    url("/fonts/inter-semibold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src:
+    local("Inter Bold"),
+    local("Inter-Bold"),
+    url("/fonts/inter-bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* Kontentino Fonts - Tobias */
+@font-face {
+  font-family: "Tobias";
+  src:
+    local("Tobias Regular"),
+    local("Tobias-Regular"),
+    url("/fonts/tobias-regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tobias";
+  src:
+    local("Tobias Medium"),
+    local("Tobias-Medium"),
+    url("/fonts/tobias-medium.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tobias";
+  src:
+    local("Tobias Bold"),
+    local("Tobias-Bold"),
+    url("/fonts/tobias-bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
 @layer base {
   :root {
-    /* Kontentino Light Theme (from gpt-apps) */
-    --background: 0 0% 100%; /* #ffffff */
-    --foreground: 215 12% 11%; /* #181b1f */
+    /* Kontentino Brand Colors */
+    --background: 330 100% 97%; /* Pinkish: #ffeff2 */
+    --foreground: 0 0% 10%; /* #1a1a1a */
 
-    --card: 0 0% 100%; /* #ffffff */
-    --card-foreground: 215 12% 11%; /* #181b1f */
+    --card: 0 0% 100%; /* Pure white: #ffffff */
+    --card-foreground: 0 0% 10%; /* #1a1a1a */
 
     --popover: 0 0% 100%; /* #ffffff */
-    --popover-foreground: 215 12% 11%; /* #181b1f */
+    --popover-foreground: 0 0% 10%; /* #1a1a1a */
 
-    --primary: 230 82% 53%; /* #2146ec */
+    --primary: 230 85% 53%; /* Kontentino Blue: #2146ec */
     --primary-foreground: 0 0% 100%; /* #ffffff */
 
-    --secondary: 220 14% 96%; /* #f2f3f5 */
-    --secondary-foreground: 215 12% 11%; /* #181b1f */
+    --primary-dark: 230 100% 40%; /* #0025cb */
 
-    --muted: 220 14% 96%; /* #f2f3f5 */
-    --muted-foreground: 215 18% 55%; /* #7a869a */
+    --secondary: 329 100% 77%; /* Pork/Pink: #ff8eef */
+    --secondary-foreground: 0 0% 10%; /* #1a1a1a */
 
-    --accent: 220 14% 96%; /* #f2f3f5 */
-    --accent-foreground: 215 12% 11%; /* #181b1f */
+    --secondary-light: 320 100% 84%; /* Light Pink: #ffb0f4 */
+
+    --grass: 157 77% 49%; /* Green: #2dd280 */
+    --grass-foreground: 0 0% 100%; /* #ffffff */
+
+    --muted: 0 6% 98%; /* Pink Dust 50: #fff7f9 */
+    --muted-foreground: 0 0% 45%; /* #737373 */
+
+    --accent: 0 3% 96%; /* Pink Dust 90: #fff1f3 */
+    --accent-foreground: 0 0% 10%; /* #1a1a1a */
 
     --destructive: 358 82% 49%; /* #de1c22 */
     --destructive-foreground: 0 0% 100%; /* #ffffff */
 
-    --border: 214 19% 91%; /* #e4e7eb */
-    --input: 214 19% 91%; /* #e4e7eb */
-    --ring: 230 74% 76%; /* #90a3f6 */
+    --border: 0 2% 92%; /* Light gray border */
+    --input: 0 2% 92%; /* Light gray input */
+    --ring: 230 75% 76%; /* #90a3f6 */
 
-    --radius: 0.625rem;
+    --radius: 0.75rem; /* 12px */
+
+    /* Card gradient colors */
+    --card-blue: 217 91% 97%; /* Light blue */
+    --card-purple: 270 100% 98%; /* Light purple */
+    --card-green: 142 76% 96%; /* Light green */
   }
 
   .dark {
@@ -53,6 +144,8 @@
     --secondary: 215 12% 21%; /* #31363e */
     --secondary-foreground: 210 11% 98%; /* #f8f9fa */
 
+    --secondary-light: 320 100% 84%; /* Light Pink: #ffb0f4 */
+
     --muted: 215 12% 21%; /* #31363e */
     --muted-foreground: 215 18% 66%; /* #a2aab8 */
 
@@ -65,6 +158,14 @@
     --border: 215 12% 21%; /* #31363e */
     --input: 215 12% 21%; /* #31363e */
     --ring: 215 18% 55%; /* #7a869a */
+
+    --grass: 157 77% 49%; /* Green: #2dd280 */
+    --grass-foreground: 0 0% 100%; /* #ffffff */
+
+    /* Card gradient colors for dark mode */
+    --card-blue: 217 91% 10%; /* Dark blue */
+    --card-purple: 270 70% 12%; /* Dark purple */
+    --card-green: 142 50% 12%; /* Dark green */
   }
 }
 
@@ -74,6 +175,13 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  h1, h2 {
+    font-family: 'Tobias', Georgia, serif;
+  }
+  h3, h4, h5, h6 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 }
 

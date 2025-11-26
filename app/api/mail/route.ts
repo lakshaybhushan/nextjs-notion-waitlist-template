@@ -65,13 +65,13 @@ export async function POST(request: NextRequest) {
     console.warn(`⚠️  Skipping rate limit for IP: ${ip} (localhost/unknown)`);
   }
 
-  const { email, firstname } = await request.json();
+  const { email, role, linkedin } = await request.json();
 
-  console.log(`📧 Processing signup request: ${email} (${firstname})`);
+  console.log(`📧 Processing signup request: ${email} (${role})`);
 
   try {
     const htmlContent = await render(
-      WelcomeTemplate({ userFirstname: firstname }),
+      WelcomeTemplate({ userFirstname: email, role, linkedin }),
     );
 
     console.log(`📤 Sending email to: ${email}`);

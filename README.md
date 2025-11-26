@@ -1,33 +1,33 @@
-# Kontentino GPT Apps - Waitlist Landing Page
+# Social Media Planner - Waitlist Landing Page
 
 <p align="center">
 <img src="https://img.shields.io/badge/Next.js-000000.svg?style=for-the-badge&logo=nextdotjs&logoColor=white">
-<img src="https://img.shields.io/badge/Notion-000000.svg?style=for-the-badge&logo=Notion&logoColor=white">
-<img src="https://img.shields.io/badge/Postmark-FFCD00.svg?style=for-the-badge&logo=Postmark&logoColor=black">
+<img src="https://img.shields.io/badge/Pipedrive-000000.svg?style=for-the-badge&logo=Pipedrive&logoColor=white">
+<img src="https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white">
 <img src="https://img.shields.io/badge/Railway-0B0D0E.svg?style=for-the-badge&logo=Railway&logoColor=white">
 </p>
 
 ![Landing Page Preview](./app/opengraph-image.png)
 
-A waitlist application for **Kontentino GPT Apps** - the first ChatGPT integration for social media professionals. Generate content with AI, visualize platform-accurate previews, and export to Kontentino for instant approval.
+A waitlist application for **Social Media Planner by Kontentino** - Bring your whole social media workflow inside ChatGPT. Turn ChatGPT conversations into visual content calendars with ready-to-publish posts.
 
 **Live Demo:** Coming soon
 
-## What is Kontentino GPT Apps?
+## What is Social Media Planner?
 
-Three powerful ChatGPT applications for social media teams:
+A ChatGPT integration that transforms your content ideas into structured social media plans:
 
-- **Post Preview** - Generate and visualize posts with pixel-perfect platform previews
-- **Content Calendar** - Display your month of content at a glance
-- **Post List** - Bulk overview and management for high-volume campaigns
+- **Visual Calendar** - Turn messy chats into a full monthly content calendar
+- **Ready to Publish** - Approve, export, or schedule content straight from ChatGPT
+- **Stay in Flow** - No more copy-pasting between tools
 
 ## Features
 
 - **Next.js 14** - Modern React framework with App Router
-- **Notion Database** - Waitlist data stored in Notion as CMS
-- **Postmark Email** - Automated welcome emails (10,000 free/month)
+- **Pipedrive CRM** - All waitlist data stored as Leads & Persons in Pipedrive
+- **Lead Management** - Automatic lead creation with comprehensive notes
 - **Redis Rate Limiting** - Prevent spam (Railway Redis or Upstash)
-- **Beautiful UI** - shadcn/ui components with dark/light theme
+- **Beautiful UI** - Kontentino-branded design with 3D tilt effects
 - **Video Showcase** - Product demonstration section
 - **Mobile Responsive** - Optimized for all devices
 
@@ -37,9 +37,8 @@ Three powerful ChatGPT applications for social media teams:
 
 - Node.js 18+
 - pnpm (recommended) or npm
-- Notion account with database
-- Postmark account (free tier)
-- Redis (Railway or Upstash)
+- **Pipedrive account** with API token (REQUIRED)
+- Redis (optional - for rate limiting)
 
 ### Installation
 
@@ -54,8 +53,8 @@ pnpm install
 # Copy environment variables
 cp .env.example .env.local
 
-# Add your credentials to .env.local
-# See setup guides below for details
+# Add your Pipedrive API token to .env.local
+# Get it from: Settings → Personal → API
 
 # Run development server
 pnpm dev
@@ -66,16 +65,10 @@ pnpm dev
 ### Environment Variables
 
 ```bash
-# Notion
-NOTION_SECRET=secret_xxxxxxxxxxxxx
-NOTION_DB=xxxxxxxxxxxxxxxxxxxxxxx
+# Pipedrive (REQUIRED)
+PIPEDRIVE_API_TOKEN=your_pipedrive_api_token_here
 
-# Postmark
-POSTMARK_API_KEY=xxxxxxxx-xxxx-xxxx
-POSTMARK_FROM_EMAIL=noreply@kontentino.com
-POSTMARK_REPLY_TO=support@kontentino.com
-
-# Redis (Railway auto-configured, or use Upstash)
+# Redis (OPTIONAL - for rate limiting)
 REDIS_URL=redis://...
 # OR
 UPSTASH_REDIS_REST_URL=https://...
@@ -84,24 +77,22 @@ UPSTASH_REDIS_REST_TOKEN=xxxxx
 
 ## Setup Guides
 
-Step-by-step instructions for each service:
+Step-by-step instructions:
 
-- **[QUICK_START.md](./QUICK_START.md)** - Complete setup in 15 minutes
-- **[NOTION_SETUP.md](./NOTION_SETUP.md)** - Configure Notion database
-- **[POSTMARK_SETUP.md](./POSTMARK_SETUP.md)** - Setup email service
-- **[REDIS_SETUP.md](./REDIS_SETUP.md)** - Configure rate limiting
+- **[PIPEDRIVE_SETUP.md](./PIPEDRIVE_SETUP.md)** - Complete Pipedrive integration guide
+- **[PIPEDRIVE_CUSTOM_FIELDS_SETUP.md](./PIPEDRIVE_CUSTOM_FIELDS_SETUP.md)** - Set up custom fields for better filtering (optional)
+- **[PIPEDRIVE_FIELD_MAPPING.md](./PIPEDRIVE_FIELD_MAPPING.md)** - Field mapping reference
+- **[REDIS_SETUP.md](./REDIS_SETUP.md)** - Configure rate limiting (optional)
 - **[RAILWAY_SETUP.md](./RAILWAY_SETUP.md)** - Deploy to Railway
-- **[LOGS_GUIDE.md](./LOGS_GUIDE.md)** - Monitor and debug
 
 ## Documentation
 
-Full technical documentation available in [docs/README.md](./docs/README.md):
+Key documentation files:
 
-- Architecture overview
-- API routes specification
-- Component structure
-- Deployment guide
-- Troubleshooting
+- **Architecture** - Pipedrive-first data storage (Persons + Leads)
+- **Lead Management** - Automatic lead creation with notes
+- **API Routes** - Single `/api/pipedrive` endpoint
+- **Deployment** - Railway or Vercel
 
 ## Development
 
@@ -109,13 +100,7 @@ Full technical documentation available in [docs/README.md](./docs/README.md):
 
 ```bash
 pnpm dev
-```
-
-### Preview Email Templates
-
-```bash
-pnpm email
-# Open http://localhost:3001
+# Open http://localhost:3000
 ```
 
 ### Build for Production
@@ -123,6 +108,14 @@ pnpm email
 ```bash
 pnpm build
 pnpm start
+```
+
+### Test Pipedrive Integration
+
+```bash
+# Make sure PIPEDRIVE_API_TOKEN is set in .env.local
+# Fill out the form on the landing page
+# Check your Pipedrive Leads view to verify the data
 ```
 
 ## Deployment
@@ -133,8 +126,8 @@ Railway provides built-in Redis and automatic deployments.
 
 1. Push code to GitHub
 2. Create new Railway project from repo
-3. Add Redis service in Railway dashboard
-4. Set environment variables
+3. Add Redis service (optional, for rate limiting)
+4. Set `PIPEDRIVE_API_TOKEN` environment variable
 5. Deploy automatically on every push
 
 See [RAILWAY_SETUP.md](./RAILWAY_SETUP.md) for complete instructions.
@@ -143,77 +136,77 @@ See [RAILWAY_SETUP.md](./RAILWAY_SETUP.md) for complete instructions.
 
 One-click deployment to Vercel:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkontentino%2Fkontentino-gpt-landing-waitlist&env=NOTION_SECRET,NOTION_DB,POSTMARK_API_KEY,POSTMARK_FROM_EMAIL,POSTMARK_REPLY_TO,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkontentino%2Fkontentino-gpt-landing-waitlist&env=PIPEDRIVE_API_TOKEN,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN)
 
-Note: Vercel requires Upstash Redis (Railway Redis not available).
+Note: Vercel requires Upstash Redis for rate limiting (Railway Redis not available).
 
 ## Project Structure
 
 ```
 ├── app/
 │   ├── api/
-│   │   ├── mail/route.ts       # Email sending endpoint
-│   │   └── notion/route.ts     # Notion database endpoint
+│   │   └── pipedrive/route.ts  # Pipedrive CRM endpoint
 │   ├── page.tsx                # Main landing page
 │   └── layout.tsx              # Root layout
 ├── components/
-│   ├── cta.tsx                 # Hero section
+│   ├── cta.tsx                 # Hero section with tilt effect
 │   ├── form.tsx                # Signup form
-│   ├── about-section.tsx       # Video & features
+│   ├── about-section.tsx       # Features & content
+│   ├── final-cta.tsx           # Bottom CTA
 │   └── ui/                     # shadcn/ui components
-├── emails/
-│   └── index.tsx               # Welcome email template
-├── docs/
-│   └── README.md               # Technical documentation
-└── public/
-    └── kontentino-logo.svg     # Brand assets
+├── public/
+│   ├── hero-demo.mp4           # Product demo video
+│   ├── img/                    # Images
+│   └── fonts/                  # Tobias & Inter fonts
+├── PIPEDRIVE_SETUP.md          # Integration guide
+└── PIPEDRIVE_FIELD_MAPPING.md  # Field reference
 ```
 
 ## API Routes
 
-### POST /api/mail
+### POST /api/pipedrive
 
-Send welcome email via Postmark.
-
-**Request:**
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com"
-}
-```
-
-**Rate Limit:** 2 requests/minute per IP
-
-### POST /api/notion
-
-Add user to Notion waitlist database.
+Create Person and Lead in Pipedrive CRM with comprehensive note.
 
 **Request:**
 ```json
 {
-  "name": "John Doe",
-  "email": "john@example.com"
+  "email": "john@example.com",
+  "role": "Social media pro",
+  "linkedin": "https://linkedin.com/in/johndoe"
 }
 ```
+
+**Response:**
+```json
+{
+  "success": true,
+  "person_id": 12345,
+  "lead_id": 67890
+}
+```
+
+**Rate Limit:** 2 requests/minute per IP (if Redis configured)
+
+**What Gets Created:**
+- **Person** with email
+- **Lead** titled "{Role} - {Email}"
+- **Note** containing role, LinkedIn, source, cohort, and virtual tags
 
 ## Customization
 
 ### Update Video
 
-Replace the placeholder video in `components/about-section.tsx`:
-
-```typescript
-const videoUrl = "https://www.youtube.com/embed/YOUR_VIDEO_ID";
-```
+Replace `public/hero-demo.mp4` with your own product demo video.
 
 ### Modify Theme
 
 Edit color scheme in `app/globals.css`:
 
 ```css
---background: 216 25% 5%;    /* Blue-tinted dark */
---primary: 230 82% 67%;      /* Kontentino blue */
+--primary: 230 85% 53%;      /* Kontentino blue #2146ec */
+--secondary: 329 100% 77%;   /* Pink #ff8eef */
+--background: 330 100% 97%;  /* Light pink #ffeff2 */
 ```
 
 ### Change Content
@@ -221,19 +214,19 @@ Edit color scheme in `app/globals.css`:
 Main content sections:
 - Hero: `components/cta.tsx`
 - Form: `components/form.tsx`
-- About: `components/about-section.tsx`
-- Email: `emails/index.tsx`
+- Features: `components/about-section.tsx`
+- Bottom CTA: `components/final-cta.tsx`
 
 ## Tech Stack
 
 - **Framework:** Next.js 14 (App Router)
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS + shadcn/ui
-- **Animation:** Framer Motion
-- **Email:** Postmark + React Email
-- **Database:** Notion API
-- **Cache:** Redis (ioredis)
+- **Animation:** Framer Motion (3D tilt effects)
+- **CRM:** Pipedrive (via pipedrive SDK v30.4.0)
+- **Cache:** Redis (ioredis) - optional
 - **Deployment:** Railway / Vercel
+- **Fonts:** Tobias (serif) + Inter (sans-serif)
 
 ## Monitoring
 
@@ -243,42 +236,64 @@ Main content sections:
 railway logs --follow
 ```
 
-### Check Email Delivery
+### Check Pipedrive Leads
 
-Visit [Postmark Dashboard](https://account.postmarkapp.com) to monitor:
-- Email delivery rate
-- Bounce rate
-- Open rate (if tracking enabled)
+Visit [Pipedrive Dashboard](https://app.pipedrive.com) to:
+- View all waitlist leads
+- Filter by title (contains role)
+- Search notes for specific cohorts or tags
+- Export lead lists to CSV
 
-### Monitor Waitlist
+### Monitor Waitlist Growth
 
-Open your Notion database to see all signups in real-time.
+Create filters in Pipedrive to track:
+- Leads by role (Agency, Creator, Social media pro)
+- Monthly cohorts (search notes for "2025-01")
+- LinkedIn profile completion (search for "LinkedIn: https")
+- Leads created in last 7/30 days
 
 ## Troubleshooting
 
-### Email not sending
-- Verify `POSTMARK_API_KEY` is valid
-- Check sender email is verified in Postmark
-- Review Postmark dashboard for errors
+### Leads not appearing in Pipedrive
+- Verify `PIPEDRIVE_API_TOKEN` is set correctly
+- Check token is valid (test with API call)
+- Review server logs for API errors
+- Test token with curl:
+  ```bash
+  curl -X GET "https://api.pipedrive.com/v1/users/me?api_token=YOUR_TOKEN"
+  ```
 
-### Notion connection fails
-- Ensure database is shared with integration
-- Verify `NOTION_SECRET` and `NOTION_DB` are correct
-- Check database has "Name" (title) and "Email" columns
+### Person creation fails
+- Check if email already exists (Pipedrive may reject duplicates)
+- Verify your Pipedrive plan supports number of contacts
+- Review API rate limits
+- Check server logs for specific error messages
+
+### Lead creation fails
+- Ensure Person was created successfully first
+- Check server logs for Pipedrive API errors
+- Verify your plan allows lead creation
+- Check lead inbox capacity
+
+### Notes not appearing
+- Notes are attached to Leads, not Persons
+- Check the Lead's Activity feed
+- Note creation failures are soft fails (won't block signup)
+- Refresh the lead page to see new notes
 
 ### Rate limiting not working
+- Rate limiting requires Redis configuration
 - Confirm Redis is connected (`REDIS_URL` or Upstash)
 - Check Railway Redis service is running
-- Review logs for connection errors
-
-See [docs/README.md](./docs/README.md) for more troubleshooting tips.
+- Without Redis, rate limiting is skipped (useful for local dev)
 
 ## Security
 
-- **Rate Limiting:** 2 requests/minute per IP prevents spam
+- **Rate Limiting:** 2 requests/minute per IP prevents spam (requires Redis)
 - **Email Validation:** Client and server-side validation
 - **Environment Variables:** Never commit `.env.local`
-- **Redis:** Secure connection to Railway or Upstash
+- **Pipedrive Token:** Keep `PIPEDRIVE_API_TOKEN` secret (treat like a password)
+- **API Security:** Server-side validation and error handling
 
 ## Contributing
 

@@ -12,8 +12,12 @@ export const metadata: Metadata = {
   description:
     "Join the waitlist for Kontentino GPT Apps - the first ChatGPT integration built for social media professionals. Generate content in ChatGPT, preview with platform-accurate layouts, and export instantly.",
   icons: {
-    icon: "/favicon.png",
-    apple: "/favicon.png",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
   },
 };
 

@@ -1,16 +1,10 @@
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ModeToggle } from "./mode-toggle";
-import { containerVariants, itemVariants } from "@/lib/animation-variants";
 
 export default function Footer() {
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="mt-auto flex w-full items-center justify-between border-t bg-background p-6 text-muted-foreground">
-      <motion.div variants={itemVariants} className="flex items-center gap-3">
+    <div className="mt-auto flex w-full flex-col gap-4 border-t bg-background p-6 text-muted-foreground md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center">
         <img
           src="/kontentino-logo.svg"
           alt="Kontentino"
@@ -26,12 +20,23 @@ export default function Footer() {
               Kontentino
             </span>
           </Link>
-          <span className="hidden md:inline">— Social Media Management Platform</span>
+          <span className="hidden lg:inline">— Social Media Management Platform</span>
         </div>
-      </motion.div>
-      <motion.div variants={itemVariants}>
+      </div>
+
+      <div className="flex items-center gap-4">
+        <Link href="/privacy">
+          <span className="text-sm text-muted-foreground underline underline-offset-2 transition-all duration-200 ease-linear hover:text-primary">
+            Privacy Policy
+          </span>
+        </Link>
+        <Link href="/terms">
+          <span className="text-sm text-muted-foreground underline underline-offset-2 transition-all duration-200 ease-linear hover:text-primary">
+            Terms of Service
+          </span>
+        </Link>
         <ModeToggle />
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }

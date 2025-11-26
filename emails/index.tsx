@@ -12,12 +12,14 @@ import * as React from "react";
 
 interface EmailProps {
   userFirstname: string;
+  role?: string;
+  linkedin?: string;
 }
 
-export const NotionWaitlistEmail = ({ userFirstname }: EmailProps) => (
+export const NotionWaitlistEmail = ({ userFirstname, role, linkedin }: EmailProps) => (
   <Html>
     <Head />
-    <Preview>Welcome to Kontentino ChatGPT App, {userFirstname}! 🚀</Preview>
+    <Preview>Welcome to Social Media Planner Early Access!</Preview>
     <Body style={main}>
       <Container style={container}>
         <Img
@@ -27,16 +29,18 @@ export const NotionWaitlistEmail = ({ userFirstname }: EmailProps) => (
           alt="Kontentino Logo"
           style={logo}
         />
-        <Text style={greeting}>Hi {userFirstname},</Text>
+        <Text style={greeting}>Welcome to Social Media Planner!</Text>
         <Text style={paragraph}>
-          Welcome to <strong>Kontentino ChatGPT App</strong> — you're now on the list for exclusive early beta access!
+          Thank you for joining the <strong>Social Media Planner</strong> early access — you're now on the list for exclusive beta access!
         </Text>
         <Text style={paragraph}>
-          <strong>Create in ChatGPT. Approve with Kontentino.</strong>
+          <strong>Bring your whole social media workflow inside ChatGPT.</strong>
         </Text>
         <Text style={paragraph}>
-          Finally—generate posts, preview them perfectly, and share for approval without the tool-switching headache.
-          We're launching with <strong>Content Calendar</strong> first, followed by Post Preview and Post List.
+          Social Media Planner turns your ChatGPT ideas into a visual content calendar with ready-to-publish posts — without copy-pasting into other tools.
+        </Text>
+        <Text style={paragraph}>
+          We'll start sending invites in small waves to keep feedback manageable. You'll be among the first to experience this seamless workflow.
         </Text>
         <Text style={paragraph}>
           We'll notify you as soon as beta access opens. In the meantime, if you
@@ -58,7 +62,7 @@ export const NotionWaitlistEmail = ({ userFirstname }: EmailProps) => (
         <Hr style={hr} />
         <Text style={footer}>
           You received this email because you signed up for early access to
-          Kontentino GPT Apps. Excited to have you on board!
+          Social Media Planner. Excited to have you on board!
         </Text>
       </Container>
     </Body>
@@ -66,7 +70,9 @@ export const NotionWaitlistEmail = ({ userFirstname }: EmailProps) => (
 );
 
 NotionWaitlistEmail.PreviewProps = {
-  userFirstname: "Tyler",
+  userFirstname: "user@example.com",
+  role: "Social media pro",
+  linkedin: "https://linkedin.com/in/example",
 } as EmailProps;
 
 export default NotionWaitlistEmail;
