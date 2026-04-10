@@ -5,12 +5,12 @@ import { containerVariants, itemVariants } from "@/lib/animation-variants";
 import TextBlur from "./ui/text-blur";
 
 const logos = [
-  { href: "https://nextjs.org", src: "/nextjs.svg", alt: "Next.js Logo" },
-  { href: "https://notion.so", src: "/notion.svg", alt: "Notion Logo" },
-  { href: "https://resend.com", src: "/resend.svg", alt: "Resend Logo" },
-  { href: "https://upstash.com", src: "/upstash.svg", alt: "Upstash Logo" },
-  { href: "https://ui.shadcn.com", src: "/shadcn.svg", alt: "shadcn Logo" },
-  { href: "https://vercel.com", src: "/vercel.svg", alt: "Vercel Logo" },
+  { href: "https://www.instagram.com/cavalcant.ink/", src: "/inst.png", alt: "Instagram Logo" },
+  { href: "https://www.tiktok.com/@cavalcant.tattoo", src: "/TikTok-logo-RGB-Horizontal-white.png", alt: "Tiktok Logo" },
+  { href: "https://wa.me/5515996978400", src: "/Digital_Inline_White_RGB_2026.svg", alt: "Whatsapp Logo" },
+  // { href: "https://upstash.com", src: "/upstash.svg", alt: "Upstash Logo" },
+  // { href: "https://ui.shadcn.com", src: "/shadcn.svg", alt: "shadcn Logo" },
+  // { href: "https://vercel.com", src: "/vercel.svg", alt: "Vercel Logo" },
 ];
 
 export default function Logos() {
@@ -23,14 +23,14 @@ export default function Logos() {
       <motion.div variants={itemVariants}>
         <TextBlur
           className="text-center text-2xl font-medium tracking-tight text-zinc-200 md:text-3xl"
-          text="Powered by"
+          text="Nossos links"
         />
       </motion.div>
 
       <motion.div variants={itemVariants}>
         <TextBlur
           className="text-center text-base text-zinc-300 sm:text-lg"
-          text="Simple and powerful tools that help you build faster"
+          text="Conheça um pouco mais do nosso trabalho:"
           duration={0.8}
         />
       </motion.div>
